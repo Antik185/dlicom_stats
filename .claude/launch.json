@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dlicom",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const h=require('http'),fs=require('fs'),p=require('path');h.createServer((req,res)=>{let f=p.join('E:/dlicom',req.url==='/'?'/index.html':req.url);try{const d=fs.readFileSync(f);const m={'html':'text/html','js':'application/javascript','json':'application/json','css':'text/css','png':'image/png','webm':'video/webm'}[f.split('.').pop()]||'text/plain';res.writeHead(200,{'Content-Type':m});res.end(d)}catch(e){res.writeHead(404);res.end('Not found')}}).listen(3456)"],
+      "port": 3456
+    }
+  ]
+}
