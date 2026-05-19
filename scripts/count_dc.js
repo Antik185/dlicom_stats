@@ -98,19 +98,29 @@ function processFile(filePath) {
   });
 }
 
+function findJsonFiles(dir) {
+  const results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) results.push(...findJsonFiles(full));
+    else if (entry.name.endsWith('.json')) results.push(full);
+  }
+  return results;
+}
+
 async function main() {
-  const files = fs.readdirSync(JSON_DIR).filter(f => f.endsWith('.json'));
+  const files = findJsonFiles(JSON_DIR);
   console.log(`Обрабатываем ${files.length} файлов параллельно...`);
 
   const start = Date.now();
 
   // Все файлы — одновременно
   const results = await Promise.all(
-    files.map(f => {
-      const fp = path.join(JSON_DIR, f);
+    files.map(fp => {
+      const label = path.relative(JSON_DIR, fp);
       return processFile(fp).then(r => {
         let total = Object.values(r.counts).reduce((a, b) => a + b, 0);
-        console.log(`  ✓ ${f}: ${total} сообщений, ${Object.keys(r.counts).length} пользователей`);
+        console.log(`  ✓ ${label}: ${total} сообщений, ${Object.keys(r.counts).length} пользователей`);
         return r;
       });
     })

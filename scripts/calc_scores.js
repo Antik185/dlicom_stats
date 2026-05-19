@@ -20,11 +20,18 @@ const X_LINKS     = path.join(__dirname, '..', 'data', 'x_links.json');
 const X_STATS     = path.join(__dirname, '..', 'data', 'x_stats.json');
 const OUT_FILE    = path.join(__dirname, '..', 'data', 'scores.json');
 
+// Хэндлы X-аккаунтов проекта — их посты не считаются
+const X_BLACKLIST = new Set(['dlicomapp', 'dlicom']);
+
 function calcXScore(posts, tweetStats) {
   let totalViews = 0, totalLikes = 0, totalComments = 0, totalReposts = 0;
   let postCount = 0;
 
   for (const post of posts) {
+    // Пропускаем посты проекта (как с явным handle, так и разрешённые через stats)
+    const resolvedHandle = (post.handle || tweetStats[post.id]?.handle || '').toLowerCase();
+    if (X_BLACKLIST.has(resolvedHandle)) continue;
+
     const s = tweetStats[post.id];
     if (!s) continue;
     totalViews    += s.views    || 0;
@@ -74,6 +81,10 @@ function determineTier(total, p25, p75) {
 }
 
 function main() {
+  // Опциональная дата конца периода (дата выгрузки данных)
+  const refArg   = process.argv.find(a => a.startsWith('--ref-date='));
+  const refDate  = refArg ? refArg.slice(11) : new Date().toISOString().slice(0, 10);
+
   const dcStats  = JSON.parse(fs.readFileSync(DC_FILE, 'utf-8'));
   const xLinks   = JSON.parse(fs.readFileSync(X_LINKS, 'utf-8'));
   const xStats   = fs.existsSync(X_STATS)
@@ -102,7 +113,13 @@ function main() {
       username,
       nickname:   dc.nickname || xData?.nickname || username,
       avatarUrl:  dc.avatarUrl || xData?.avatarUrl || '',
-      xHandle:    xData?.posts?.[0]?.handle || null,
+      xHandle:    (() => {
+        for (const p of (xData?.posts || [])) {
+          const h = p.handle || xStats[p.id]?.handle;
+          if (h) return h;
+        }
+        return null;
+      })(),
       dcMessages: dc.dcMessages,
       dcScore:    Math.round(dcScore * 10) / 10,
       ...xResult,
@@ -134,6 +151,7 @@ function main() {
 
   const output = {
     generatedAt: new Date().toISOString(),
+    refDate,
     totalUsers: n,
     thresholds: { myth: Math.round(p90), legendary: Math.round(p99) },
     users: scores,

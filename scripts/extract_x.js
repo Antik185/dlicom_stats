@@ -10,8 +10,19 @@ const path = require('path');
 const JSON_DIR = path.join(__dirname, '..', 'json');
 const OUT_FILE = path.join(__dirname, '..', 'data', 'x_links.json');
 
-// Оба канала, где публикуют X-посты
-const SOURCE_FILES = ['creators.json', 'dlicom-creators.json'];
+// Каналы, где публикуют X-посты
+const SOURCE_NAMES = new Set(['creators.json', 'dlicom-creators.json']);
+
+// Рекурсивно находит все файлы из SOURCE_NAMES в папке dir
+function findSourceFiles(dir) {
+  const results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) results.push(...findSourceFiles(full));
+    else if (SOURCE_NAMES.has(entry.name)) results.push(full);
+  }
+  return results;
+}
 
 // Паттерн: x.com/HANDLE/status/ID или twitter.com/HANDLE/status/ID
 const X_POST_RE = /https?:\/\/(?:x\.com|twitter\.com)\/([^\/\s\?]+)\/status\/(\d+)/gi;
@@ -28,14 +39,15 @@ function extractFromFile(filePath) {
     X_POST_RE.lastIndex = 0;
     let m;
     while ((m = X_POST_RE.exec(content)) !== null) {
-      const handle = m[1];
-      const postId = m[2];
+      const rawHandle = m[1];
+      const postId    = m[2];
 
-      // Пропускаем анонимные ссылки x.com/i/status/...
-      if (handle === 'i') continue;
       // Пропускаем официальные/системные аккаунты
       const EXCLUDED = new Set(['dlicomapp', 'dlicom']);
-      if (EXCLUDED.has(handle.toLowerCase())) continue;
+      if (EXCLUDED.has(rawHandle.toLowerCase())) continue;
+
+      // Анонимные ссылки x.com/i/status/... — handle неизвестен, получим его при scrape
+      const handle = rawHandle === 'i' ? null : rawHandle;
 
       if (!users[authorName]) {
         users[authorName] = {
@@ -48,7 +60,7 @@ function extractFromFile(filePath) {
 
       if (!users[authorName].seenIds.has(postId)) {
         users[authorName].seenIds.add(postId);
-        users[authorName].posts.push({ id: postId, handle, url: `https://x.com/${handle}/status/${postId}` });
+        users[authorName].posts.push({ id: postId, handle, url: `https://x.com/${handle || 'i'}/status/${postId}` });
       }
     }
   }
@@ -58,11 +70,11 @@ function extractFromFile(filePath) {
 
 function main() {
   const merged = {};
+  const sourceFiles = findSourceFiles(JSON_DIR);
+  console.log(`Найдено ${sourceFiles.length} X-файлов`);
 
-  for (const fname of SOURCE_FILES) {
-    const fp = path.join(JSON_DIR, fname);
-    if (!fs.existsSync(fp)) { console.warn(`Файл не найден: ${fname}`); continue; }
-
+  for (const fp of sourceFiles) {
+    const fname = path.relative(JSON_DIR, fp);
     console.log(`Читаем ${fname}...`);
     const users = extractFromFile(fp);
 

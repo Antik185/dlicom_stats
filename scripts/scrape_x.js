@@ -27,7 +27,7 @@ const CONCURRENCY = parseInt(
   process.argv.find(a => a.startsWith('--concurrency='))?.split('=')[1] || '5'
 );
 const BATCH_SIZE  = Math.min(100, parseInt(
-  process.argv.find(a => a.startsWith('--batch='))?.split('=')[1] || '100'
+  process.argv.find(a => a.startsWith('--batch='))?.split('=')[1] || '20'
 ));
 const RESUME      = process.argv.includes('--resume');
 
@@ -85,7 +85,14 @@ function parseTweet(tweet) {
   const reposts  = (tweet.retweet_count    || 0) + (tweet.quote_count || 0);
   const comments = tweet.reply_count       || tweet.replies_count  || 0;
 
-  return { views, likes, reposts, comments };
+  // Извлекаем handle автора из данных твита (важно для i/status ссылок)
+  const twitterHandle =
+    tweet.user?.screen_name ||
+    tweet.author?.userName  ||
+    tweet.author?.screen_name ||
+    null;
+
+  return { views, likes, reposts, comments, twitterHandle };
 }
 
 // ── Прогресс-бар ───────────────────────────────────────────────
@@ -109,9 +116,9 @@ async function main() {
   const allPostsMap = {}; // id -> { handle, discordName }
   for (const [discordName, data] of Object.entries(xLinks)) {
     for (const post of data.posts) {
-      if (EXCLUDED_HANDLES.has(post.handle.toLowerCase())) continue;
+      if (post.handle && EXCLUDED_HANDLES.has(post.handle.toLowerCase())) continue;
       if (!allPostsMap[post.id]) {
-        allPostsMap[post.id] = { handle: post.handle, discordName };
+        allPostsMap[post.id] = { handle: post.handle || null, discordName };
       }
     }
   }
@@ -152,7 +159,7 @@ async function main() {
         errors++;
         // Записываем как ошибки, чтобы --resume их пропустил при следующем запуске
         for (const id of batchIds) {
-          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: allPostsMap[id].handle, id, error: true };
+          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: allPostsMap[id].handle || null, id, error: true };
         }
         return;
       }
@@ -172,10 +179,13 @@ async function main() {
 
       for (const id of batchIds) {
         const parsed = parseTweet(byId[id]);
+        // Если в x_links handle = null (i/status ссылка), берём handle из ответа API
+        const resolvedHandle = allPostsMap[id].handle || parsed?.twitterHandle || null;
         if (parsed) {
-          stats[id] = { ...parsed, handle: allPostsMap[id].handle, id };
+          const { twitterHandle, ...metrics } = parsed;
+          stats[id] = { ...metrics, handle: resolvedHandle, id };
         } else {
-          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: allPostsMap[id].handle, id, notFound: true };
+          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: resolvedHandle, id, notFound: true };
         }
       }
     } finally {

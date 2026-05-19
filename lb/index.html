@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dlicom — Leaderboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/lb" class="nav-brand">DLICOM</a>
+  <a href="/lb" class="nav-tab nav-active">Leaderboard</a>
+  <a href="/cards" class="nav-tab">Score Cards</a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <div class="header">
+      <div>
+        <div class="logo-mini">DLICOM</div>
+        <div class="title">LEADERBOARD</div>
+      </div>
+      <div class="live" id="live-status">
+        <span class="pulse-dot"></span>
+        Loading live data...
+      </div>
+    </div>
+
+    <div class="constellation-wrap">
+      <div class="constellation-label">★ THE LEGENDS ★</div>
+      <div class="constellation" id="constellation-container">
+        <svg class="constellation-bg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
+          <path class="conn-line" id="line-1-2" stroke="#a070e0" stroke-opacity="0.45" />
+          <path class="conn-line" id="line-1-3" stroke="#5a90d0" stroke-opacity="0.4" />
+          <path class="conn-line" id="line-2-3" stroke="#6a50b0" stroke-opacity="0.35" />
+          <circle class="star" cx="60"  cy="40"  r="0.8" style="animation-delay:0s"/>
+          <circle class="star" cx="120" cy="90"  r="0.6" style="animation-delay:0.5s"/>
+          <circle class="star" cx="200" cy="30"  r="0.9" style="animation-delay:1.2s"/>
+          <circle class="star" cx="700" cy="60"  r="0.7" style="animation-delay:0.8s"/>
+          <circle class="star" cx="640" cy="40"  r="0.5" style="animation-delay:1.6s"/>
+          <circle class="star" cx="750" cy="150" r="0.8" style="animation-delay:2s"/>
+          <circle class="star" cx="40"  cy="180" r="0.6" style="animation-delay:0.3s"/>
+          <circle class="star" cx="380" cy="290" r="0.7" style="animation-delay:2.4s"/>
+          <circle class="star" cx="500" cy="300" r="0.5" style="animation-delay:1.8s"/>
+          <circle class="star" cx="80"  cy="270" r="0.6" style="animation-delay:0.9s"/>
+          <circle class="star" cx="730" cy="280" r="0.7" style="animation-delay:1.4s"/>
+          <circle class="star" cx="350" cy="20"  r="0.5" style="animation-delay:1.1s"/>
+          <circle class="star" cx="540" cy="180" r="0.6" style="animation-delay:0.6s"/>
+        </svg>
+
+        <!-- #1 -->
+        <div class="champion-pos champ-1-pos">
+          <div class="champion rank-1-color">
+            <i class="ti ti-crown crown-icon"></i>
+            <div class="champ-avatar-wrap">
+              <div class="champ-orbit-ring-2"></div>
+              <div class="champ-orbit-ring"></div>
+              <div class="champ-glow"></div>
+              <div class="champ-avatar" data-slot="1"></div>
+              <div class="champ-rank-pill">#1</div>
+              <!-- Planets -->
+              <div class="pa pa-a"><span class="pb"></span></div>
+              <div class="pa pa-b"><span class="pb pb-s"></span></div>
+              <div class="pa pa-c"><span class="pb pb-xs"></span></div>
+            </div>
+            <div class="champ-info">
+              <div class="champ-name" data-slot="1-name"></div>
+              <div class="champ-handle" data-slot="1-handle"></div>
+              <div class="champ-score" data-slot="1-score"></div>
+              <div class="champ-tier" data-slot="1-tier"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- #2 -->
+        <div class="champion-pos champ-2-pos">
+          <div class="champion rank-2-color">
+            <div class="champ-avatar-wrap">
+              <div class="champ-orbit-ring"></div>
+              <div class="champ-glow"></div>
+              <div class="champ-avatar" data-slot="2"></div>
+              <div class="champ-rank-pill">#2</div>
+              <div class="pa pa-a"><span class="pb"></span></div>
+              <div class="pa pa-b"><span class="pb pb-s"></span></div>
+              <div class="pa pa-c"><span class="pb pb-xs"></span></div>
+            </div>
+            <div class="champ-info">
+              <div class="champ-name" data-slot="2-name"></div>
+              <div class="champ-handle" data-slot="2-handle"></div>
+              <div class="champ-score" data-slot="2-score"></div>
+              <div class="champ-tier" data-slot="2-tier"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- #3 -->
+        <div class="champion-pos champ-3-pos">
+          <div class="champion rank-3-color">
+            <div class="champ-avatar-wrap">
+              <div class="champ-orbit-ring"></div>
+              <div class="champ-glow"></div>
+              <div class="champ-avatar" data-slot="3"></div>
+              <div class="champ-rank-pill">#3</div>
+              <div class="pa pa-a"><span class="pb"></span></div>
+              <div class="pa pa-b"><span class="pb pb-s"></span></div>
+              <div class="pa pa-c"><span class="pb pb-xs"></span></div>
+            </div>
+            <div class="champ-info">
+              <div class="champ-name" data-slot="3-name"></div>
+              <div class="champ-handle" data-slot="3-handle"></div>
+              <div class="champ-score" data-slot="3-score"></div>
+              <div class="champ-tier" data-slot="3-tier"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+      <div class="filters-group">
+        <div class="filter-row">
+          <div class="filter-label">PERIOD</div>
+          <div class="filter-group" id="time-filter">
+            <button class="filter-btn active" data-time="all">All Time</button>
+            <button class="filter-btn" data-time="monthly">Monthly</button>
+            <button class="filter-btn" data-time="weekly">Weekly</button>
+          </div>
+        </div>
+        <div class="filter-row" style="margin-bottom:0">
+          <div class="filter-label">SOURCE</div>
+          <div class="filter-group" id="stat-filter">
+            <button class="filter-btn active" data-stat="all">All stats</button>
+            <button class="filter-btn" data-stat="discord"><i class="ti ti-brand-discord"></i> Discord</button>
+            <button class="filter-btn" data-stat="twitter"><i class="ti ti-brand-x"></i> Twitter</button>
+          </div>
+        </div>
+      </div>
+      <div class="lb-search-wrap">
+        <i class="ti ti-search lb-search-icon"></i>
+        <input type="text" id="lb-search" class="lb-search" placeholder="Search by name..." autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+
+    <!-- Column headers -->
+    <div class="col-header">
+      <div>#</div>
+      <div>USER</div>
+      <div class="col-right col-header-cell" id="score-label">TOTAL</div>
+      <div class="col-right col-header-cell" id="dc-label">DC</div>
+      <div class="col-right col-header-cell" id="x-label">X</div>
+    </div>
+
+    <div id="rows"></div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination" style="display:none">
+      <button class="page-arrow" id="prev-page" disabled>
+        <i class="ti ti-chevron-left"></i>
+      </button>
+      <span class="page-info" id="page-info">1 – 10</span>
+      <button class="page-arrow" id="next-page">
+        <i class="ti ti-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="footer" id="footer-stats">
+      <div>Loading total entries...</div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../data/rank_history_data.js" onerror="window.RANK_HISTORY_DATA=null"></script>
+<script src="../data/badges_data.js" onerror="window.BADGES_DATA=null"></script>
+<script src="app.js"></script>
+</body>
+</html>
