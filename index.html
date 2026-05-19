@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<base href="/">
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Dlicom · Creator Cards</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,7 +137,7 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 #card-view{
   position:fixed;inset:0;overflow-y:auto;
   display:flex;flex-direction:column;align-items:center;
-  padding:70px 16px 60px;
+  padding:118px 16px 60px;
   opacity:0;transform:translateY(40px) scale(.94);
   pointer-events:none;
   transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1);
@@ -146,7 +147,7 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 
 /* ── Back button ─────────────────────────────────────────────── */
 #back-btn{
-  position:absolute;top:18px;left:18px;
+  position:absolute;top:66px;left:18px;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.14);
   color:#fff;font-family:'Geist',sans-serif;
@@ -164,7 +165,7 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 
 /* ── Corner Logo ─────────────────────────────────────────────── */
 .corner-logo{
-  position:absolute;top:28px;right:32px;
+  position:absolute;top:76px;right:32px;
   height:24px;z-index:100;
   opacity:0.8;transition:opacity .25s ease;
 }
@@ -413,9 +414,35 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 .card.dl-freeze .info-block::before,
 .card.dl-freeze .stats-col::before,
 .card.dl-freeze .stats-all::before{opacity:0!important}
+/* Replace mask-based shimmer border with real border for html2canvas */
+.card.dl-freeze .info-block,
+.card.dl-freeze .stats-col,
+.card.dl-freeze .stats-all{border:1.5px solid rgba(150,160,220,.25)!important}
+.card.t1.dl-freeze .info-block,
+.card.t1.dl-freeze .stats-col,
+.card.t1.dl-freeze .stats-all{border-color:rgba(94,118,224,.55)!important}
+.card.t3.dl-freeze .info-block,
+.card.t3.dl-freeze .stats-col,
+.card.t3.dl-freeze .stats-all{border-color:rgba(109,70,249,.55)!important}
+.card.t5.dl-freeze .info-block,
+.card.t5.dl-freeze .stats-col,
+.card.t5.dl-freeze .stats-all{border-color:rgba(212,168,48,.5)!important}
+
+/* ── Top navigation ── */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:48px;display:flex;align-items:center;gap:4px;padding:0 28px;background:rgba(5,6,23,0.92);backdrop-filter:blur(18px);border-bottom:1px solid #1a1d3a;}
+.nav-brand{font-size:13px;font-weight:600;letter-spacing:5px;color:#4ad6ff;margin-right:20px;text-decoration:none;font-family:inherit;}
+.nav-tab{padding:5px 16px;border-radius:8px;font-size:13px;font-weight:500;letter-spacing:0.5px;color:#5a608a;text-decoration:none;transition:all 0.2s;border:1px solid transparent;font-family:inherit;}
+.nav-tab:hover{color:#c0c5e0;background:rgba(255,255,255,0.05);}
+.nav-tab.nav-active{color:#4ad6ff;background:rgba(74,214,255,0.1);border-color:rgba(74,214,255,0.3);}
 </style>
 </head>
 <body>
+
+<nav class="top-nav">
+  <a href="/lb/" class="nav-brand">DLICOM</a>
+  <a href="/lb/" class="nav-tab">Leaderboard</a>
+  <a href="/cards" class="nav-tab nav-active">Score Cards</a>
+</nav>
 
 <!-- Cinematic Background -->
 <div id="cinematic-bg">
@@ -885,10 +912,12 @@ async function downloadCard() {
   captureWrap.style.justifyContent = 'center';
   captureWrap.style.borderRadius = '20px';
   
+  /* Временно убрали фон
   const bgImg = document.createElement('img');
   bgImg.src = 'image/bg.svg';
   bgImg.style.cssText = 'position:absolute; top:50%; left:50%; width:1200px; height:1200px; object-fit:cover; transform:translate(-50%, -50%) rotate(90deg); z-index:0; pointer-events:none;';
   captureWrap.appendChild(bgImg);
+  */
 
   const clone = cardEl.cloneNode(true);
   clone.classList.add('dl-freeze');
@@ -905,12 +934,14 @@ async function downloadCard() {
   document.body.appendChild(captureWrap);
 
   // Ждем загрузки картинки фона, чтобы html2canvas не завис
+  /*
   await new Promise(r => {
     if (bgImg.complete) { r(); return; }
     bgImg.onload = r;
     bgImg.onerror = r;
     setTimeout(r, 1000);
   });
+  */
 
   await new Promise(r => setTimeout(r, 100)); // Даем браузеру применить стили
 
