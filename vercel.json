@@ -1,6 +1,9 @@
 {
+  "redirects": [
+    { "source": "/",    "destination": "/lb/", "permanent": false },
+    { "source": "/lb",  "destination": "/lb/", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/lb",    "destination": "/lb/index.html" },
     { "source": "/cards", "destination": "/index.html" }
   ]
 }
