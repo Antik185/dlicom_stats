@@ -13,8 +13,17 @@ function decodeJsonStr(s) {
   return s.replace(/\\u([0-9a-fA-F]{4})/gi, (_, h) => String.fromCharCode(parseInt(h, 16)));
 }
 
-const JSON_DIR = path.join(__dirname, '..', 'json');
-const OUT_FILE = path.join(__dirname, '..', 'data', 'dc_stats.json');
+const JSON_DIR    = path.join(__dirname, '..', 'json');
+const OUT_FILE    = path.join(__dirname, '..', 'data', 'dc_stats.json');
+const ALIASES_FILE = path.join(__dirname, 'aliases.json');
+
+// Загружаем алиасы (старый_ник -> новый_ник)
+const _rawAliases = JSON.parse(fs.readFileSync(ALIASES_FILE, 'utf-8'));
+const ALIASES = {};
+for (const [k, v] of Object.entries(_rawAliases)) {
+  if (!k.startsWith('_')) ALIASES[k] = v;
+}
+function resolveAlias(name) { return ALIASES[name] || name; }
 
 function processFile(filePath) {
   return new Promise((resolve) => {
@@ -86,9 +95,10 @@ function processFile(filePath) {
       if (authorDepth <= 0) {
         inAuthor = false;
         if (!isBot && name && msgType) {
-          counts[name] = (counts[name] || 0) + 1;
-          if (!nicknames[name] && nickname) nicknames[name] = nickname;
-          if (!avatars[name] && avatar) avatars[name] = avatar;
+          const canon = resolveAlias(name);
+          counts[canon] = (counts[canon] || 0) + 1;
+          if (!nicknames[canon] && nickname) nicknames[canon] = nickname;
+          if (!avatars[canon] && avatar) avatars[canon] = avatar;
         }
         pendingType = null;
       }

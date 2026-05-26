@@ -1,15 +1,18 @@
 /**
  * Парсер X-статистики через SocialData API.
- * Эндпоинт: POST /twitter/tweets  — до 100 твитов за запрос.
+ * Эндпоинт: POST /twitter/tweets-by-ids — чанки по BATCH_SIZE, без параллелизма.
  *
  * Использование:
  *   set SOCIALDATA_KEY=ваш_ключ  (Windows)
  *   node scripts/scrape_x.js
- *   node scripts/scrape_x.js --concurrency=5 --batch=100 --resume
+ *   node scripts/scrape_x.js --resume
+ *   node scripts/scrape_x.js --resume --retry-errors
+ *   node scripts/scrape_x.js --limit=5   (тест — первые N постов)
  *
- * --resume      пропускает уже сохранённые твиты
- * --concurrency кол-во параллельных запросов (по умолч. 5)
- * --batch       твитов в одном запросе (макс. 100, по умолч. 100)
+ * --resume         пропускает уже сохранённые твиты (errors НЕ перезапрашиваются)
+ * --retry-errors   дополнительно ретраит записи с error:true
+ * --batch          твитов в одном запросе (макс. 100, по умолч. 10)
+ * --limit          обработать только первые N постов (для проверки)
  */
 
 const fs   = require('fs');
@@ -21,45 +24,54 @@ const OUT_FILE     = path.join(__dirname, '..', 'data', 'x_stats.json');
 // ── Конфигурация ───────────────────────────────────────────────
 const API_KEY = process.env.SOCIALDATA_KEY
   || process.argv.find(a => a.startsWith('--key='))?.split('=').slice(1).join('=')
-  || '8101|7WAkxO5sFiRsL8gRlXybAM9SXjDRXYeL8LOQg8BW21860fd5';
+  || '4948|CQ4cozl2G0GCVVLZhRhfXsv9DMHzjPHnL4aE7mK9d7093fab';
 
-const CONCURRENCY = parseInt(
-  process.argv.find(a => a.startsWith('--concurrency='))?.split('=')[1] || '5'
-);
-const BATCH_SIZE  = Math.min(100, parseInt(
-  process.argv.find(a => a.startsWith('--batch='))?.split('=')[1] || '20'
+const BATCH_SIZE   = Math.min(100, parseInt(
+  process.argv.find(a => a.startsWith('--batch='))?.split('=')[1] || '10'
 ));
-const RESUME      = process.argv.includes('--resume');
+const RESUME       = process.argv.includes('--resume');
+const RETRY_ERRORS = process.argv.includes('--retry-errors');
+const LIMIT        = parseInt(
+  process.argv.find(a => a.startsWith('--limit='))?.split('=')[1] || '0'
+);
 
-const BASE_URL    = 'https://api.socialdata.tools';
-const EXCLUDED_HANDLES = new Set(['dlicomapp']); // X-аккаунты которые не считаем
-const RETRY_DELAY = 3000;
-const MAX_RETRIES = 3;
-
-// ── Семафор ────────────────────────────────────────────────────
-class Semaphore {
-  constructor(n) { this.n = n; this.queue = []; }
-  acquire() { return new Promise(r => this.n > 0 ? (this.n--, r()) : this.queue.push(r)); }
-  release() { this.queue.length > 0 ? this.queue.shift()() : this.n++; }
-}
+const BASE_URL         = 'https://api.socialdata.tools';
+const EXCLUDED_HANDLES = new Set(['dlicomapp']);
+const RETRY_DELAY      = 5000;   // задержка при 429
+const MAX_RETRIES      = 3;
+const CHUNK_DELAY_MS   = 1000;   // пауза между батчами
+const FETCH_TIMEOUT    = 30000;  // таймаут запроса (мс)
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// ── API-запрос ─────────────────────────────────────────────────
+// ── API-запрос батчем ──────────────────────────────────────────
 async function fetchBatch(ids, attempt = 1) {
-  const res = await fetch(`${BASE_URL}/twitter/tweets-by-ids`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${API_KEY}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({ ids }),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+
+  let res;
+  try {
+    res = await fetch(`${BASE_URL}/twitter/tweets-by-ids`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type':  'application/json',
+        'Accept':        'application/json',
+        'Connection':    'close',
+      },
+      body: JSON.stringify({ ids }),
+      signal: controller.signal,
+    });
+  } catch (err) {
+    clearTimeout(timer);
+    if (err.name === 'AbortError') throw new Error(`Timeout ${FETCH_TIMEOUT / 1000}s`);
+    throw err;
+  }
+  clearTimeout(timer);
 
   if (res.status === 429) {
     const wait = RETRY_DELAY * attempt;
-    console.warn(`\n  ⚠ Rate limit, ждём ${wait/1000}с...`);
+    console.warn(`\n  ⚠ Rate limit, ждём ${wait / 1000}с...`);
     await sleep(wait);
     if (attempt < MAX_RETRIES) return fetchBatch(ids, attempt + 1);
     throw new Error('Rate limit exceeded after retries');
@@ -73,34 +85,64 @@ async function fetchBatch(ids, attempt = 1) {
   return res.json();
 }
 
+// ── Fallback: одиночный запрос GET /twitter/tweets/:id ─────────
+// Батч-эндпоинт тихо игнорирует новые large-ID твиты (2025+).
+// Для таких случаев используем single endpoint.
+async function fetchSingle(id, attempt = 1) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+
+  let res;
+  try {
+    res = await fetch(`${BASE_URL}/twitter/tweets/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Accept':        'application/json',
+        'Connection':    'close',
+      },
+      signal: controller.signal,
+    });
+  } catch (err) {
+    clearTimeout(timer);
+    if (err.name === 'AbortError') throw new Error(`Timeout single ${FETCH_TIMEOUT / 1000}s`);
+    throw err;
+  }
+  clearTimeout(timer);
+
+  if (res.status === 404) return null;   // твит удалён / приватный
+
+  if (res.status === 429) {
+    const wait = RETRY_DELAY * attempt;
+    await sleep(wait);
+    if (attempt < MAX_RETRIES) return fetchSingle(id, attempt + 1);
+    throw new Error('Rate limit exceeded after retries (single)');
+  }
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(`API error ${res.status}: ${text.slice(0, 120)}`);
+  }
+
+  return res.json();
+}
+
 // ── Парсинг ответа ─────────────────────────────────────────────
-// SocialData возвращает объекты в Twitter API v1.1 формате
 function parseTweet(tweet) {
   if (!tweet) return null;
 
-  // Метрики могут быть в разных полях в зависимости от версии API
   const views =
     parseInt(tweet.views?.count || tweet.views_count || tweet.impression_count || tweet.view_count || 0);
-  const likes    = tweet.favorite_count    || tweet.like_count    || 0;
-  const reposts  = (tweet.retweet_count    || 0) + (tweet.quote_count || 0);
-  const comments = tweet.reply_count       || tweet.replies_count  || 0;
+  const likes    = tweet.favorite_count || tweet.like_count    || 0;
+  const reposts  = (tweet.retweet_count || 0) + (tweet.quote_count || 0);
+  const comments = tweet.reply_count    || tweet.replies_count || 0;
 
-  // Извлекаем handle автора из данных твита (важно для i/status ссылок)
   const twitterHandle =
-    tweet.user?.screen_name ||
-    tweet.author?.userName  ||
+    tweet.user?.screen_name   ||
+    tweet.author?.userName    ||
     tweet.author?.screen_name ||
     null;
 
   return { views, likes, reposts, comments, twitterHandle };
-}
-
-// ── Прогресс-бар ───────────────────────────────────────────────
-function bar(done, total, errors) {
-  const pct    = total > 0 ? Math.round((done / total) * 100) : 0;
-  const filled = Math.round(pct / 2);
-  const b      = '█'.repeat(filled) + '░'.repeat(50 - filled);
-  process.stdout.write(`\r  [${b}] ${pct}% — батч ${done}/${total}, ошибок: ${errors}`);
 }
 
 // ── Main ───────────────────────────────────────────────────────
@@ -112,8 +154,8 @@ async function main() {
 
   const xLinks = JSON.parse(fs.readFileSync(X_LINKS_FILE, 'utf-8'));
 
-  // Собираем все уникальные ID
-  const allPostsMap = {}; // id -> { handle, discordName }
+  // Собираем все уникальные посты
+  const allPostsMap = {};
   for (const [discordName, data] of Object.entries(xLinks)) {
     for (const post of data.posts) {
       if (post.handle && EXCLUDED_HANDLES.has(post.handle.toLowerCase())) continue;
@@ -123,93 +165,135 @@ async function main() {
     }
   }
 
-  // Загружаем уже сохранённые (--resume)
+  // --resume: загружаем существующие
   let existing = {};
   if (RESUME && fs.existsSync(OUT_FILE)) {
     existing = JSON.parse(fs.readFileSync(OUT_FILE, 'utf-8'));
-    console.log(`↩ Resume: уже сохранено ${Object.keys(existing).length} твитов`);
+    const errored   = Object.values(existing).filter(v => v.error).length;
+    const notFoundC = Object.values(existing).filter(v => v.notFound).length;
+    console.log(`↩ Resume: уже сохранено ${Object.keys(existing).length} записей`);
+    console.log(`   OK: ${Object.keys(existing).length - errored - notFoundC} | NotFound: ${notFoundC} | Error: ${errored}${RETRY_ERRORS ? ' (ретраим)' : ' (пропускаем)'}`);
   }
 
-  const allIds    = Object.keys(allPostsMap);
-  const toFetchIds = RESUME ? allIds.filter(id => !existing[id]) : allIds;
+  const allIds = Object.keys(allPostsMap);
 
-  // Разбиваем на батчи по BATCH_SIZE
+  // Фильтруем: пропускаем уже успешные (и notFound); errors — только при --retry-errors
+  let toFetchIds;
+  if (RESUME) {
+    toFetchIds = allIds.filter(id => {
+      const e = existing[id];
+      if (!e) return true;            // новый — берём
+      if (e.error && RETRY_ERRORS) return true;  // error + явный ретрай
+      return false;                   // всё остальное — пропускаем
+    });
+  } else {
+    toFetchIds = allIds;
+  }
+
+  if (LIMIT > 0) {
+    toFetchIds = toFetchIds.slice(0, LIMIT);
+    console.log(`🧪 Тест-режим: берём первые ${LIMIT} постов`);
+  }
+
+  // Разбиваем на батчи
   const batches = [];
   for (let i = 0; i < toFetchIds.length; i += BATCH_SIZE) {
     batches.push(toFetchIds.slice(i, i + BATCH_SIZE));
   }
 
-  console.log(`SocialData API | ключ: ${API_KEY.slice(0,8)}...`);
+  console.log(`SocialData API | ключ: ${API_KEY.slice(0, 8)}...`);
   console.log(`Твитов всего: ${allIds.length} | Загружаем: ${toFetchIds.length}`);
-  console.log(`Батчей: ${batches.length} × до ${BATCH_SIZE} | Параллельность: ${CONCURRENCY}\n`);
+  console.log(`Батчей: ${batches.length} × до ${BATCH_SIZE} | Последовательно (пауза ${CHUNK_DELAY_MS}мс, таймаут ${FETCH_TIMEOUT / 1000}с)\n`);
 
   const stats  = { ...existing };
-  const sem    = new Semaphore(CONCURRENCY);
-  let doneBatches = 0;
-  let errors      = 0;
+  let errors   = 0;
+  let notFound = 0;
+  let success  = 0;
 
-  const tasks = batches.map((batchIds) => async () => {
-    await sem.acquire();
+  for (let i = 0; i < batches.length; i++) {
+    const batchIds = batches[i];
+    process.stdout.write(`  Батч ${i + 1}/${batches.length} (${batchIds.length} твитов)...`);
+
     try {
-      let json;
-      try {
-        json = await fetchBatch(batchIds);
-      } catch (err) {
-        console.warn(`\n  ✗ Батч из ${batchIds.length} твитов: ${err.message}`);
-        errors++;
-        // Записываем как ошибки, чтобы --resume их пропустил при следующем запуске
-        for (const id of batchIds) {
-          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: allPostsMap[id].handle || null, id, error: true };
-        }
-        return;
-      }
+      const json = await fetchBatch(batchIds);
 
-      // Ответ может быть массивом или объектом { data: [...] }
-      const tweets = Array.isArray(json) ? json
-        : Array.isArray(json?.data) ? json.data
+      // Ответ: массив, { data: [] } или { tweets: [] }
+      const tweets = Array.isArray(json)        ? json
+        : Array.isArray(json?.data)   ? json.data
         : Array.isArray(json?.tweets) ? json.tweets
         : [];
 
-      // Индексируем по id
       const byId = {};
       for (const t of tweets) {
         const id = t.id_str || t.id || String(t.rest_id);
         byId[id] = t;
       }
 
+      let batchOk = 0;
+      const missedByBatch = [];
+
       for (const id of batchIds) {
-        const parsed = parseTweet(byId[id]);
-        // Если в x_links handle = null (i/status ссылка), берём handle из ответа API
+        const parsed         = parseTweet(byId[id]);
         const resolvedHandle = allPostsMap[id].handle || parsed?.twitterHandle || null;
         if (parsed) {
           const { twitterHandle, ...metrics } = parsed;
           stats[id] = { ...metrics, handle: resolvedHandle, id };
+          batchOk++;
+          success++;
         } else {
-          stats[id] = { views:0, likes:0, reposts:0, comments:0, handle: resolvedHandle, id, notFound: true };
+          missedByBatch.push(id);
         }
       }
-    } finally {
-      doneBatches++;
-      bar(doneBatches, batches.length, errors);
-      sem.release();
-    }
-  });
 
-  await Promise.all(tasks.map(t => t()));
-  console.log('\n');
+      // Fallback: пробуем single-endpoint для пропущенных батчем
+      let singleOk = 0;
+      for (const id of missedByBatch) {
+        const resolvedHandle = allPostsMap[id].handle || null;
+        try {
+          await sleep(300);
+          const tweet  = await fetchSingle(id);
+          const parsed = parseTweet(tweet);
+          if (parsed) {
+            const { twitterHandle, ...metrics } = parsed;
+            stats[id] = { ...metrics, handle: resolvedHandle || parsed.twitterHandle || null, id };
+            singleOk++;
+            success++;
+          } else {
+            stats[id] = { views: 0, likes: 0, reposts: 0, comments: 0, handle: resolvedHandle, id, notFound: true };
+            notFound++;
+          }
+        } catch (err) {
+          stats[id] = { views: 0, likes: 0, reposts: 0, comments: 0, handle: resolvedHandle, id, error: true, errorMsg: err.message };
+          errors++;
+        }
+      }
+
+      const fallbackNote = missedByBatch.length ? ` +single:${singleOk}/${missedByBatch.length}` : '';
+      process.stdout.write(` ✓ batch:${batchOk}/${batchIds.length}${fallbackNote}\n`);
+    } catch (err) {
+      process.stdout.write(` ✗ ${err.message}\n`);
+      errors++;
+      for (const id of batchIds) {
+        stats[id] = { views: 0, likes: 0, reposts: 0, comments: 0, handle: allPostsMap[id].handle || null, id, error: true };
+      }
+    }
+
+    // Пауза между батчами (кроме последнего)
+    if (i < batches.length - 1) await sleep(CHUNK_DELAY_MS);
+  }
 
   // Сохраняем
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(stats, null, 2));
 
-  const ok      = Object.values(stats).filter(s => !s.error && !s.notFound).length;
-  const errored = Object.values(stats).filter(s => s.error).length;
-  const missing = Object.values(stats).filter(s => s.notFound).length;
-
-  console.log(`✅ Готово!`);
-  console.log(`   Успешно  : ${ok}`);
-  console.log(`   Не найдено: ${missing}`);
-  console.log(`   Ошибки   : ${errored}`);
+  console.log(`\n✅ Готово!`);
+  console.log(`   Успешно    : ${success}`);
+  console.log(`   Не найдено : ${notFound}`);
+  console.log(`   Ошибки     : ${errors}`);
+  if (LIMIT > 0) {
+    console.log(`\n⚠ Тест-режим: загружено только ${toFetchIds.length} постов.`);
+    console.log(`  Для полного прохода: node scripts/scrape_x.js --resume`);
+  }
   console.log(`Сохранено: ${OUT_FILE}`);
 }
 

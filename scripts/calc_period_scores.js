@@ -21,10 +21,18 @@ const fs       = require('fs');
 const readline = require('readline');
 const path     = require('path');
 
-const JSON_DIR    = path.join(__dirname, '..', 'json');
-const DATA_DIR    = path.join(__dirname, '..', 'data');
-const X_LINKS     = path.join(DATA_DIR, 'x_links.json');
-const X_STATS     = path.join(DATA_DIR, 'x_stats.json');
+const JSON_DIR     = path.join(__dirname, '..', 'json');
+const DATA_DIR     = path.join(__dirname, '..', 'data');
+const X_LINKS      = path.join(DATA_DIR, 'x_links.json');
+const X_STATS      = path.join(DATA_DIR, 'x_stats.json');
+const ALIASES_FILE = path.join(__dirname, 'aliases.json');
+
+const _rawAliases = JSON.parse(fs.readFileSync(ALIASES_FILE, 'utf-8'));
+const ALIASES = {};
+for (const [k, v] of Object.entries(_rawAliases)) {
+  if (!k.startsWith('_')) ALIASES[k] = v;
+}
+function resolveAlias(name) { return ALIASES[name] || name; }
 
 // ── CLI ───────────────────────────────────────────────────────
 const arg = process.argv.find(a => a.startsWith('--period='));
@@ -144,9 +152,10 @@ function countDcPeriod(filePath) {
         if (!isBot && name && msgType && msgTs) {
           const ts = new Date(msgTs).getTime();
           if (ts >= cutoff) {
-            counts[name] = (counts[name] || 0) + 1;
-            if (!nicknames[name] && nickname) nicknames[name] = nickname;
-            if (!avatars[name]   && avatar)   avatars[name]   = avatar;
+            const canon = resolveAlias(name);
+            counts[canon] = (counts[canon] || 0) + 1;
+            if (!nicknames[canon] && nickname) nicknames[canon] = nickname;
+            if (!avatars[canon]   && avatar)   avatars[canon]   = avatar;
           }
         }
         pendingType = pendingTs = null;

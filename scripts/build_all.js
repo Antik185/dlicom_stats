@@ -22,7 +22,7 @@ const path = require('path');
 
 const SCRIPTS = path.join(__dirname);
 const skipX   = process.argv.includes('--skip-x');
-const concurrencyArg = process.argv.find(a => a.startsWith('--concurrency=')) || '--concurrency=5';
+const batchArg = process.argv.find(a => a.startsWith('--batch=')) || '--batch=10';
 
 // Определяем ref-date: явный аргумент или вчера
 const refArg  = process.argv.find(a => a.startsWith('--ref-date='));
@@ -48,7 +48,7 @@ const start = Date.now();
 run('count_dc.js');
 run('extract_x.js');
 if (!skipX) {
-  run('scrape_x.js', `${concurrencyArg} --resume`);
+  run('scrape_x.js', `${batchArg} --resume`);
 } else {
   console.log('\n⚠ Пропускаем scrape_x.js (--skip-x)');
 }

@@ -7,8 +7,16 @@
 const fs = require('fs');
 const path = require('path');
 
-const JSON_DIR = path.join(__dirname, '..', 'json');
-const OUT_FILE = path.join(__dirname, '..', 'data', 'x_links.json');
+const JSON_DIR     = path.join(__dirname, '..', 'json');
+const OUT_FILE     = path.join(__dirname, '..', 'data', 'x_links.json');
+const ALIASES_FILE = path.join(__dirname, 'aliases.json');
+
+const _rawAliases = JSON.parse(fs.readFileSync(ALIASES_FILE, 'utf-8'));
+const ALIASES = {};
+for (const [k, v] of Object.entries(_rawAliases)) {
+  if (!k.startsWith('_')) ALIASES[k] = v;
+}
+function resolveAlias(name) { return ALIASES[name] || name; }
 
 // Каналы, где публикуют X-посты
 const SOURCE_NAMES = new Set(['creators.json', 'dlicom-creators.json']);
@@ -34,7 +42,7 @@ function extractFromFile(filePath) {
   for (const msg of data.messages) {
     if (msg.author.isBot) continue;
     const content = msg.content || '';
-    const authorName = msg.author.name;
+    const authorName = resolveAlias(msg.author.name);
 
     X_POST_RE.lastIndex = 0;
     let m;
