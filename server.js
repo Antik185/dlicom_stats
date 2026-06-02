@@ -25,10 +25,6 @@ http.createServer((req, res) => {
     res.writeHead(302, { Location: '/lb/' });
     return res.end();
   }
-  if (urlPath === '/cards') {
-    res.writeHead(302, { Location: '/cards/' });
-    return res.end();
-  }
   if (urlPath === '/analytics') {
     res.writeHead(302, { Location: '/analytics/' });
     return res.end();
@@ -37,7 +33,7 @@ http.createServer((req, res) => {
   // Serve actual files
   let filePath;
   if      (urlPath === '/lb/')         filePath = path.join(ROOT, 'lb/index.html');
-  else if (urlPath === '/cards/')      filePath = path.join(ROOT, 'index.html');
+  else if (urlPath === '/cards' || urlPath === '/cards/') filePath = path.join(ROOT, 'index.html');
   else if (urlPath === '/analytics/')  filePath = path.join(ROOT, 'analytics/index.html');
   else                                 filePath = path.join(ROOT, urlPath);
 
