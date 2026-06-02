@@ -41,6 +41,13 @@ const RETRY_DELAY      = 5000;   // задержка при 429
 const MAX_RETRIES      = 3;
 const CHUNK_DELAY_MS   = 1000;   // пауза между батчами
 const FETCH_TIMEOUT    = 30000;  // таймаут запроса (мс)
+const REFRESH_DAYS     = 14;     // не обновлять стату постов старше этого срока — экономим API
+const TWITTER_EPOCH    = 1288834974657;
+
+function tweetIdToMs(id) {
+  try { return Number(BigInt(id) >> 22n) + TWITTER_EPOCH; }
+  catch { return 0; }
+}
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -177,15 +184,22 @@ async function main() {
 
   const allIds = Object.keys(allPostsMap);
 
-  // Фильтруем: пропускаем уже успешные (и notFound); errors — только при --retry-errors
-  let toFetchIds;
+  // Фильтруем: пропускаем уже успешные (и notFound) если им > REFRESH_DAYS;
+  // свежие посты (≤ 14д) перефетчиваем — их метрики ещё растут.
+  // errors — только при --retry-errors.
+  const refreshCutoff = Date.now() - REFRESH_DAYS * 86400000;
+  let toFetchIds, skippedAged = 0;
   if (RESUME) {
     toFetchIds = allIds.filter(id => {
       const e = existing[id];
-      if (!e) return true;            // новый — берём
-      if (e.error && RETRY_ERRORS) return true;  // error + явный ретрай
-      return false;                   // всё остальное — пропускаем
+      if (!e) return true;                          // новый — берём
+      if (e.error) return RETRY_ERRORS;             // error → только при --retry-errors
+      // OK/notFound: освежаем только если пост моложе REFRESH_DAYS
+      const fresh = tweetIdToMs(id) >= refreshCutoff;
+      if (!fresh) skippedAged++;
+      return fresh;
     });
+    console.log(`   Пропущено как «старше ${REFRESH_DAYS} дней» (кеш сохранён): ${skippedAged}`);
   } else {
     toFetchIds = allIds;
   }

@@ -3,9 +3,12 @@
  *   1. count_dc.js              — считает DC-сообщения
  *   2. extract_x.js             — извлекает X-ссылки
  *   3. scrape_x.js              — парсит X-статистику (можно пропустить с --skip-x)
+ *   3b. scrape_x_posts.js       — тексты X-постов → x_posts.json (только новые, --resume)
  *   4. calc_scores.js           — all-time очки
  *   5. calc_period_scores.js    — weekly и monthly очки
  *   6. save_rank_snapshot.js    — снепшот рангов
+ *   7. calc_badges.js           — бейджи
+ *   8. calc_analytics.js        — community-аналитика (overview/channels/heatmap)
  *
  * Использование:
  *   node scripts/build_all.js --ref-date=2026-05-17
@@ -36,11 +39,11 @@ if (refArg) {
 }
 console.log(`📅 Ref-date: ${refDate}`);
 
-function run(script, extraArgs = '') {
+function run(script, extraArgs = '', nodeFlags = '') {
   console.log(`\n${'═'.repeat(60)}`);
   console.log(`▶ ${script}${extraArgs ? ' ' + extraArgs : ''}`);
   console.log('═'.repeat(60));
-  execSync(`node ${path.join(SCRIPTS, script)} ${extraArgs}`, { stdio: 'inherit' });
+  execSync(`node ${nodeFlags} ${path.join(SCRIPTS, script)} ${extraArgs}`, { stdio: 'inherit' });
 }
 
 const start = Date.now();
@@ -49,14 +52,16 @@ run('count_dc.js');
 run('extract_x.js');
 if (!skipX) {
   run('scrape_x.js', `${batchArg} --resume`);
+  run('scrape_x_posts.js', `${batchArg} --resume`);   // тексты постов (только новые)
 } else {
-  console.log('\n⚠ Пропускаем scrape_x.js (--skip-x)');
+  console.log('\n⚠ Пропускаем scrape_x.js + scrape_x_posts.js (--skip-x)');
 }
 run('calc_scores.js', `--ref-date=${refDate}`);
 run('calc_period_scores.js', `--period=weekly  --ref-date=${refDate}`);
 run('calc_period_scores.js', `--period=monthly --ref-date=${refDate}`);
 run('save_rank_snapshot.js', `--ref-date=${refDate}`);
 run('calc_badges.js');
+run('calc_analytics.js', `--ref-date=${refDate}`, '--max-old-space-size=8192');
 
 const elapsed = ((Date.now() - start) / 1000).toFixed(0);
 console.log(`\n${'═'.repeat(60)}`);

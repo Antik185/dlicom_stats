@@ -1,4 +1,5 @@
 {
-  "_comment": "Маппинг старых Discord-юзернеймов на новые. old -> new (canonical).",
-  "chion9943": "mithunopbd"
+  "_comment": "Маппинг Discord-юзернеймов: old -> canonical. Каноническим обычно выбирается имя, под которым лежат X-хендл/ранг-история/ревью.",
+  "chion9943": "mithunopbd",
+  "israrbaho112_22122": "israrbaho"
 }

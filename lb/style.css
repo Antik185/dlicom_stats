@@ -509,6 +509,32 @@ body {
 }
 .profile-no-badges { color: #5a608a; font-size: 15px; }
 
+/* Curated review block (заменяет rank-chart для all-time) */
+.profile-review {
+  background: linear-gradient(135deg, rgba(74,214,255,0.05), rgba(181,102,255,0.06));
+  border: 1px solid rgba(74,214,255,0.18);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.profile-review-role {
+  font-size: 16px; font-weight: 700; color: #4ad6ff;
+  letter-spacing: 0.3px; margin-bottom: 8px;
+}
+.profile-review-text {
+  font-size: 13.5px; line-height: 1.65; color: #b8c0e0;
+}
+.profile-review-text b { color: #e0e7ff; font-weight: 600; }
+.profile-review-empty {
+  color: #5a608a; font-size: 13px; line-height: 1.6;
+  background: transparent; border-color: #1a1d3a;
+}
+.rv-tag-mini {
+  margin-left: 6px; padding: 2px 7px; border-radius: 5px;
+  font-size: 9px; letter-spacing: 1px; font-weight: 600;
+  background: rgba(181,102,255,0.15); color: #c89bff;
+  text-transform: uppercase;
+}
+
 /* Badge grid in profile */
 .badge-grid {
   display: flex; flex-wrap: wrap; gap: 8px;

@@ -182,10 +182,26 @@ function buildBadgeGridHtml(username) {
     '</div>';
 }
 
+// ── Review HTML (для all-time, заменяет пустой rank-chart) ────
+function buildReviewHtml(username) {
+  const r = (window.REVIEWS_DATA || {})[username];
+  if (r) {
+    return '<div class="profile-section-title">Profile <span class="rv-tag-mini">reviewed</span></div>' +
+      '<div class="profile-review">' +
+        '<div class="profile-review-role">' + (r.role || '') + '</div>' +
+        '<div class="profile-review-text">' + (r.text || '') + '</div>' +
+      '</div>';
+  }
+  return '<div class="profile-section-title">Profile</div>' +
+    '<div class="profile-review profile-review-empty">' +
+      'No curated review yet — open the Analytics tab for an auto-generated profile.' +
+    '</div>';
+}
+
 // ── Rank history chart HTML ───────────────────────────────────
 function buildRankChartHtml(username) {
-  // All-time не показывает историю рангов
-  if (timeFilter === 'all') return '';
+  // All-time — вместо истории рангов показываем ревью (там как раз свободное место)
+  if (timeFilter === 'all') return buildReviewHtml(username);
 
   const hist = window.RANK_HISTORY_DATA;
   if (!hist?.snapshots || hist.snapshots.length < 2) {

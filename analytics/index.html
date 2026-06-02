@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dlicom — Analytics</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/lb/" class="nav-brand">DLICOM</a>
+  <a href="/lb/"         class="nav-tab">Leaderboard</a>
+  <a href="/cards/"      class="nav-tab">Score Cards</a>
+  <a href="/analytics/"  class="nav-tab nav-active">Analytics</a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="logo-mini">DLICOM</div>
+        <div class="title">ANALYTICS</div>
+      </div>
+      <div class="live" id="live-status">
+        <span class="pulse-dot"></span>
+        <span id="updated-label">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="tab-bar" id="tab-bar">
+      <button class="tab-btn active" data-tab="overview"><i class="ti ti-chart-area-line"></i> Overview</button>
+      <button class="tab-btn" data-tab="contributors"><i class="ti ti-trophy"></i> Top Contributors</button>
+      <button class="tab-btn" data-tab="channels"><i class="ti ti-hash"></i> Channels</button>
+    </div>
+
+    <!-- ════════════ OVERVIEW TAB ════════════ -->
+    <section class="tab-panel active" id="tab-overview">
+
+      <div class="stat-grid stat-grid-6">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="ti ti-users"></i></div>
+          <div class="stat-val" id="s-members">—</div>
+          <div class="stat-lbl">Total Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:#4ad6ff"><i class="ti ti-message-2"></i></div>
+          <div class="stat-val" id="s-messages">—</div>
+          <div class="stat-lbl">Total Messages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:#b566ff"><i class="ti ti-calendar-month"></i></div>
+          <div class="stat-val" id="s-mau">—</div>
+          <div class="stat-lbl">MAU</div>
+          <div class="stat-sub" id="s-mau-sub"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:#4ade80"><i class="ti ti-calendar-week"></i></div>
+          <div class="stat-val" id="s-wau">—</div>
+          <div class="stat-lbl">WAU</div>
+          <div class="stat-sub" id="s-wau-sub"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:#f5b80a"><i class="ti ti-calendar"></i></div>
+          <div class="stat-val" id="s-dau">—</div>
+          <div class="stat-lbl">DAU</div>
+        </div>
+        <div class="stat-card" id="growth-card">
+          <div class="stat-icon" style="color:#4ade80"><i class="ti ti-trending-up"></i></div>
+          <div class="stat-val" id="s-growth">—</div>
+          <div class="stat-lbl">Growth (7d)</div>
+          <div class="stat-sub" id="s-retention"></div>
+        </div>
+      </div>
+
+      <!-- Growth chart -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Activity over time</div>
+          <div class="panel-legend">
+            <span class="lg lg-msg">Messages</span>
+            <span class="lg lg-usr">Active users</span>
+          </div>
+        </div>
+        <div id="growth-chart"></div>
+      </div>
+
+      <div class="overview-2col">
+        <!-- Heatmap -->
+        <div class="panel">
+          <div class="panel-head"><div class="panel-title">When is the community active? <span class="panel-hint">(UTC)</span></div></div>
+          <div id="heatmap"></div>
+        </div>
+
+        <!-- Breakdown panels -->
+        <div class="panel">
+          <div class="panel-head"><div class="panel-title">Message types <span class="panel-hint">(last 7 days)</span></div></div>
+          <div id="class-breakdown"></div>
+          <div class="panel-head" style="margin-top:22px"><div class="panel-title">Community sentiment <span class="panel-hint">(last 7 days)</span></div></div>
+          <div id="sent-breakdown"></div>
+        
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ CONTRIBUTORS TAB ════════════ -->
+    <section class="tab-panel" id="tab-contributors">
+      <div class="controls-row">
+        <div class="lb-search-wrap" style="margin-left:auto">
+          <i class="ti ti-search lb-search-icon"></i>
+          <input type="text" id="an-search" class="lb-search" placeholder="Search contributor..." autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="col-header col-header-simple">
+        <div class="ch-rank">#</div>
+        <div class="ch-user">CONTRIBUTOR</div>
+        <div class="ch-cscore">CURATED SCORE</div>
+      </div>
+
+      <div id="rows"></div>
+
+      <div class="pagination" id="pagination" style="display:none">
+        <button class="page-arrow" id="prev-page" disabled><i class="ti ti-chevron-left"></i></button>
+        <span class="page-info" id="page-info">1 – 25</span>
+        <button class="page-arrow" id="next-page"><i class="ti ti-chevron-right"></i></button>
+      </div>
+
+      <div class="footer" id="footer-stats"></div>
+    </section>
+
+    <!-- ════════════ CHANNELS TAB ════════════ -->
+    <section class="tab-panel" id="tab-channels">
+      <div class="controls-row">
+        <div class="filter-group" id="ch-filter">
+          <button class="filter-btn active" data-chstatus="all">All</button>
+          <button class="filter-btn" data-chstatus="growing"><i class="ti ti-trending-up"></i> Growing</button>
+          <button class="filter-btn" data-chstatus="alive"><i class="ti ti-activity"></i> Alive</button>
+          <button class="filter-btn" data-chstatus="declining"><i class="ti ti-trending-down"></i> Declining</button>
+          <button class="filter-btn" data-chstatus="dead"><i class="ti ti-zzz"></i> Dead</button>
+          <button class="filter-btn" data-chstatus="spam-heavy"><i class="ti ti-trash"></i> Spam-heavy</button>
+        </div>
+        <div class="filter-group" id="ch-kind">
+          <button class="filter-btn active" data-chkind="text"><i class="ti ti-hash"></i> Text</button>
+          <button class="filter-btn" data-chkind="voice"><i class="ti ti-microphone"></i> Voice</button>
+          <button class="filter-btn" data-chkind="all">All</button>
+        </div>
+      </div>
+      <div class="ch-period-note" id="ch-period-note" style="margin-bottom:14px"></div>
+
+      <div class="col-header col-header-ch">
+        <div>CHANNEL</div>
+        <div class="col-right">MESSAGES</div>
+        <div class="col-right">ACTIVE USERS</div>
+        <div class="col-right">REPLY %</div>
+        <div class="col-right">vs PREV WEEK</div>
+        <div class="col-right">STATUS</div>
+      </div>
+      <div id="channel-rows"></div>
+    </section>
+
+  </div>
+</div>
+
+<!-- User detail modal -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close"><i class="ti ti-x"></i></button>
+
+    <div class="modal-top">
+      <div class="modal-avatar" id="m-avatar"></div>
+      <div class="modal-identity">
+        <div class="modal-name"    id="m-name"></div>
+        <div class="modal-handles" id="m-handles"></div>
+        <div id="m-tier"></div>
+      </div>
+      <div class="modal-cscore-block">
+        <div class="modal-cscore-num" id="m-cscore-num"></div>
+        <div class="modal-cscore-lbl">Contributor Score</div>
+        <div class="modal-rank-lbl"   id="m-rank-lbl"></div>
+      </div>
+    </div>
+
+    <div class="modal-review" id="m-review-wrap">
+      <div class="modal-review-head">
+        <span class="modal-review-role" id="m-review-role"></span>
+        <span class="modal-review-tag" id="m-review-tag"><i class="ti ti-sparkles"></i> auto-profile</span>
+      </div>
+      <div class="modal-review-text" id="m-review-text"></div>
+    </div>
+
+    <div class="modal-section-title">Score Breakdown</div>
+    <div id="m-components"></div>
+
+    <div class="modal-section-title" style="margin-top:24px">Activity Stats</div>
+    <div class="modal-stat-row" id="m-stats"></div>
+
+    <div id="m-history-wrap">
+      <div class="modal-section-title" style="margin-top:24px">Rank History (monthly)</div>
+      <div id="m-history"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../data/scores_data.js"         onerror="window.SCORES_DATA=null"></script>
+<script src="../data/scores_monthly_data.js" onerror="window.SCORES_MONTHLY_DATA=null"></script>
+<script src="../data/scores_weekly_data.js"  onerror="window.SCORES_WEEKLY_DATA=null"></script>
+<script src="../data/rank_history_data.js"   onerror="window.RANK_HISTORY_DATA=null"></script>
+<script src="../data/analytics_data.js"      onerror="window.ANALYTICS_DATA=null"></script>
+<script src="../data/reviews_data.js"        onerror="window.REVIEWS_DATA=null"></script>
+<script src="app.js"></script>
+</body>
+</html>
