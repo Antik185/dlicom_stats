@@ -537,5 +537,21 @@ body {
   .chn-row > *:nth-child(3), .chn-row > *:nth-child(4), .chn-row > *:nth-child(5),
   .col-header-ch > *:nth-child(3), .col-header-ch > *:nth-child(4), .col-header-ch > *:nth-child(5) { display: none; }
   .title { font-size: 28px; letter-spacing: 3px; }
-  .tab-btn { padding: 8px 12px; font-size: 13px; }
+
+  /* Top nav на мобилке — впихиваем все 3 вкладки */
+  .top-nav { padding: 0 12px; gap: 2px; }
+  .nav-brand { margin-right: 8px; letter-spacing: 3px; font-size: 12px; }
+  .nav-tab { padding: 4px 9px; font-size: 11px; letter-spacing: 0; white-space: nowrap; }
+
+  /* Tab buttons (Overview / Top Contributors / Channels) — иконка рядом с текстом */
+  .tab-btn {
+    padding: 7px 10px; font-size: 12px; gap: 5px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .tab-bar { gap: 4px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  /* Header: live-метку под заголовок чтобы не налезала */
+  .header { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 24px; }
+  .live { padding-left: 0; font-size: 12px; }
 }
