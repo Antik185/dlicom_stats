@@ -169,12 +169,27 @@ function countDcPeriod(filePath) {
 // Хэндлы X-аккаунтов проекта — их посты не считаются
 const X_BLACKLIST = new Set(['dlicomapp', 'dlicom']);
 
+// Список вручную исключённых tweet-ID (из scripts/excluded_posts.json)
+let EXCLUDED_POSTS = new Set();
+try {
+  const exc = JSON.parse(fs.readFileSync(path.join(__dirname, 'excluded_posts.json'), 'utf-8'));
+  EXCLUDED_POSTS = new Set(Object.keys(exc).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
+// Забаненные юзеры (полностью пропускаем в периодических скорах)
+let EXCLUDED_USERS = new Set();
+try {
+  const exu = JSON.parse(fs.readFileSync(path.join(__dirname, 'excluded_users.json'), 'utf-8'));
+  EXCLUDED_USERS = new Set(Object.keys(exu).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
 // ── X-скор за период ─────────────────────────────────────────
 function calcXPeriod(xLinks, xStats) {
   const result = {};
 
   for (const [discordName, data] of Object.entries(xLinks)) {
     const filtered = (data.posts || []).filter(p => {
+      if (EXCLUDED_POSTS.has(p.id)) return false;   // вручную исключённый
       const ms = tweetIdToMs(p.id);
       if (ms < cutoff) return false;
       // Исключаем посты аккаунтов проекта
@@ -289,6 +304,7 @@ async function main() {
   const scores = [];
 
   for (const username of allUsers) {
+    if (EXCLUDED_USERS.has(username)) continue;   // забанен
     const dcMsg   = dcCounts[username] || 0;
     const dcScore = Math.round(dcMsg * 1 * 10) / 10;
     const xData   = xPeriod[username];

@@ -37,6 +37,13 @@ const ALIASES = {};
 for (const [k, v] of Object.entries(_rawAliases)) if (!k.startsWith('_')) ALIASES[k] = v;
 const resolveAlias = n => ALIASES[n] || n;
 
+// Забаненные юзеры (не попадают в contributors аналитики)
+let EXCLUDED_USERS = new Set();
+try {
+  const exu = JSON.parse(fs.readFileSync(path.join(__dirname, 'excluded_users.json'), 'utf-8'));
+  EXCLUDED_USERS = new Set(Object.keys(exu).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
 const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function decodeJsonStr(s) {
@@ -532,6 +539,7 @@ async function main() {
   const totalDays = days.length || 1;
   const contributors = {};
   for (const [name, m] of Object.entries(userMeta)) {
+    if (EXCLUDED_USERS.has(name)) continue;   // забаненный
     // топ-3 канала по числу сообщений
     const topChannels = Object.entries(m.chanCount)
       .sort((a, b) => b[1] - a[1]).slice(0, 3)

@@ -23,11 +23,26 @@ const OUT_FILE    = path.join(__dirname, '..', 'data', 'scores.json');
 // Хэндлы X-аккаунтов проекта — их посты не считаются
 const X_BLACKLIST = new Set(['dlicomapp', 'dlicom']);
 
+// Список вручную исключённых tweet-ID (читаем из scripts/excluded_posts.json)
+let EXCLUDED_POSTS = new Set();
+try {
+  const exc = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'excluded_posts.json'), 'utf-8'));
+  EXCLUDED_POSTS = new Set(Object.keys(exc).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
+// Забаненные юзеры (скоринг полностью пропускает)
+let EXCLUDED_USERS = new Set();
+try {
+  const exu = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'excluded_users.json'), 'utf-8'));
+  EXCLUDED_USERS = new Set(Object.keys(exu).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
 function calcXScore(posts, tweetStats) {
   let totalViews = 0, totalLikes = 0, totalComments = 0, totalReposts = 0;
   let postCount = 0;
 
   for (const post of posts) {
+    if (EXCLUDED_POSTS.has(post.id)) continue;   // вручную исключённый твит
     // Пропускаем посты проекта (как с явным handle, так и разрешённые через stats)
     const resolvedHandle = (post.handle || tweetStats[post.id]?.handle || '').toLowerCase();
     if (X_BLACKLIST.has(resolvedHandle)) continue;
@@ -97,6 +112,7 @@ function main() {
   const scores = [];
 
   for (const username of allUsers) {
+    if (EXCLUDED_USERS.has(username)) continue;   // забанен — полностью пропускаем
     const dc = dcStats[username] || { dcMessages: 0, nickname: username, avatarUrl: '' };
     const xData = xLinks[username];
 

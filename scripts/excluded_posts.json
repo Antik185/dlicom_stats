@@ -1,0 +1,4 @@
+{
+  "_comment": "X-посты, которые НЕ учитываются в расчёте scores. Tweet ID -> reason.",
+  "2057619116379263316": "manual exclude (https://x.com/LanyKatt/status/2057619116379263316)"
+}
