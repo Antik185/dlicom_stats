@@ -4,6 +4,11 @@
     { "source": "/lb",  "destination": "/lb/", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/cards", "destination": "/index.html" }
+    { "source": "/cards",      "destination": "/index.html" },
+    { "source": "/cards/",     "destination": "/index.html" },
+    { "source": "/spotlight",  "destination": "/spotlight/index.html" },
+    { "source": "/spotlight/", "destination": "/spotlight/index.html" },
+    { "source": "/analytics",  "destination": "/analytics/index.html" },
+    { "source": "/analytics/", "destination": "/analytics/index.html" }
   ]
 }
