@@ -365,6 +365,116 @@ body {
 .chn-num  { text-align: right; font-size: 14px; color: #c0c5e0; font-variant-numeric: tabular-nums; }
 .ch-period-note { font-size: 12px; color: #5a608a; }
 .chn-voice-ic { color: #b566ff; font-size: 13px; }
+
+/* ── Spotlight tab ───────────────────────────────────────────────── */
+.sp-controls { flex-wrap: wrap; gap: 12px; }
+.sp-stats-line { font-size: 13px; color: #5a608a; margin-bottom: 14px; }
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.sp-card {
+  background: #0e1124;
+  border: 1px solid #1a1d3a;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s;
+  position: relative;
+}
+.sp-card:hover { transform: translateY(-3px); border-color: rgba(74,214,255,0.35); }
+.sp-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #1a1d3a center/cover no-repeat;
+  position: relative;
+}
+.sp-card-img-wrap.video::after {
+  content: "▶"; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 14px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+.sp-card-empty {
+  width: 100%; aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  color: #3a4060; font-size: 11px; letter-spacing: 1px;
+}
+.sp-card-foot {
+  padding: 9px 11px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px;
+}
+.sp-card-author { color: #c0c5e0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp-card-likes { color: #f87171; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.sp-card-likes i { font-size: 13px; }
+
+/* Spotlight modal */
+.sp-modal {
+  background: rgba(7,8,28,0.98);
+  border: 1px solid #1a1d3a;
+  border-radius: 22px;
+  width: 100%; max-width: 720px;
+  max-height: 92vh; overflow-y: auto;        /* контент скроллится, кнопка не обрезается */
+  position: relative;
+  animation: modal-in 0.2s ease;
+  display: flex; flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74,214,255,0.25) transparent;
+}
+.sp-modal::-webkit-scrollbar { width: 6px; }
+.sp-modal::-webkit-scrollbar-track { background: transparent; }
+.sp-modal::-webkit-scrollbar-thumb { background: rgba(74,214,255,0.18); border-radius: 3px; }
+.sp-modal-media {
+  width: 100%;
+  max-height: 60vh; overflow: hidden;
+  background: #050617 center/contain no-repeat;
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-modal-media img, .sp-modal-media video {
+  max-width: 100%; max-height: 60vh; object-fit: contain; display: block;
+}
+.sp-modal-body { padding: 20px 24px 24px; }
+.sp-modal-author {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; color: #e0e7ff; font-weight: 600; margin-bottom: 10px;
+}
+.sp-modal-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #1a1d3a center/cover no-repeat;
+  flex-shrink: 0;
+}
+.sp-modal-handle { font-size: 12px; color: #5a608a; font-weight: 400; }
+.sp-modal-text {
+  font-size: 14px; color: #b8c0e0; line-height: 1.55;
+  margin-bottom: 14px;
+  max-height: 120px; overflow-y: auto;
+  white-space: pre-wrap;
+}
+.sp-modal-stats {
+  display: flex; gap: 16px; font-size: 13px; color: #8890b0;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.sp-modal-stats span { display: flex; align-items: center; gap: 5px; }
+.sp-modal-stats span.likes { color: #f87171; }
+.sp-modal-stats span.views { color: #4ad6ff; }
+.sp-modal-stats span.reposts { color: #4ade80; }
+.sp-modal-stats span.date { color: #5a608a; }
+.sp-modal-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border-radius: 10px;
+  background: rgba(74,214,255,0.12); color: #4ad6ff;
+  border: 1px solid rgba(74,214,255,0.3);
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  transition: background 0.15s;
+}
+.sp-modal-link:hover { background: rgba(74,214,255,0.2); }
+
+@media (max-width: 1100px) { .sp-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px)  { .sp-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .sp-grid { grid-template-columns: 1fr; } .sp-card-img-wrap { aspect-ratio: 16/10; } }
 .chn-growth { text-align: right; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .chn-status { text-align: right; }
 .status-badge {
@@ -538,10 +648,11 @@ body {
   .col-header-ch > *:nth-child(3), .col-header-ch > *:nth-child(4), .col-header-ch > *:nth-child(5) { display: none; }
   .title { font-size: 28px; letter-spacing: 3px; }
 
-  /* Top nav на мобилке — впихиваем все 3 вкладки */
-  .top-nav { padding: 0 12px; gap: 2px; }
-  .nav-brand { margin-right: 8px; letter-spacing: 3px; font-size: 12px; }
-  .nav-tab { padding: 4px 9px; font-size: 11px; letter-spacing: 0; white-space: nowrap; }
+  /* Top nav на мобилке — 4 вкладки, разрешаем горизонтальный скролл */
+  .top-nav { padding: 0 10px; gap: 2px; overflow-x: auto; }
+  .top-nav::-webkit-scrollbar { display: none; }
+  .nav-brand { margin-right: 6px; letter-spacing: 2px; font-size: 11px; flex-shrink: 0; }
+  .nav-tab { padding: 4px 8px; font-size: 11px; letter-spacing: 0; white-space: nowrap; flex-shrink: 0; }
 
   /* Tab buttons (Overview / Top Contributors / Channels) — иконка рядом с текстом */
   .tab-btn {

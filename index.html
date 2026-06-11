@@ -435,9 +435,10 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 .nav-tab:hover{color:#c0c5e0;background:rgba(255,255,255,0.05);}
 .nav-tab.nav-active{color:#4ad6ff;background:rgba(74,214,255,0.1);border-color:rgba(74,214,255,0.3);}
 @media (max-width: 740px) {
-  .top-nav{padding:0 12px;gap:2px}
-  .nav-brand{margin-right:8px;letter-spacing:3px;font-size:12px}
-  .nav-tab{padding:4px 9px;font-size:11px;letter-spacing:0;white-space:nowrap}
+  .top-nav{padding:0 10px;gap:2px;overflow-x:auto}
+  .top-nav::-webkit-scrollbar{display:none}
+  .nav-brand{margin-right:6px;letter-spacing:2px;font-size:11px;flex-shrink:0}
+  .nav-tab{padding:4px 8px;font-size:11px;letter-spacing:0;white-space:nowrap;flex-shrink:0}
 }
 </style>
 </head>
@@ -445,9 +446,10 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
 
 <nav class="top-nav">
   <a href="/lb/" class="nav-brand">DLICOM</a>
-  <a href="/lb/"         class="nav-tab">Leaderboard</a>
-  <a href="/cards"       class="nav-tab nav-active">Score Cards</a>
-  <a href="/analytics/"  class="nav-tab">Analytics</a>
+  <a href="/lb/"                  class="nav-tab">Leaderboard</a>
+  <a href="/cards/"               class="nav-tab nav-active">Score Cards</a>
+  <a href="/analytics/"           class="nav-tab">Analytics</a>
+  <a href="/spotlight/"           class="nav-tab">Spotlight</a>
 </nav>
 
 <!-- Cinematic Background -->

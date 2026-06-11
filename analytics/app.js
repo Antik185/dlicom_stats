@@ -609,14 +609,28 @@ function renderChannels() {
   renderTable();
   renderChannels();
 
-  // Tab switching
-  document.getElementById('tab-bar').addEventListener('click', e => {
-    const btn = e.target.closest('[data-tab]');
-    if (!btn) return;
+  // Tab switching (с поддержкой hash в URL)
+  function selectTab(name) {
+    const btn = document.querySelector(`[data-tab="${name}"]`);
+    if (!btn) return false;
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+    return true;
+  }
+  document.getElementById('tab-bar').addEventListener('click', e => {
+    const btn = e.target.closest('[data-tab]');
+    if (!btn) return;
+    selectTab(btn.dataset.tab);
+    history.replaceState(null, '', '#' + btn.dataset.tab);
+  });
+  // hash-роутинг: /analytics/#spotlight → сразу открываем Spotlight
+  const initialHash = (location.hash || '').replace(/^#/, '');
+  if (initialHash) selectTab(initialHash);
+  window.addEventListener('hashchange', () => {
+    const h = (location.hash || '').replace(/^#/, '');
+    if (h) selectTab(h);
   });
 
   document.getElementById('an-search').addEventListener('input', e => {

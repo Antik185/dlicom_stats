@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dlicom — Spotlight</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../analytics/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/lb/" class="nav-brand">DLICOM</a>
+  <a href="/lb/"          class="nav-tab">Leaderboard</a>
+  <a href="/cards/"       class="nav-tab">Score Cards</a>
+  <a href="/analytics/"   class="nav-tab">Analytics</a>
+  <a href="/spotlight/"   class="nav-tab nav-active">Spotlight</a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <div class="header">
+      <div>
+        <div class="logo-mini">DLICOM</div>
+        <div class="title">SPOTLIGHT</div>
+      </div>
+      <div class="live" id="live-status">
+        <span class="pulse-dot"></span>
+        <span id="sp-updated">—</span>
+      </div>
+    </div>
+
+    <div class="controls-row sp-controls">
+      <div class="filter-group" id="sp-sort">
+        <button class="filter-btn active" data-sort="likes"><i class="ti ti-heart"></i> Most liked</button>
+        <button class="filter-btn" data-sort="latest"><i class="ti ti-calendar"></i> Latest</button>
+        <button class="filter-btn" data-sort="oldest"><i class="ti ti-history"></i> Oldest</button>
+      </div>
+      <div class="filter-group" id="sp-period">
+        <button class="filter-btn active" data-period="all">All time</button>
+        <button class="filter-btn" data-period="month">30d</button>
+        <button class="filter-btn" data-period="week">7d</button>
+      </div>
+      <div class="lb-search-wrap">
+        <i class="ti ti-search lb-search-icon"></i>
+        <input type="text" id="sp-search" class="lb-search" placeholder="Search by author..." autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+
+    <div class="sp-stats-line" id="sp-stats"></div>
+    <div class="sp-grid" id="sp-grid"></div>
+
+    <div class="pagination" id="sp-pagination" style="display:none">
+      <button class="page-arrow" id="sp-prev-page" disabled><i class="ti ti-chevron-left"></i></button>
+      <span class="page-info" id="sp-page-info">1 – 24</span>
+      <button class="page-arrow" id="sp-next-page"><i class="ti ti-chevron-right"></i></button>
+    </div>
+
+    <div class="footer" id="sp-footer"></div>
+
+  </div>
+</div>
+
+<!-- Spotlight modal -->
+<div class="modal-overlay hidden" id="sp-modal-overlay">
+  <div class="sp-modal" id="sp-modal">
+    <button class="modal-close" id="sp-modal-close"><i class="ti ti-x"></i></button>
+
+    <div class="sp-modal-media-wrap">
+      <button class="sp-arrow sp-prev" id="sp-prev" aria-label="Prev"><i class="ti ti-chevron-left"></i></button>
+      <div class="sp-modal-media" id="sp-media-wrap"></div>
+      <button class="sp-arrow sp-next" id="sp-next" aria-label="Next"><i class="ti ti-chevron-right"></i></button>
+      <div class="sp-dots" id="sp-dots"></div>
+    </div>
+
+    <div class="sp-modal-body">
+      <div class="sp-modal-author" id="sp-author"></div>
+      <div class="sp-modal-text" id="sp-text"></div>
+      <div class="sp-modal-stats" id="sp-stats-modal"></div>
+      <a class="sp-modal-link" id="sp-link" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> Open on 𝕏</a>
+    </div>
+  </div>
+</div>
+
+<script src="../data/spotlight_data.js" onerror="window.SPOTLIGHT_DATA=null"></script>
+<script src="app.js"></script>
+</body>
+</html>

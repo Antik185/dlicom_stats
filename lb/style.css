@@ -663,10 +663,11 @@ body {
   .card { padding: 18px 16px; border-radius: 22px; }
   .header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 22px; }
   .title { font-size: 22px; letter-spacing: 3px; }
-  /* Top nav — впихиваем все 3 вкладки на узких экранах */
-  .top-nav { padding: 0 12px; gap: 2px; }
-  .nav-brand { margin-right: 8px; letter-spacing: 3px; font-size: 12px; }
-  .nav-tab { padding: 4px 9px; font-size: 11px; letter-spacing: 0; white-space: nowrap; }
+  /* Top nav — 4 вкладки на узких экранах, разрешаем скролл */
+  .top-nav { padding: 0 10px; gap: 2px; overflow-x: auto; }
+  .top-nav::-webkit-scrollbar { display: none; }
+  .nav-brand { margin-right: 6px; letter-spacing: 2px; font-size: 11px; flex-shrink: 0; }
+  .nav-tab { padding: 4px 8px; font-size: 11px; letter-spacing: 0; white-space: nowrap; flex-shrink: 0; }
   .col-header, .lb-row { grid-template-columns: 44px 1fr 82px 56px 56px; gap: 8px; }
   .lb-row { padding: 14px 12px; }
   .col-header { padding: 10px 12px 8px; font-size: 11px; }
