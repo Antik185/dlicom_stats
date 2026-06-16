@@ -37,6 +37,13 @@ try {
   EXCLUDED_USERS = new Set(Object.keys(exu).filter(k => !k.startsWith('_')));
 } catch (_) {}
 
+// Члены команды — считаются, но исключаются из ранжирования (rank=★, в конце таблицы)
+let TEAM_USERS = new Set();
+try {
+  const tu = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'team_users.json'), 'utf-8'));
+  TEAM_USERS = new Set(Object.keys(tu).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
 function calcXScore(posts, tweetStats) {
   let totalViews = 0, totalLikes = 0, totalComments = 0, totalReposts = 0;
   let postCount = 0;
@@ -144,25 +151,39 @@ function main() {
     });
   }
 
-  // Сортируем по убыванию totalScore
-  scores.sort((a, b) => b.totalScore - a.totalScore);
+  // Помечаем team-членов
+  for (const s of scores) s.team = TEAM_USERS.has(s.username);
 
-  // Определяем тиры на основе реального распределения
-  const totals = scores.map(s => s.totalScore);
+  // Сортируем по убыванию totalScore, team-члены всегда в самый конец
+  scores.sort((a, b) => {
+    if (a.team !== b.team) return a.team ? 1 : -1;
+    return b.totalScore - a.totalScore;
+  });
+
+  // Тиры/процентиль считаем только по НЕ-team юзерам
+  const ranked = scores.filter(s => !s.team);
+  const totals = ranked.map(s => s.totalScore);
   const n = totals.length;
   const p90 = totals[Math.floor(n * 0.10)] || 0; // топ-10% → Tier A (Mythic)
   const p99 = totals[Math.floor(n * 0.01)] || 0; // топ-1%  → Tier S (Legendary)
 
   for (const s of scores) {
-    if (s.totalScore >= p99)      s.tier = 't5'; // S — Legendary
+    if (s.team)                   s.tier = 't5'; // team всегда показываем как высший
+    else if (s.totalScore >= p99) s.tier = 't5'; // S — Legendary
     else if (s.totalScore >= p90) s.tier = 't3'; // A — Mythic
     else                          s.tier = 't1'; // B — Rare
   }
 
-  // Добавляем ранг и процентиль
-  scores.forEach((s, i) => {
-    s.rank = i + 1;
-    s.percentile = Math.round(((n - i - 1) / n) * 100);
+  // Ранг и процентиль: обычные юзеры 1..N, team-члены получают rank='★'
+  let r = 0;
+  scores.forEach((s) => {
+    if (s.team) {
+      s.rank = '★';
+      s.percentile = 100;
+    } else {
+      s.rank = ++r;
+      s.percentile = Math.round(((n - r) / n) * 100);
+    }
   });
 
   const output = {

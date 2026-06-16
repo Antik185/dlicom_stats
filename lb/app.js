@@ -87,6 +87,7 @@ function getUserBadges(username) {
 
 // ── Rank change indicator HTML ────────────────────────────────
 function buildRankChangeHtml(username, realRank) {
+  if (typeof realRank !== 'number') return '';   // team-член (★) — без тренда
   const hist = window.RANK_HISTORY_DATA;
   if (!hist?.snapshots) return '';
 
@@ -144,7 +145,7 @@ function buildStatsHtml(u) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
   const stats = [
-    { label: 'Rank',      value: u.rank ? '#' + u.rank : '?',  sub: u.tierLabel },
+    { label: 'Rank',      value: u.team ? '★' : (u.rank ? '#' + u.rank : '?'),  sub: u.tierLabel },
     { label: 'Total Pts', value: fmtNum(u.totalScore),  sub: u.percentile != null ? 'top ' + (100 - u.percentile) + '%' : '' },
     { label: 'DC Score',  value: fmtNum(u.dcScore),     sub: fmtNum(u.dcMessages) + ' msgs' },
     { label: 'X Score',   value: fmtNum(u.xScore),      sub: fmtNum(u.posts) + ' posts' },
@@ -523,7 +524,11 @@ function computeAll() {
       statFilter === 'twitter' ? (u.xScore    || 0) :
                                  (u.totalScore || 0);
     return { ...u, score };
-  }).sort((a, b) => b.score - a.score);
+  }).sort((a, b) => {
+    // team-члены всегда в самый конец, остальные по score
+    if (!!a.team !== !!b.team) return a.team ? 1 : -1;
+    return b.score - a.score;
+  });
 }
 function computeScored() {
   let all = computeAll();
@@ -548,7 +553,9 @@ function render() {
   }
 
   const allScored   = computeAll();
-  const realRankMap = new Map(allScored.map((u, i) => [u.username, i + 1]));
+  // team-членам присваиваем ★ вместо номера; остальным — позиция среди не-team
+  let _r = 0;
+  const realRankMap = new Map(allScored.map(u => [u.username, u.team ? '★' : (++_r)]));
   renderChampions(allScored);
   updateColHeaders();
 
@@ -672,6 +679,9 @@ async function loadData(timeframe) {
 
     const totalU = data.totalUsers || data.users.length || 1;
     usersData = (data.users || []).map(u => {
+      if (u.team) {
+        return { ...u, verified: !!u.xHandle, tierClass: 'L', tierLabel: 'TEAM' };
+      }
       const pctCalc = (u.rank / totalU) * 100;
       const dispPct = pctCalc < 0.1 ? '0.1%' : pctCalc < 1 ? pctCalc.toFixed(1) + '%' : Math.round(pctCalc) + '%';
       let tierClass = 'B';

@@ -31,6 +31,7 @@ const BATCH_SIZE   = Math.min(100, parseInt(
 ));
 const RESUME       = process.argv.includes('--resume');
 const RETRY_ERRORS = process.argv.includes('--retry-errors');
+const ERRORS_ONLY  = process.argv.includes('--errors-only');  // только error-записи, без рефреша свежих
 const LIMIT        = parseInt(
   process.argv.find(a => a.startsWith('--limit='))?.split('=')[1] || '0'
 );
@@ -41,7 +42,7 @@ const RETRY_DELAY      = 5000;   // задержка при 429
 const MAX_RETRIES      = 3;
 const CHUNK_DELAY_MS   = 1000;   // пауза между батчами
 const FETCH_TIMEOUT    = 30000;  // таймаут запроса (мс)
-const REFRESH_DAYS     = 14;     // не обновлять стату постов старше этого срока — экономим API
+const REFRESH_DAYS     = 7;      // не обновлять стату постов старше этого срока — экономим API
 const TWITTER_EPOCH    = 1288834974657;
 
 function tweetIdToMs(id) {
@@ -189,7 +190,11 @@ async function main() {
   // errors — только при --retry-errors.
   const refreshCutoff = Date.now() - REFRESH_DAYS * 86400000;
   let toFetchIds, skippedAged = 0;
-  if (RESUME) {
+  if (ERRORS_ONLY) {
+    // только error-записи, ничего больше не трогаем
+    toFetchIds = allIds.filter(id => existing[id]?.error);
+    console.log(`   Режим --errors-only: только ошибочные записи (${toFetchIds.length})`);
+  } else if (RESUME) {
     toFetchIds = allIds.filter(id => {
       const e = existing[id];
       if (!e) return true;                          // новый — берём

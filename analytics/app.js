@@ -565,6 +565,12 @@ function closeModal() { document.getElementById('modal-overlay').classList.add('
 let chStatusFilter = 'all';
 let chKindFilter = 'text';
 const STATUS_ICON = { growing:'ti-trending-up', alive:'ti-activity', declining:'ti-trending-down', dead:'ti-zzz', 'spam-heavy':'ti-trash' };
+const HIDDEN_CHANNEL_MARKERS = ['中文', 'дё­ж'];
+
+function isHiddenChannel(c) {
+  const text = `${c.name || ''} ${c.category || ''}`;
+  return HIDDEN_CHANNEL_MARKERS.some(marker => text.includes(marker));
+}
 
 function renderChannels() {
   // подпись периода
@@ -576,6 +582,7 @@ function renderChannels() {
   }
 
   const list = (ANALYTICS?.channels || []).filter(c =>
+    !isHiddenChannel(c) &&
     (chStatusFilter === 'all' || c.status === chStatusFilter) &&
     (chKindFilter === 'all' || (chKindFilter === 'voice' ? c.isVoice : !c.isVoice)));
   const container = document.getElementById('channel-rows');

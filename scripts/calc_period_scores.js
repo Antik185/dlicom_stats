@@ -183,6 +183,13 @@ try {
   EXCLUDED_USERS = new Set(Object.keys(exu).filter(k => !k.startsWith('_')));
 } catch (_) {}
 
+// Члены команды — rank='★', в конце, остальные ранкуются без них
+let TEAM_USERS = new Set();
+try {
+  const tu = JSON.parse(fs.readFileSync(path.join(__dirname, 'team_users.json'), 'utf-8'));
+  TEAM_USERS = new Set(Object.keys(tu).filter(k => !k.startsWith('_')));
+} catch (_) {}
+
 // ── X-скор за период ─────────────────────────────────────────
 function calcXPeriod(xLinks, xStats) {
   const result = {};
@@ -339,16 +346,26 @@ async function main() {
     });
   }
 
-  scores.sort((a, b) => b.totalScore - a.totalScore);
+  for (const s of scores) s.team = TEAM_USERS.has(s.username);
+  scores.sort((a, b) => {
+    if (a.team !== b.team) return a.team ? 1 : -1;
+    return b.totalScore - a.totalScore;
+  });
 
-  const n   = scores.length;
-  const p90 = scores[Math.floor(n * 0.10)]?.totalScore || 0;
-  const p99 = scores[Math.floor(n * 0.01)]?.totalScore || 0;
+  const ranked = scores.filter(s => !s.team);
+  const n   = ranked.length;
+  const p90 = ranked[Math.floor(n * 0.10)]?.totalScore || 0;
+  const p99 = ranked[Math.floor(n * 0.01)]?.totalScore || 0;
 
-  scores.forEach((s, i) => {
-    s.rank       = i + 1;
-    s.percentile = Math.round(((n - i - 1) / n) * 100);
-    s.tier       = s.totalScore >= p99 ? 't5' : s.totalScore >= p90 ? 't3' : 't1';
+  let r = 0;
+  scores.forEach((s) => {
+    if (s.team) {
+      s.rank = '★'; s.percentile = 100; s.tier = 't5';
+    } else {
+      s.rank = ++r;
+      s.percentile = Math.round(((n - r) / n) * 100);
+      s.tier = s.totalScore >= p99 ? 't5' : s.totalScore >= p90 ? 't3' : 't1';
+    }
   });
 
   const periodDays = Math.round((refMs - cutoff) / (24 * 60 * 60 * 1000));
