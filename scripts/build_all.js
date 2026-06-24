@@ -24,8 +24,9 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const SCRIPTS = path.join(__dirname);
-const skipX   = process.argv.includes('--skip-x');
-const batchArg = process.argv.find(a => a.startsWith('--batch=')) || '--batch=10';
+const skipX     = process.argv.includes('--skip-x');
+const skipTexts = process.argv.includes('--skip-texts');   // пропустить только scrape_x_posts (тексты)
+const batchArg  = process.argv.find(a => a.startsWith('--batch=')) || '--batch=10';
 
 // Определяем ref-date: явный аргумент или вчера
 const refArg  = process.argv.find(a => a.startsWith('--ref-date='));
@@ -52,7 +53,8 @@ run('count_dc.js');
 run('extract_x.js');
 if (!skipX) {
   run('scrape_x.js', `${batchArg} --resume`);
-  run('scrape_x_posts.js', `${batchArg} --resume`);   // тексты постов (только новые)
+  if (!skipTexts) run('scrape_x_posts.js', `${batchArg} --resume`);   // тексты постов (только новые)
+  else console.log('\n⚠ Пропускаем scrape_x_posts.js (--skip-texts)');
 } else {
   console.log('\n⚠ Пропускаем scrape_x.js + scrape_x_posts.js (--skip-x)');
 }
