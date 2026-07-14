@@ -62,7 +62,9 @@ run('calc_scores.js', `--ref-date=${refDate}`);
 run('calc_period_scores.js', `--period=weekly  --ref-date=${refDate}`);
 run('calc_period_scores.js', `--period=monthly --ref-date=${refDate}`);
 run('save_rank_snapshot.js', `--ref-date=${refDate}`);
+run('extract_current_roles.js');
 run('calc_badges.js');
+run('build_suspicious_x.js');
 run('calc_analytics.js', `--ref-date=${refDate}`, '--max-old-space-size=8192');
 
 const elapsed = ((Date.now() - start) / 1000).toFixed(0);

@@ -565,7 +565,7 @@ function closeModal() { document.getElementById('modal-overlay').classList.add('
 let chStatusFilter = 'all';
 let chKindFilter = 'text';
 const STATUS_ICON = { growing:'ti-trending-up', alive:'ti-activity', declining:'ti-trending-down', dead:'ti-zzz', 'spam-heavy':'ti-trash' };
-const HIDDEN_CHANNEL_MARKERS = ['中文', 'дё­ж'];
+const HIDDEN_CHANNEL_MARKERS = ['中文', 'дё­ж', 'content-spotlight'];
 
 function isHiddenChannel(c) {
   const text = `${c.name || ''} ${c.category || ''}`;

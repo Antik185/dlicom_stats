@@ -29,8 +29,8 @@ http.createServer((req, res) => {
     res.writeHead(302, { Location: '/analytics/' });
     return res.end();
   }
-  if (urlPath === '/spotlight') {
-    res.writeHead(302, { Location: '/spotlight/' });
+  if (urlPath === '/bots' || urlPath === '/spotlight' || urlPath === '/spotlight/') {
+    res.writeHead(302, { Location: '/bots/' });
     return res.end();
   }
 
@@ -39,7 +39,7 @@ http.createServer((req, res) => {
   if      (urlPath === '/lb/')         filePath = path.join(ROOT, 'lb/index.html');
   else if (urlPath === '/cards' || urlPath === '/cards/') filePath = path.join(ROOT, 'index.html');
   else if (urlPath === '/analytics/')  filePath = path.join(ROOT, 'analytics/index.html');
-  else if (urlPath === '/spotlight/')  filePath = path.join(ROOT, 'spotlight/index.html');
+  else if (urlPath === '/bots/')       filePath = path.join(ROOT, 'bots/index.html');
   else                                 filePath = path.join(ROOT, urlPath);
 
   try {

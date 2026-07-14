@@ -61,9 +61,17 @@ function extractFromFile(filePath) {
         users[authorName] = {
           nickname: msg.author.nickname || msg.author.name,
           avatarUrl: msg.author.avatarUrl || '',
+          profileTs: new Date(msg.timestamp || 0).getTime(),
           posts: [],
           seenIds: new Set(),
         };
+      }
+
+      const profileTs = new Date(msg.timestamp || 0).getTime();
+      if (profileTs >= (users[authorName].profileTs || 0)) {
+        users[authorName].nickname = msg.author.nickname || msg.author.name;
+        users[authorName].avatarUrl = msg.author.avatarUrl || users[authorName].avatarUrl;
+        users[authorName].profileTs = profileTs;
       }
 
       if (!users[authorName].seenIds.has(postId)) {
@@ -91,9 +99,15 @@ function main() {
         merged[discordName] = {
           nickname: data.nickname,
           avatarUrl: data.avatarUrl,
+          profileTs: data.profileTs || 0,
           posts: [],
           seenIds: new Set(),
         };
+      }
+      if ((data.profileTs || 0) >= merged[discordName].profileTs) {
+        merged[discordName].nickname = data.nickname;
+        merged[discordName].avatarUrl = data.avatarUrl || merged[discordName].avatarUrl;
+        merged[discordName].profileTs = data.profileTs || 0;
       }
       for (const post of data.posts) {
         if (!merged[discordName].seenIds.has(post.id)) {

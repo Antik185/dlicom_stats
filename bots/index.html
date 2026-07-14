@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dlicom - Possible Bots</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../analytics/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="/lb/" class="nav-brand">DLICOM</a>
+  <a href="/lb/" class="nav-tab">Leaderboard</a>
+  <a href="/cards/" class="nav-tab">Score Cards</a>
+  <a href="/analytics/" class="nav-tab">Analytics</a>
+  <a href="/bots/" class="nav-tab nav-active">Possible Bots</a>
+</nav>
+
+<main class="page">
+  <section class="card bots-shell">
+    <header class="header bots-header">
+      <div>
+        <div class="logo-mini">DLICOM / X REVIEW</div>
+        <h1 class="title">POSSIBLE BOTS</h1>
+      </div>
+      <div class="live"><span class="pulse-dot"></span><span id="updated">-</span></div>
+    </header>
+
+    <div class="signal-grid" id="signal-grid"></div>
+
+    <div class="bots-controls">
+      <div class="control-stack">
+        <span class="control-label">Category</span>
+        <div class="filter-group" id="category-filter">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="comments"><i class="ti ti-message-exclamation"></i> Comments &gt; likes</button>
+          <button class="filter-btn" data-category="low-likes"><i class="ti ti-eye-exclamation"></i> Low like rate</button>
+        </div>
+      </div>
+      <div class="control-stack">
+        <span class="control-label">Discord role</span>
+        <div class="filter-group" id="role-filter">
+          <button class="filter-btn active" data-role="all">All</button>
+          <button class="filter-btn" data-role="Dliever">Dliever</button>
+          <button class="filter-btn" data-role="Dcoded">Dcoded</button>
+          <button class="filter-btn" data-role="DCO">DCO</button>
+        </div>
+      </div>
+      <label class="bots-search">
+        <i class="ti ti-search"></i>
+        <input id="bots-search" type="search" placeholder="Discord or X..." autocomplete="off">
+      </label>
+    </div>
+
+    <div class="results-head">
+      <div><span id="result-count">0</span> accounts to review</div>
+      <select id="sort-select" aria-label="Sort accounts">
+        <option value="severity">Most signals</option>
+        <option value="views">Most views</option>
+        <option value="comments">Most comments</option>
+      </select>
+    </div>
+
+    <div class="bots-list" id="bots-list"></div>
+    <div class="empty-state" id="empty-state" hidden>
+      <i class="ti ti-filter-off"></i>
+      <span>No accounts match the selected filters</span>
+    </div>
+
+    <div class="pagination" id="pagination" hidden>
+      <button class="page-arrow" id="prev-page" aria-label="Previous page"><i class="ti ti-chevron-left"></i></button>
+      <span class="page-info" id="page-info"></span>
+      <button class="page-arrow" id="next-page" aria-label="Next page"><i class="ti ti-chevron-right"></i></button>
+    </div>
+  </section>
+</main>
+
+<script src="../data/suspicious_x_data.js" onerror="window.SUSPICIOUS_X_DATA=null"></script>
+<script src="app.js"></script>
+</body>
+</html>

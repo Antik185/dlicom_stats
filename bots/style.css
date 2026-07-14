@@ -1,0 +1,86 @@
+body { padding-top: 88px; }
+.bots-shell { border-radius: 16px; padding: 34px 38px 42px; }
+.bots-header { align-items: center; margin-bottom: 26px; }
+.bots-header .title { font-size: 34px; letter-spacing: 0; }
+
+.signal-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #1a1d3a; border-radius: 8px; overflow: hidden; margin-bottom: 24px;
+}
+.signal-card { padding: 18px 20px; background: rgba(255,255,255,.025); border-right: 1px solid #1a1d3a; }
+.signal-card:last-child { border-right: 0; }
+.signal-card i { color: #4ad6ff; font-size: 19px; }
+.signal-number { display: block; margin-top: 9px; color: #f1f5ff; font-size: 25px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.signal-label { display: block; margin-top: 3px; color: #6f7699; font-size: 11px; text-transform: uppercase; letter-spacing: 0; }
+
+.bots-controls { display: grid; grid-template-columns: 1.3fr 1fr minmax(210px,.65fr); gap: 14px; align-items: end; margin-bottom: 18px; }
+.control-stack { min-width: 0; }
+.control-label { display: block; margin-bottom: 7px; color: #5a608a; font-size: 11px; text-transform: uppercase; }
+.bots-controls .filter-group { display: flex; flex-wrap: wrap; gap: 5px; }
+.bots-controls .filter-btn { border-radius: 6px; padding: 7px 10px; white-space: nowrap; }
+.bots-search { height: 35px; display: flex; align-items: center; gap: 8px; padding: 0 11px; border: 1px solid #252947; border-radius: 6px; background: #080a20; color: #5a608a; }
+.bots-search:focus-within { border-color: rgba(74,214,255,.55); }
+.bots-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #dce3ff; font: inherit; font-size: 13px; }
+
+.results-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 10px; border-top: 1px solid #1a1d3a; color: #737a9d; font-size: 12px; }
+.results-head select { color: #aab1cf; background: #080a20; border: 1px solid #252947; border-radius: 6px; padding: 7px 30px 7px 9px; }
+
+.bots-list { display: flex; flex-direction: column; gap: 8px; }
+.bot-row { border: 1px solid #1a1d3a; border-radius: 8px; background: rgba(255,255,255,.018); overflow: hidden; }
+.bot-main { display: grid; grid-template-columns: minmax(250px,1.25fr) minmax(250px,1.2fr) minmax(310px,1.5fr) 26px; gap: 18px; align-items: center; width: 100%; padding: 15px 17px; border: 0; color: inherit; background: transparent; text-align: left; cursor: pointer; }
+.bot-main:hover { background: rgba(74,214,255,.025); }
+.bot-user { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.bot-avatar { position: relative; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: #181c3a; color: #89ddff; font-size: 13px; font-weight: 700; }
+.bot-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bot-name { overflow: hidden; color: #e5e9fa; font-size: 14px; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+.bot-handles { margin-top: 3px; color: #606889; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.role-list { display: flex; gap: 5px; margin-top: 6px; }
+.role-pill { padding: 2px 6px; border: 1px solid #323755; border-radius: 4px; color: #9aa2c4; font-size: 9px; }
+.role-Dcoded { color: #d0d861; border-color: rgba(208,216,97,.35); }
+.role-Dliever { color: #ff5dd6; border-color: rgba(255,93,214,.35); }
+.role-DCO { color: #ddd; border-color: rgba(221,221,221,.3); }
+
+.bot-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.metric strong { display: block; color: #dce2f8; font-size: 13px; font-variant-numeric: tabular-nums; }
+.metric span { color: #535a7b; font-size: 9px; text-transform: uppercase; }
+.flag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.flag-pill { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; padding: 4px 7px; border-radius: 5px; font-size: 10px; font-weight: 600; }
+.flag-comments { color: #ffbc6b; background: rgba(255,188,107,.09); border: 1px solid rgba(255,188,107,.24); }
+.flag-low-likes { color: #73d7ff; background: rgba(73,198,255,.08); border: 1px solid rgba(73,198,255,.22); }
+.expand-icon { color: #505778; transition: transform .18s; }
+.bot-row.open .expand-icon { transform: rotate(180deg); }
+
+.evidence { display: none; padding: 0 17px 16px 73px; }
+.bot-row.open .evidence { display: block; }
+.evidence-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; padding-top: 13px; border-top: 1px solid #1a1d3a; }
+.evidence-group { min-width: 0; }
+.evidence-title { margin-bottom: 7px; color: #8189aa; font-size: 10px; text-transform: uppercase; }
+.post-link { display: grid; grid-template-columns: 70px repeat(3,1fr) 18px; gap: 7px; align-items: center; min-height: 31px; padding: 5px 7px; margin-bottom: 4px; border: 1px solid #202440; border-radius: 5px; color: #747c9d; text-decoration: none; font-size: 10px; }
+.post-link:hover { border-color: rgba(74,214,255,.35); color: #c4cbe4; }
+.post-link strong { color: #b8bfd9; font-weight: 550; }
+.empty-state { min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #596080; font-size: 13px; }
+.empty-state i { font-size: 28px; }
+
+@media (max-width: 1100px) {
+  .bots-controls { grid-template-columns: 1fr 1fr; }
+  .bots-search { grid-column: 1/-1; }
+  .bot-main { grid-template-columns: minmax(220px,1fr) minmax(230px,1fr) 26px; }
+  .flag-list { grid-column: 1/-1; }
+  .evidence-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  body { padding: 66px 10px 30px; }
+  .bots-shell { padding: 23px 14px 30px; }
+  .bots-header { align-items: flex-start; }
+  .bots-header .title { font-size: 23px; }
+  .signal-grid { grid-template-columns: 1fr; }
+  .signal-card { border-right: 0; border-bottom: 1px solid #1a1d3a; }
+  .signal-card:last-child { border-bottom: 0; }
+  .bots-controls { grid-template-columns: 1fr; }
+  .bots-search { grid-column: auto; }
+  .bot-main { grid-template-columns: 1fr 24px; gap: 12px; }
+  .bot-metrics, .flag-list { grid-column: 1/-1; }
+  .expand-icon { grid-column: 2; grid-row: 1; }
+  .evidence { padding: 0 12px 12px; }
+  .evidence-grid { grid-template-columns: 1fr; }
+}

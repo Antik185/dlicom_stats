@@ -459,6 +459,7 @@ async function main() {
       if (/events/.test(n)) return false;          // 🎮╏events
       if (/dlicom-creators/.test(n)) return false; // 🧷╏dlicom-creators
       if (/app-feedback/.test(n)) return false;    // 🧪╏app-feedback
+      if (/content-spotlight/.test(n)) return false;
       if (/中文|chinese/i.test(cat) || /中文|游戏频道/.test(ch.name)) return false; // 🇨🇳 китайский канал
       return true;
     })

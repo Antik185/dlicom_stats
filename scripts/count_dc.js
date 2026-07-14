@@ -35,11 +35,13 @@ function processFile(filePath) {
     const counts = {};
     const nicknames = {};
     const avatars = {};
+    const profileTs = {};
 
     let inAuthor = false;
     let authorDepth = 0;
     let msgType = null;
     let pendingType = null;
+    let pendingTs = null;
     let name = null;
     let nickname = null;
     let avatar = null;
@@ -52,6 +54,10 @@ function processFile(filePath) {
       if (!inAuthor && t.startsWith('"type":')) {
         const v = t.replace('"type":', '').trim().replace(/[",\s]/g, '');
         pendingType = (v === 'Default' || v === 'Reply') ? v : null;
+      }
+      if (!inAuthor && t.startsWith('"timestamp":')) {
+        const m = t.match(/"timestamp":\s*"([^"]+)"/);
+        if (m) pendingTs = m[1];
       }
 
       // Начало блока author
@@ -97,14 +103,18 @@ function processFile(filePath) {
         if (!isBot && name && msgType) {
           const canon = resolveAlias(name);
           counts[canon] = (counts[canon] || 0) + 1;
-          if (!nicknames[canon] && nickname) nicknames[canon] = nickname;
-          if (!avatars[canon] && avatar) avatars[canon] = avatar;
+          const ts = pendingTs ? new Date(pendingTs).getTime() : 0;
+          if (!profileTs[canon] || ts >= profileTs[canon]) {
+            if (nickname) nicknames[canon] = nickname;
+            if (avatar) avatars[canon] = avatar;
+            profileTs[canon] = ts;
+          }
         }
-        pendingType = null;
+        pendingType = pendingTs = null;
       }
     });
 
-    rl.on('close', () => resolve({ counts, nicknames, avatars }));
+    rl.on('close', () => resolve({ counts, nicknames, avatars, profileTs }));
   });
 }
 
@@ -140,12 +150,16 @@ async function main() {
   const totalCounts = {};
   const allNicknames = {};
   const allAvatars = {};
+  const allProfileTs = {};
 
-  for (const { counts, nicknames, avatars } of results) {
+  for (const { counts, nicknames, avatars, profileTs } of results) {
     for (const [u, c] of Object.entries(counts)) {
       totalCounts[u] = (totalCounts[u] || 0) + c;
-      if (!allNicknames[u] && nicknames[u]) allNicknames[u] = nicknames[u];
-      if (!allAvatars[u] && avatars[u]) allAvatars[u] = avatars[u];
+      if (!allProfileTs[u] || (profileTs[u] || 0) >= allProfileTs[u]) {
+        if (nicknames[u]) allNicknames[u] = nicknames[u];
+        if (avatars[u]) allAvatars[u] = avatars[u];
+        allProfileTs[u] = profileTs[u] || 0;
+      }
     }
   }
 

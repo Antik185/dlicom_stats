@@ -35,6 +35,8 @@ const ERRORS_ONLY  = process.argv.includes('--errors-only');  // только er
 const LIMIT        = parseInt(
   process.argv.find(a => a.startsWith('--limit='))?.split('=')[1] || '0'
 );
+const FROM_DATE_ARG = process.argv.find(a => a.startsWith('--from-date='))?.split('=')[1] || null;
+const TO_DATE_ARG   = process.argv.find(a => a.startsWith('--to-date='))?.split('=')[1] || null;
 
 const BASE_URL         = 'https://api.socialdata.tools';
 const EXCLUDED_HANDLES = new Set(['dlicomapp']);
@@ -44,10 +46,19 @@ const CHUNK_DELAY_MS   = 1000;   // пауза между батчами
 const FETCH_TIMEOUT    = 30000;  // таймаут запроса (мс)
 const REFRESH_DAYS     = 7;      // не обновлять стату постов старше этого срока — экономим API
 const TWITTER_EPOCH    = 1288834974657;
+const FROM_MS          = FROM_DATE_ARG ? new Date(`${FROM_DATE_ARG}T00:00:00.000Z`).getTime() : null;
+const TO_MS            = TO_DATE_ARG   ? new Date(`${TO_DATE_ARG}T23:59:59.999Z`).getTime()   : null;
 
 function tweetIdToMs(id) {
   try { return Number(BigInt(id) >> 22n) + TWITTER_EPOCH; }
   catch { return 0; }
+}
+
+function isInRequestedDateRange(id) {
+  const ms = tweetIdToMs(id);
+  if (FROM_MS !== null && ms < FROM_MS) return false;
+  if (TO_MS !== null && ms > TO_MS) return false;
+  return true;
 }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -183,7 +194,14 @@ async function main() {
     console.log(`   OK: ${Object.keys(existing).length - errored - notFoundC} | NotFound: ${notFoundC} | Error: ${errored}${RETRY_ERRORS ? ' (ретраим)' : ' (пропускаем)'}`);
   }
 
-  const allIds = Object.keys(allPostsMap);
+  const allIdsRaw = Object.keys(allPostsMap);
+  const allIds = (FROM_MS !== null || TO_MS !== null)
+    ? allIdsRaw.filter(isInRequestedDateRange)
+    : allIdsRaw;
+
+  if (FROM_MS !== null || TO_MS !== null) {
+    console.log(`   Date range: ${FROM_DATE_ARG || 'begin'}..${TO_DATE_ARG || 'end'} | filtered ${allIds.length}/${allIdsRaw.length}`);
+  }
 
   // Фильтруем: пропускаем уже успешные (и notFound) если им > REFRESH_DAYS;
   // свежие посты (≤ 14д) перефетчиваем — их метрики ещё растут.
