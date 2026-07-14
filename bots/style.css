@@ -40,9 +40,10 @@ body { padding-top: 88px; }
 .role-Dliever { color: #ff5dd6; border-color: rgba(255,93,214,.35); }
 .role-DCO { color: #ddd; border-color: rgba(221,221,221,.3); }
 
-.bot-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.bot-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .metric strong { display: block; color: #dce2f8; font-size: 13px; font-variant-numeric: tabular-nums; }
 .metric span { color: #535a7b; font-size: 9px; text-transform: uppercase; }
+.metric span i { margin-right: 3px; color: #747d9f; font-size: 11px; vertical-align: -1px; }
 .flag-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .flag-pill { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; padding: 4px 7px; border-radius: 5px; font-size: 10px; font-weight: 600; }
 .flag-comments { color: #ffbc6b; background: rgba(255,188,107,.09); border: 1px solid rgba(255,188,107,.24); }

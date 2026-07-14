@@ -46,6 +46,19 @@ function avatar(user) {
   return `<div class="bot-avatar"><span>${esc(initials(user.nickname || user.username))}</span>${image}</div>`;
 }
 
+function flaggedMetrics(user) {
+  const posts = new Map();
+  for (const flag of user.flags) {
+    for (const post of flag.evidence) posts.set(post.id, post);
+  }
+  return [...posts.values()].reduce((totals, post) => {
+    totals.posts++;
+    totals.likes += post.likes || 0;
+    totals.comments += post.comments || 0;
+    return totals;
+  }, { posts: 0, likes: 0, comments: 0 });
+}
+
 function evidence(flag) {
   const title = labels[flag.type].text;
   return `<div class="evidence-group"><div class="evidence-title">${esc(title)}${flag.ratio ? ` / ${flag.ratio}x` : ''}</div>${flag.evidence.map(post => `
@@ -55,12 +68,13 @@ function evidence(flag) {
 }
 
 function row(user) {
+  const flagged = flaggedMetrics(user);
   const roles = user.roles.map(role => `<span class="role-pill role-${esc(role)}">${esc(role)}</span>`).join('');
   const flags = user.flags.map(flag => `<span class="flag-pill flag-${flag.type}"><i class="ti ${labels[flag.type].icon}"></i>${labels[flag.type].text}${flag.count > 1 ? ` · ${flag.count}` : ''}</span>`).join('');
   return `<article class="bot-row">
     <button class="bot-main" type="button" aria-expanded="false">
       <div class="bot-user">${avatar(user)}<div style="min-width:0"><div class="bot-name">${esc(user.nickname || user.username)}</div><div class="bot-handles">${esc(user.username)}${user.handle ? ` · @${esc(user.handle)}` : ''}</div><div class="role-list">${roles}</div></div></div>
-      <div class="bot-metrics"><div class="metric"><strong>${fmt(user.posts)}</strong><span>posts</span></div><div class="metric"><strong>${fmt(user.totals.views)}</strong><span>views</span></div><div class="metric"><strong>${fmt(user.totals.likes)}</strong><span>likes</span></div><div class="metric"><strong>${fmt(user.totals.comments)}</strong><span>comments</span></div></div>
+      <div class="bot-metrics"><div class="metric"><strong>${fmt(flagged.posts)}</strong><span><i class="ti ti-file-text"></i> posts</span></div><div class="metric"><strong>${fmt(flagged.likes)}</strong><span><i class="ti ti-heart"></i> likes</span></div><div class="metric"><strong>${fmt(flagged.comments)}</strong><span><i class="ti ti-message-circle"></i> comments</span></div></div>
       <div class="flag-list">${flags}</div><i class="ti ti-chevron-down expand-icon"></i>
     </button>
     <div class="evidence"><div class="evidence-grid">${user.flags.map(evidence).join('')}</div></div>

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-14T20:30:32.931Z",
+  "generatedAt": "2026-07-14T21:12:42.849Z",
   "rules": {
     "comments": "At least 15 likes and more comments than likes",
     "lowLikes": "At least 1,000 views, no more than 10 likes, like rate up to 0.3%"
   },
   "counts": {
-    "users": 28,
-    "comments": 24,
+    "users": 25,
+    "comments": 21,
     "lowLikes": 8
   },
   "users": [
@@ -2215,76 +2215,6 @@
       "severity": 2
     },
     {
-      "username": "rajveersingh4118",
-      "nickname": "Mr Raj || Dlicom",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/510246492666200064/cf2d11b045cc8cdf88f21afab0cdc169.png?size=512",
-      "handle": "Rajveer84338199",
-      "roles": [
-        "DCO"
-      ],
-      "posts": 92,
-      "totals": {
-        "views": 33541,
-        "likes": 2075,
-        "comments": 1374,
-        "reposts": 127
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2058716072963101014",
-              "url": "https://x.com/Rajveer84338199/status/2058716072963101014",
-              "date": "2026-05-25",
-              "views": 1134,
-              "likes": 106,
-              "comments": 109,
-              "reposts": 17,
-              "engagement": 232
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "tuanh234",
-      "nickname": "Dezzy [Dli]",
-      "avatarUrl": "https://cdn.discordapp.com/guilds/1460130124598087712/users/1284182040568270940/avatars/c24eb01169aeac293a11336c69742799.png?size=512",
-      "handle": "dezyyy_y",
-      "roles": [
-        "Dcoded"
-      ],
-      "posts": 58,
-      "totals": {
-        "views": 15524,
-        "likes": 893,
-        "comments": 658,
-        "reposts": 8
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2071114773991985419",
-              "url": "https://x.com/dezyyy_y/status/2071114773991985419",
-              "date": "2026-06-28",
-              "views": 488,
-              "likes": 17,
-              "comments": 20,
-              "reposts": 1,
-              "engagement": 38
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
       "username": "mizan9933",
       "nickname": "Miizan |Dlicom",
       "avatarUrl": "https://cdn.discordapp.com/avatars/1013439284189089843/fe9364c629779c7d2dd7b000054b7fda.png?size=512",
@@ -2418,41 +2348,6 @@
               "comments": 6,
               "reposts": 1,
               "engagement": 12
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "czboii22",
-      "nickname": "#Czboii",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1354804151246127266/be808632f7cd01dd1ed320eec9c35ae9.png?size=512",
-      "handle": "czboii22",
-      "roles": [
-        "Dcoded"
-      ],
-      "posts": 27,
-      "totals": {
-        "views": 6548,
-        "likes": 368,
-        "comments": 255,
-        "reposts": 18
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2072696207940722732",
-              "url": "https://x.com/czboii22/status/2072696207940722732",
-              "date": "2026-07-02",
-              "views": 237,
-              "likes": 18,
-              "comments": 20,
-              "reposts": 3,
-              "engagement": 41
             }
           ]
         }
