@@ -265,6 +265,29 @@ body {
 }
 .filter-btn .ti { font-size: 18px; }
 
+.bot-filter-row { margin: 15px 0 0; }
+.bot-toggle {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: #8a90b0; font-size: 16px; cursor: pointer;
+}
+.bot-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.toggle-track {
+  width: 42px; height: 24px; padding: 3px; border-radius: 12px;
+  border: 1px solid #303556; background: #11142b;
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.toggle-thumb {
+  display: block; width: 16px; height: 16px; border-radius: 50%;
+  background: #69708f; transition: transform .2s, background .2s;
+}
+.bot-toggle input:checked + .toggle-track {
+  border-color: #4ad6ff; background: rgba(74,214,255,.14);
+  box-shadow: 0 0 16px rgba(74,214,255,.16);
+}
+.bot-toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(18px); background: #4ad6ff; }
+.bot-toggle input:focus-visible + .toggle-track { outline: 2px solid #7ae2ff; outline-offset: 2px; }
+.bot-toggle i { color: #4ad6ff; font-size: 17px; vertical-align: -1px; }
+
 /* Search */
 .lb-search-wrap { position: relative; flex-shrink: 0; }
 .lb-search {

@@ -2,12 +2,16 @@ let usersData   = [];
 let statFilter  = 'all';
 let timeFilter  = 'all';
 let searchQuery = '';
+let withoutBots = true;
 let firstRender = true;
 let previousRanks = new Map();
 const champState = { 1: null, 2: null, 3: null };
 
 const PAGE_SIZE = 10;
 let currentPage = 0;
+const suspiciousUsernames = new Set(
+  (window.SUSPICIOUS_X_DATA?.users || []).map(user => String(user.username || '').toLowerCase()),
+);
 
 // ── Icon data URLs (embedded, no server dependency) ───────────
 const ICON_DATA = {
@@ -87,6 +91,7 @@ function getUserBadges(username) {
 
 // ── Rank change indicator HTML ────────────────────────────────
 function buildRankChangeHtml(username, realRank) {
+  if (withoutBots) return '';
   if (typeof realRank !== 'number') return '';   // team-член (★) — без тренда
   const hist = window.RANK_HISTORY_DATA;
   if (!hist?.snapshots) return '';
@@ -518,7 +523,10 @@ function updatePagination(total) {
 
 // ── Compute sorted lists ──────────────────────────────────────
 function computeAll() {
-  return usersData.map(u => {
+  const visibleUsers = withoutBots
+    ? usersData.filter(u => !suspiciousUsernames.has(String(u.username || '').toLowerCase()))
+    : usersData;
+  return visibleUsers.map(u => {
     const score =
       statFilter === 'discord' ? (u.dcScore   || 0) :
       statFilter === 'twitter' ? (u.xScore    || 0) :
@@ -562,6 +570,9 @@ function render() {
   const scored     = computeScored();
   const totalPool  = scored.reduce((a, b) => a + b.score, 0);
   const totalCount = scored.length;
+  const hiddenCount = usersData.length - allScored.length;
+  document.getElementById('footer-stats').innerHTML =
+    '<div>' + allScored.length + ' users shown' + (hiddenCount ? ' · ' + hiddenCount + ' bots hidden' : '') + '</div>';
   const pageStart  = currentPage * PAGE_SIZE;
   const paged      = scored.slice(pageStart, pageStart + PAGE_SIZE);
 
@@ -698,9 +709,6 @@ async function loadData(timeframe) {
     const yyyy = statusDate.getFullYear();
     document.getElementById('live-status').innerHTML =
       '<span class="pulse-dot"></span> Live · updated ' + dd + '.' + mm + '.' + yyyy;
-    document.getElementById('footer-stats').innerHTML =
-      '<div>' + String(totalU) + ' users total</div>';
-
     firstRender = true;
     currentPage = 0;
     render();
@@ -726,6 +734,12 @@ document.querySelectorAll('#time-filter .filter-btn').forEach(b => {
     b.classList.add('active');
     timeFilter = b.dataset.time; currentPage = 0; loadData(timeFilter);
   });
+});
+document.getElementById('without-bots').addEventListener('change', e => {
+  withoutBots = e.target.checked;
+  firstRender = true;
+  currentPage = 0;
+  render();
 });
 document.getElementById('lb-search').addEventListener('input', e => {
   searchQuery = e.target.value.trim(); firstRender = true; currentPage = 0; render();

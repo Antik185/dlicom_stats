@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-07-14T21:12:42.849Z",
+  "generatedAt": "2026-08-18T19:05:23.388Z",
   "rules": {
+    "minimumPosts": "At least 2 unique suspicious posts",
     "comments": "At least 15 likes and more comments than likes",
     "lowLikes": "At least 1,000 views, no more than 10 likes, like rate up to 0.3%"
   },
   "counts": {
-    "users": 25,
-    "comments": 21,
-    "lowLikes": 8
+    "users": 17,
+    "comments": 14,
+    "lowLikes": 6
   },
   "users": [
     {
@@ -18,18 +19,28 @@
       "roles": [
         "Dcoded"
       ],
-      "posts": 173,
+      "posts": 204,
       "totals": {
-        "views": 37971,
-        "likes": 4641,
-        "comments": 4037,
-        "reposts": 737
+        "views": 44972,
+        "likes": 5186,
+        "comments": 4459,
+        "reposts": 764
       },
       "flags": [
         {
           "type": "comments",
-          "count": 45,
+          "count": 49,
           "evidence": [
+            {
+              "id": "2080257167538655555",
+              "url": "https://x.com/Evan_Officials/status/2080257167538655555",
+              "date": "2026-07-23",
+              "views": 277,
+              "likes": 20,
+              "comments": 34,
+              "reposts": 0,
+              "engagement": 54
+            },
             {
               "id": "2072209887610978791",
               "url": "https://x.com/Evan_Officials/status/2072209887610978791",
@@ -39,6 +50,16 @@
               "comments": 45,
               "reposts": 0,
               "engagement": 77
+            },
+            {
+              "id": "2080184670940021152",
+              "url": "https://x.com/Evan_Officials/status/2080184670940021152",
+              "date": "2026-07-23",
+              "views": 282,
+              "likes": 19,
+              "comments": 31,
+              "reposts": 3,
+              "engagement": 53
             },
             {
               "id": "2070759055208137023",
@@ -141,6 +162,16 @@
               "engagement": 85
             },
             {
+              "id": "2079883101673861444",
+              "url": "https://x.com/Evan_Officials/status/2079883101673861444",
+              "date": "2026-07-22",
+              "views": 375,
+              "likes": 34,
+              "comments": 41,
+              "reposts": 4,
+              "engagement": 79
+            },
+            {
               "id": "2067592836204449999",
               "url": "https://x.com/Evan_Officials/status/2067592836204449999",
               "date": "2026-06-18",
@@ -189,6 +220,16 @@
               "comments": 32,
               "reposts": 0,
               "engagement": 58
+            },
+            {
+              "id": "2079583048421519809",
+              "url": "https://x.com/Evan_Officials/status/2079583048421519809",
+              "date": "2026-07-21",
+              "views": 315,
+              "likes": 20,
+              "comments": 26,
+              "reposts": 1,
+              "engagement": 47
             },
             {
               "id": "2068559232417624337",
@@ -483,27 +524,27 @@
           ]
         }
       ],
-      "severity": 45
+      "severity": 49
     },
     {
       "username": "senjueth",
       "nickname": "SEN JU  | DLICOM",
-      "avatarUrl": "https://cdn.discordapp.com/guilds/1460130124598087712/users/696987275078270987/avatars/4d5cc19430864cbfd4ed50a13f1deec3.png?size=512",
+      "avatarUrl": "https://cdn.discordapp.com/guilds/1460130124598087712/users/696987275078270987/avatars/bce095071e6c631e7bb3e1e7722d804c.png?size=512",
       "handle": "0xSeenju",
       "roles": [
         "DCO"
       ],
-      "posts": 63,
+      "posts": 73,
       "totals": {
-        "views": 156664,
-        "likes": 3325,
-        "comments": 3250,
-        "reposts": 51
+        "views": 171868,
+        "likes": 4112,
+        "comments": 3926,
+        "reposts": 64
       },
       "flags": [
         {
           "type": "comments",
-          "count": 30,
+          "count": 33,
           "evidence": [
             {
               "id": "2073261746287226971",
@@ -666,6 +707,16 @@
               "engagement": 142
             },
             {
+              "id": "2076579187561996376",
+              "url": "https://x.com/0xSeenju/status/2076579187561996376",
+              "date": "2026-07-13",
+              "views": 1428,
+              "likes": 80,
+              "comments": 85,
+              "reposts": 1,
+              "engagement": 166
+            },
+            {
               "id": "2070090442985922608",
               "url": "https://x.com/0xSeenju/status/2070090442985922608",
               "date": "2026-06-25",
@@ -804,6 +855,26 @@
               "comments": 45,
               "reposts": 1,
               "engagement": 89
+            },
+            {
+              "id": "2076936688899924007",
+              "url": "https://x.com/0xSeenju/status/2076936688899924007",
+              "date": "2026-07-14",
+              "views": 1640,
+              "likes": 70,
+              "comments": 71,
+              "reposts": 1,
+              "engagement": 142
+            },
+            {
+              "id": "2077644778884448276",
+              "url": "https://x.com/0xSeenju/status/2077644778884448276",
+              "date": "2026-07-16",
+              "views": 1242,
+              "likes": 62,
+              "comments": 63,
+              "reposts": 1,
+              "engagement": 126
             }
           ]
         },
@@ -824,27 +895,27 @@
           ]
         }
       ],
-      "severity": 31
+      "severity": 34
     },
     {
       "username": "sohagmollik126",
-      "nickname": "͞Sᴏʜ֟ᴀɢ ᥫ᭡",
+      "nickname": "Sᴏʜ֟ᴀɢ ᥫ᭡ | DLICOM",
       "avatarUrl": "https://cdn.discordapp.com/avatars/1116537485443485767/5617892eb921655811ae424fe1059dc1.png?size=512",
       "handle": "bvvvvhfg",
       "roles": [
         "Dliever"
       ],
-      "posts": 95,
+      "posts": 199,
       "totals": {
-        "views": 32610,
-        "likes": 2229,
-        "comments": 2079,
-        "reposts": 186
+        "views": 48610,
+        "likes": 4033,
+        "comments": 3593,
+        "reposts": 338
       },
       "flags": [
         {
           "type": "comments",
-          "count": 17,
+          "count": 23,
           "evidence": [
             {
               "id": "2069612652373168513",
@@ -937,6 +1008,16 @@
               "engagement": 43
             },
             {
+              "id": "2077072947320439101",
+              "url": "https://x.com/bvvvvhfg/status/2077072947320439101",
+              "date": "2026-07-14",
+              "views": 808,
+              "likes": 36,
+              "comments": 39,
+              "reposts": 1,
+              "engagement": 76
+            },
+            {
               "id": "2067658601175695462",
               "url": "https://x.com/bvvvvhfg/status/2067658601175695462",
               "date": "2026-06-18",
@@ -955,6 +1036,26 @@
               "comments": 34,
               "reposts": 1,
               "engagement": 67
+            },
+            {
+              "id": "2082524277929279507",
+              "url": "https://x.com/bvvvvhfg/status/2082524277929279507",
+              "date": "2026-07-29",
+              "views": 103,
+              "likes": 15,
+              "comments": 17,
+              "reposts": 1,
+              "engagement": 33
+            },
+            {
+              "id": "2084286214644043927",
+              "url": "https://x.com/bvvvvhfg/status/2084286214644043927",
+              "date": "2026-08-03",
+              "views": 176,
+              "likes": 24,
+              "comments": 26,
+              "reposts": 1,
+              "engagement": 51
             },
             {
               "id": "2069260176134397998",
@@ -1015,11 +1116,41 @@
               "comments": 45,
               "reposts": 4,
               "engagement": 93
+            },
+            {
+              "id": "2076970826608587206",
+              "url": "https://x.com/bvvvvhfg/status/2076970826608587206",
+              "date": "2026-07-14",
+              "views": 548,
+              "likes": 20,
+              "comments": 21,
+              "reposts": 1,
+              "engagement": 42
+            },
+            {
+              "id": "2077256764878434794",
+              "url": "https://x.com/bvvvvhfg/status/2077256764878434794",
+              "date": "2026-07-15",
+              "views": 138,
+              "likes": 20,
+              "comments": 21,
+              "reposts": 1,
+              "engagement": 42
+            },
+            {
+              "id": "2080491403227136067",
+              "url": "https://x.com/bvvvvhfg/status/2080491403227136067",
+              "date": "2026-07-24",
+              "views": 146,
+              "likes": 20,
+              "comments": 21,
+              "reposts": 1,
+              "engagement": 42
             }
           ]
         }
       ],
-      "severity": 17
+      "severity": 23
     },
     {
       "username": "hasan014536",
@@ -1029,17 +1160,17 @@
       "roles": [
         "Dliever"
       ],
-      "posts": 65,
+      "posts": 77,
       "totals": {
-        "views": 12632,
-        "likes": 1738,
-        "comments": 1657,
-        "reposts": 73
+        "views": 14293,
+        "likes": 1984,
+        "comments": 1879,
+        "reposts": 84
       },
       "flags": [
         {
           "type": "comments",
-          "count": 16,
+          "count": 19,
           "evidence": [
             {
               "id": "2070738369718759446",
@@ -1092,6 +1223,16 @@
               "engagement": 81
             },
             {
+              "id": "2076613919230378417",
+              "url": "https://x.com/MdHasan53951357i/status/2076613919230378417",
+              "date": "2026-07-13",
+              "views": 130,
+              "likes": 32,
+              "comments": 38,
+              "reposts": 1,
+              "engagement": 71
+            },
+            {
               "id": "2068347686152290780",
               "url": "https://x.com/MdHasan53951357/status/2068347686152290780",
               "date": "2026-06-20",
@@ -1130,6 +1271,16 @@
               "comments": 95,
               "reposts": 4,
               "engagement": 190
+            },
+            {
+              "id": "2077405169613213845",
+              "url": "https://x.com/MdHasan53951357/status/2077405169613213845",
+              "date": "2026-07-15",
+              "views": 131,
+              "likes": 36,
+              "comments": 40,
+              "reposts": 1,
+              "engagement": 77
             },
             {
               "id": "2067264291787694100",
@@ -1200,11 +1351,196 @@
               "comments": 26,
               "reposts": 1,
               "engagement": 52
+            },
+            {
+              "id": "2077272724612026668",
+              "url": "https://x.com/MdHasan53951357/status/2077272724612026668",
+              "date": "2026-07-15",
+              "views": 158,
+              "likes": 16,
+              "comments": 17,
+              "reposts": 2,
+              "engagement": 35
             }
           ]
         }
       ],
-      "severity": 16
+      "severity": 19
+    },
+    {
+      "username": "sayedvision",
+      "nickname": "SAYED AHMED",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1230740925949673475/d0b8bec1ba9485608fc3acc0d68b5745.png?size=512",
+      "handle": "SayedVision",
+      "roles": [
+        "Dliever"
+      ],
+      "posts": 73,
+      "totals": {
+        "views": 36414,
+        "likes": 4037,
+        "comments": 3736,
+        "reposts": 119
+      },
+      "flags": [
+        {
+          "type": "comments",
+          "count": 15,
+          "evidence": [
+            {
+              "id": "2075986692188824062",
+              "url": "https://x.com/SayedVision/status/2075986692188824062",
+              "date": "2026-07-11",
+              "views": 598,
+              "likes": 84,
+              "comments": 89,
+              "reposts": 1,
+              "engagement": 174
+            },
+            {
+              "id": "2077081476391383533",
+              "url": "https://x.com/SayedVision/status/2077081476391383533",
+              "date": "2026-07-14",
+              "views": 549,
+              "likes": 62,
+              "comments": 67,
+              "reposts": 0,
+              "engagement": 129
+            },
+            {
+              "id": "2084317660377227744",
+              "url": "https://x.com/SayedVision/status/2084317660377227744",
+              "date": "2026-08-03",
+              "views": 486,
+              "likes": 72,
+              "comments": 77,
+              "reposts": 0,
+              "engagement": 149
+            },
+            {
+              "id": "2071916052817351098",
+              "url": "https://x.com/SayedVision/status/2071916052817351098",
+              "date": "2026-06-30",
+              "views": 643,
+              "likes": 76,
+              "comments": 80,
+              "reposts": 3,
+              "engagement": 159
+            },
+            {
+              "id": "2071486597258973420",
+              "url": "https://x.com/SayedVision/status/2071486597258973420",
+              "date": "2026-06-29",
+              "views": 430,
+              "likes": 52,
+              "comments": 55,
+              "reposts": 1,
+              "engagement": 108
+            },
+            {
+              "id": "2073799281589506545",
+              "url": "https://x.com/SayedVision/status/2073799281589506545",
+              "date": "2026-07-05",
+              "views": 594,
+              "likes": 64,
+              "comments": 67,
+              "reposts": 3,
+              "engagement": 134
+            },
+            {
+              "id": "2076719032758333937",
+              "url": "https://x.com/SayedVision/status/2076719032758333937",
+              "date": "2026-07-13",
+              "views": 625,
+              "likes": 71,
+              "comments": 74,
+              "reposts": 2,
+              "engagement": 147
+            },
+            {
+              "id": "2081059501520892126",
+              "url": "https://x.com/SayedVision/status/2081059501520892126",
+              "date": "2026-07-25",
+              "views": 478,
+              "likes": 66,
+              "comments": 69,
+              "reposts": 5,
+              "engagement": 140
+            },
+            {
+              "id": "2071626401149833420",
+              "url": "https://x.com/SayedVision/status/2071626401149833420",
+              "date": "2026-06-29",
+              "views": 774,
+              "likes": 77,
+              "comments": 79,
+              "reposts": 4,
+              "engagement": 160
+            },
+            {
+              "id": "2072351871529050457",
+              "url": "https://x.com/SayedVision/status/2072351871529050457",
+              "date": "2026-07-01",
+              "views": 630,
+              "likes": 77,
+              "comments": 79,
+              "reposts": 6,
+              "engagement": 162
+            },
+            {
+              "id": "2075629674408059275",
+              "url": "https://x.com/SayedVision/status/2075629674408059275",
+              "date": "2026-07-10",
+              "views": 424,
+              "likes": 50,
+              "comments": 52,
+              "reposts": 0,
+              "engagement": 102
+            },
+            {
+              "id": "2078518389614801082",
+              "url": "https://x.com/SayedVision/status/2078518389614801082",
+              "date": "2026-07-18",
+              "views": 477,
+              "likes": 56,
+              "comments": 58,
+              "reposts": 0,
+              "engagement": 114
+            },
+            {
+              "id": "2064363792558125378",
+              "url": "https://x.com/SayedVision/status/2064363792558125378",
+              "date": "2026-06-09",
+              "views": 1249,
+              "likes": 73,
+              "comments": 74,
+              "reposts": 3,
+              "engagement": 150
+            },
+            {
+              "id": "2083604514960265502",
+              "url": "https://x.com/SayedVision/status/2083604514960265502",
+              "date": "2026-08-01",
+              "views": 260,
+              "likes": 25,
+              "comments": 26,
+              "reposts": 1,
+              "engagement": 52
+            },
+            {
+              "id": "2083969889317126629",
+              "url": "https://x.com/SayedVision/status/2083969889317126629",
+              "date": "2026-08-02",
+              "views": 275,
+              "likes": 20,
+              "comments": 21,
+              "reposts": 0,
+              "engagement": 41
+            }
+          ]
+        }
+      ],
+      "severity": 15
     },
     {
       "username": "0xred_9",
@@ -1214,12 +1550,12 @@
       "roles": [
         "Dcoded"
       ],
-      "posts": 48,
+      "posts": 51,
       "totals": {
-        "views": 23043,
-        "likes": 1924,
-        "comments": 1758,
-        "reposts": 65
+        "views": 24450,
+        "likes": 2065,
+        "comments": 1868,
+        "reposts": 68
       },
       "flags": [
         {
@@ -1388,111 +1724,6 @@
       "severity": 15
     },
     {
-      "username": "sayedvision",
-      "nickname": "SAYED AHMED",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1230740925949673475/d0b8bec1ba9485608fc3acc0d68b5745.png?size=512",
-      "handle": "SayedVision",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 43,
-      "totals": {
-        "views": 23256,
-        "likes": 2340,
-        "comments": 2149,
-        "reposts": 76
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 8,
-          "evidence": [
-            {
-              "id": "2075986692188824062",
-              "url": "https://x.com/SayedVision/status/2075986692188824062",
-              "date": "2026-07-11",
-              "views": 598,
-              "likes": 84,
-              "comments": 89,
-              "reposts": 1,
-              "engagement": 174
-            },
-            {
-              "id": "2071916052817351098",
-              "url": "https://x.com/SayedVision/status/2071916052817351098",
-              "date": "2026-06-30",
-              "views": 643,
-              "likes": 76,
-              "comments": 80,
-              "reposts": 3,
-              "engagement": 159
-            },
-            {
-              "id": "2071486597258973420",
-              "url": "https://x.com/SayedVision/status/2071486597258973420",
-              "date": "2026-06-29",
-              "views": 430,
-              "likes": 52,
-              "comments": 55,
-              "reposts": 1,
-              "engagement": 108
-            },
-            {
-              "id": "2073799281589506545",
-              "url": "https://x.com/SayedVision/status/2073799281589506545",
-              "date": "2026-07-05",
-              "views": 594,
-              "likes": 64,
-              "comments": 67,
-              "reposts": 3,
-              "engagement": 134
-            },
-            {
-              "id": "2071626401149833420",
-              "url": "https://x.com/SayedVision/status/2071626401149833420",
-              "date": "2026-06-29",
-              "views": 774,
-              "likes": 77,
-              "comments": 79,
-              "reposts": 4,
-              "engagement": 160
-            },
-            {
-              "id": "2072351871529050457",
-              "url": "https://x.com/SayedVision/status/2072351871529050457",
-              "date": "2026-07-01",
-              "views": 630,
-              "likes": 77,
-              "comments": 79,
-              "reposts": 6,
-              "engagement": 162
-            },
-            {
-              "id": "2075629674408059275",
-              "url": "https://x.com/SayedVision/status/2075629674408059275",
-              "date": "2026-07-10",
-              "views": 424,
-              "likes": 50,
-              "comments": 52,
-              "reposts": 0,
-              "engagement": 102
-            },
-            {
-              "id": "2064363792558125378",
-              "url": "https://x.com/SayedVision/status/2064363792558125378",
-              "date": "2026-06-09",
-              "views": 1249,
-              "likes": 73,
-              "comments": 74,
-              "reposts": 3,
-              "engagement": 150
-            }
-          ]
-        }
-      ],
-      "severity": 8
-    },
-    {
       "username": "asur0010",
       "nickname": "𝐉 𝐄 𝐄 𝐓  🌿",
       "avatarUrl": "https://cdn.discordapp.com/avatars/1101133205521846282/b29d77c2c0d5ae79f8bae3f78692178c.png?size=512",
@@ -1500,12 +1731,12 @@
       "roles": [
         "Dliever"
       ],
-      "posts": 13,
+      "posts": 40,
       "totals": {
-        "views": 29276,
-        "likes": 78,
-        "comments": 57,
-        "reposts": 11
+        "views": 34294,
+        "likes": 174,
+        "comments": 131,
+        "reposts": 37
       },
       "flags": [
         {
@@ -1575,12 +1806,12 @@
       "roles": [
         "Dcoded"
       ],
-      "posts": 29,
+      "posts": 36,
       "totals": {
-        "views": 20439,
-        "likes": 2202,
-        "comments": 2075,
-        "reposts": 61
+        "views": 28971,
+        "likes": 3174,
+        "comments": 2959,
+        "reposts": 80
       },
       "flags": [
         {
@@ -1653,19 +1884,244 @@
       "severity": 6
     },
     {
-      "username": "sharman23_93252",
-      "nickname": "Sharman Chowdhury",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1311775153763651604/d63da70685f32963eff03c72646abb83.png?size=512",
-      "handle": "mdsharman21",
+      "username": "0x_sharifp",
+      "nickname": "SHARIF 🦇",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1308231286736945184/0fa773042ecfa638dcede6136bd8f96b.png?size=512",
+      "handle": "0x_sharifP",
+      "roles": [
+        "Dliever"
+      ],
+      "posts": 27,
+      "totals": {
+        "views": 3284,
+        "likes": 458,
+        "comments": 451,
+        "reposts": 3
+      },
+      "flags": [
+        {
+          "type": "comments",
+          "count": 6,
+          "evidence": [
+            {
+              "id": "2064901512137228483",
+              "url": "https://x.com/0x_sharifP/status/2064901512137228483",
+              "date": "2026-06-11",
+              "views": 266,
+              "likes": 58,
+              "comments": 67,
+              "reposts": 0,
+              "engagement": 125
+            },
+            {
+              "id": "2067591028773982434",
+              "url": "https://x.com/0x_sharifP/status/2067591028773982434",
+              "date": "2026-06-18",
+              "views": 177,
+              "likes": 40,
+              "comments": 49,
+              "reposts": 0,
+              "engagement": 89
+            },
+            {
+              "id": "2067832351481299044",
+              "url": "https://x.com/0x_sharifP/status/2067832351481299044",
+              "date": "2026-06-19",
+              "views": 259,
+              "likes": 51,
+              "comments": 54,
+              "reposts": 2,
+              "engagement": 107
+            },
+            {
+              "id": "2067956266551726442",
+              "url": "https://x.com/0x_sharifP/status/2067956266551726442",
+              "date": "2026-06-19",
+              "views": 210,
+              "likes": 28,
+              "comments": 31,
+              "reposts": 0,
+              "engagement": 59
+            },
+            {
+              "id": "2065255975440035876",
+              "url": "https://x.com/0x_sharifP/status/2065255975440035876",
+              "date": "2026-06-12",
+              "views": 466,
+              "likes": 56,
+              "comments": 58,
+              "reposts": 0,
+              "engagement": 114
+            },
+            {
+              "id": "2065430331994587255",
+              "url": "https://x.com/0x_sharifP/status/2065430331994587255",
+              "date": "2026-06-12",
+              "views": 278,
+              "likes": 54,
+              "comments": 55,
+              "reposts": 0,
+              "engagement": 109
+            }
+          ]
+        }
+      ],
+      "severity": 6
+    },
+    {
+      "username": "mhizrockie",
+      "nickname": "Mhizrockie",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1138741226024226917/888c3971214f6e75b9178f268ef47e15.png?size=512",
+      "handle": "Patiencebaby12",
+      "roles": [
+        "Dliever"
+      ],
+      "posts": 31,
+      "totals": {
+        "views": 4007,
+        "likes": 429,
+        "comments": 439,
+        "reposts": 18
+      },
+      "flags": [
+        {
+          "type": "comments",
+          "count": 5,
+          "evidence": [
+            {
+              "id": "2087988217781870786",
+              "url": "https://x.com/Patiencebaby12/status/2087988217781870786",
+              "date": "2026-08-13",
+              "views": 218,
+              "likes": 35,
+              "comments": 41,
+              "reposts": 1,
+              "engagement": 77
+            },
+            {
+              "id": "2087265747454026006",
+              "url": "https://x.com/Patiencebaby12/status/2087265747454026006",
+              "date": "2026-08-11",
+              "views": 329,
+              "likes": 43,
+              "comments": 47,
+              "reposts": 1,
+              "engagement": 91
+            },
+            {
+              "id": "2077078006300893474",
+              "url": "https://x.com/Patiencebaby12/status/2077078006300893474",
+              "date": "2026-07-14",
+              "views": 263,
+              "likes": 28,
+              "comments": 31,
+              "reposts": 0,
+              "engagement": 59
+            },
+            {
+              "id": "2084363579944308929",
+              "url": "https://x.com/Patiencebaby12/status/2084363579944308929",
+              "date": "2026-08-03",
+              "views": 144,
+              "likes": 18,
+              "comments": 21,
+              "reposts": 1,
+              "engagement": 40
+            },
+            {
+              "id": "2086726766052184253",
+              "url": "https://x.com/Patiencebaby12/status/2086726766052184253",
+              "date": "2026-08-10",
+              "views": 207,
+              "likes": 32,
+              "comments": 33,
+              "reposts": 1,
+              "engagement": 66
+            }
+          ]
+        }
+      ],
+      "severity": 5
+    },
+    {
+      "username": "trungdung1235",
+      "nickname": "Dragan",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1237579939411398701/e5f6a86df80a94f41181998e34058e86.png?size=512",
+      "handle": "DraganD98",
       "roles": [
         "Dcoded"
       ],
-      "posts": 46,
+      "posts": 59,
       "totals": {
-        "views": 37697,
-        "likes": 1460,
-        "comments": 1141,
-        "reposts": 101
+        "views": 118197,
+        "likes": 186,
+        "comments": 155,
+        "reposts": 2
+      },
+      "flags": [
+        {
+          "type": "low-likes",
+          "count": 4,
+          "evidence": [
+            {
+              "id": "2077586167449694416",
+              "url": "https://x.com/DraganD98/status/2077586167449694416",
+              "date": "2026-07-16",
+              "views": 48612,
+              "likes": 9,
+              "comments": 9,
+              "reposts": 0,
+              "engagement": 18
+            },
+            {
+              "id": "2077790501508698157",
+              "url": "https://x.com/DraganD98/status/2077790501508698157",
+              "date": "2026-07-16",
+              "views": 27236,
+              "likes": 5,
+              "comments": 5,
+              "reposts": 0,
+              "engagement": 10
+            },
+            {
+              "id": "2087917035288436922",
+              "url": "https://x.com/DraganD98/status/2087917035288436922",
+              "date": "2026-08-13",
+              "views": 6172,
+              "likes": 2,
+              "comments": 2,
+              "reposts": 0,
+              "engagement": 4
+            },
+            {
+              "id": "2088286882748944532",
+              "url": "https://x.com/DraganD98/status/2088286882748944532",
+              "date": "2026-08-14",
+              "views": 4171,
+              "likes": 7,
+              "comments": 4,
+              "reposts": 0,
+              "engagement": 11
+            }
+          ]
+        }
+      ],
+      "severity": 4
+    },
+    {
+      "username": "sky.chain",
+      "nickname": "Sky | Dlicom Student",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/555276236947980288/a2e012595079bfe50134959889845440.png?size=512",
+      "handle": "0xrichboy",
+      "roles": [
+        "DCO"
+      ],
+      "posts": 43,
+      "totals": {
+        "views": 30636,
+        "likes": 4831,
+        "comments": 2043,
+        "reposts": 62
       },
       "flags": [
         {
@@ -1673,44 +2129,109 @@
           "count": 4,
           "evidence": [
             {
-              "id": "2063167256180170769",
-              "url": "https://x.com/mdsharman21/status/2063167256180170769",
-              "date": "2026-06-06",
-              "views": 2848,
-              "likes": 118,
-              "comments": 125,
-              "reposts": 6,
-              "engagement": 249
+              "id": "2077066027217879180",
+              "url": "https://x.com/0xrichboy/status/2077066027217879180",
+              "date": "2026-07-14",
+              "views": 1213,
+              "likes": 126,
+              "comments": 141,
+              "reposts": 0,
+              "engagement": 267
             },
             {
-              "id": "2068891998648721899",
-              "url": "https://x.com/mdsharman21/status/2068891998648721899",
-              "date": "2026-06-22",
-              "views": 414,
-              "likes": 27,
-              "comments": 31,
-              "reposts": 1,
-              "engagement": 59
-            },
-            {
-              "id": "2064746040482517468",
-              "url": "https://x.com/mdsharman21/status/2064746040482517468",
-              "date": "2026-06-10",
-              "views": 923,
-              "likes": 18,
-              "comments": 20,
+              "id": "2075250321883074625",
+              "url": "https://x.com/0xrichboy/status/2075250321883074625",
+              "date": "2026-07-09",
+              "views": 986,
+              "likes": 141,
+              "comments": 149,
               "reposts": 2,
-              "engagement": 40
+              "engagement": 292
             },
             {
-              "id": "2061988237237789102",
-              "url": "https://x.com/mdsharman21/status/2061988237237789102",
-              "date": "2026-06-03",
-              "views": 166,
-              "likes": 20,
-              "comments": 21,
-              "reposts": 3,
-              "engagement": 44
+              "id": "2075976143661125756",
+              "url": "https://x.com/0xrichboy/status/2075976143661125756",
+              "date": "2026-07-11",
+              "views": 788,
+              "likes": 108,
+              "comments": 114,
+              "reposts": 1,
+              "engagement": 223
+            },
+            {
+              "id": "2074530637000880179",
+              "url": "https://x.com/0xrichboy/status/2074530637000880179",
+              "date": "2026-07-07",
+              "views": 836,
+              "likes": 107,
+              "comments": 112,
+              "reposts": 0,
+              "engagement": 219
+            }
+          ]
+        }
+      ],
+      "severity": 4
+    },
+    {
+      "username": "dadoitentheoyeucau",
+      "nickname": "MinPomeVN",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1110416782029770822/489aa5f3952f5ca94e21359df0c1365e.png?size=512",
+      "handle": "HongMai2205",
+      "roles": [
+        "Dcoded"
+      ],
+      "posts": 55,
+      "totals": {
+        "views": 27092,
+        "likes": 1283,
+        "comments": 1000,
+        "reposts": 21
+      },
+      "flags": [
+        {
+          "type": "comments",
+          "count": 4,
+          "evidence": [
+            {
+              "id": "2056563347567579144",
+              "url": "https://x.com/HongMai2205/status/2056563347567579144",
+              "date": "2026-05-19",
+              "views": 925,
+              "likes": 62,
+              "comments": 66,
+              "reposts": 1,
+              "engagement": 129
+            },
+            {
+              "id": "2084641465674989578",
+              "url": "https://x.com/HongMai2205/status/2084641465674989578",
+              "date": "2026-08-04",
+              "views": 547,
+              "likes": 37,
+              "comments": 41,
+              "reposts": 0,
+              "engagement": 78
+            },
+            {
+              "id": "2056086646345601374",
+              "url": "https://x.com/HongMai2205/status/2056086646345601374",
+              "date": "2026-05-17",
+              "views": 1135,
+              "likes": 59,
+              "comments": 60,
+              "reposts": 0,
+              "engagement": 119
+            },
+            {
+              "id": "2065281517480468524",
+              "url": "https://x.com/HongMai2205/status/2065281517480468524",
+              "date": "2026-06-12",
+              "views": 405,
+              "likes": 15,
+              "comments": 16,
+              "reposts": 0,
+              "engagement": 31
             }
           ]
         }
@@ -1725,12 +2246,12 @@
       "roles": [
         "Dliever"
       ],
-      "posts": 5,
+      "posts": 7,
       "totals": {
-        "views": 14286,
-        "likes": 190,
-        "comments": 204,
-        "reposts": 3
+        "views": 17949,
+        "likes": 485,
+        "comments": 367,
+        "reposts": 8
       },
       "flags": [
         {
@@ -1787,242 +2308,6 @@
         }
       ],
       "severity": 4
-    },
-    {
-      "username": "satuck08",
-      "nickname": "Satu",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/609792547056910336/94a2113f89593cbf2188c23567a927a8.png?size=512",
-      "handle": "SatuCk08",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 12,
-      "totals": {
-        "views": 12689,
-        "likes": 381,
-        "comments": 350,
-        "reposts": 39
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 3,
-          "evidence": [
-            {
-              "id": "2063478762151571928",
-              "url": "https://x.com/SatuCk08/status/2063478762151571928",
-              "date": "2026-06-07",
-              "views": 2732,
-              "likes": 113,
-              "comments": 122,
-              "reposts": 4,
-              "engagement": 239
-            },
-            {
-              "id": "2064192423618572509",
-              "url": "https://x.com/satuck08/status/2064192423618572509",
-              "date": "2026-06-09",
-              "views": 1506,
-              "likes": 97,
-              "comments": 106,
-              "reposts": 4,
-              "engagement": 207
-            },
-            {
-              "id": "2064917871369809954",
-              "url": "https://x.com/satuck08/status/2064917871369809954",
-              "date": "2026-06-11",
-              "views": 845,
-              "likes": 83,
-              "comments": 86,
-              "reposts": 4,
-              "engagement": 173
-            }
-          ]
-        },
-        {
-          "type": "low-likes",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2054529182554820719",
-              "url": "https://x.com/SatuCk08/status/2054529182554820719",
-              "date": "2026-05-13",
-              "views": 2015,
-              "likes": 6,
-              "comments": 4,
-              "reposts": 5,
-              "engagement": 15
-            }
-          ]
-        }
-      ],
-      "severity": 4
-    },
-    {
-      "username": "dadoitentheoyeucau",
-      "nickname": "MinPomeVN",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1110416782029770822/489aa5f3952f5ca94e21359df0c1365e.png?size=512",
-      "handle": "HongMai2205",
-      "roles": [
-        "Dcoded"
-      ],
-      "posts": 43,
-      "totals": {
-        "views": 22223,
-        "likes": 1004,
-        "comments": 770,
-        "reposts": 20
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 3,
-          "evidence": [
-            {
-              "id": "2056563347567579144",
-              "url": "https://x.com/HongMai2205/status/2056563347567579144",
-              "date": "2026-05-19",
-              "views": 925,
-              "likes": 62,
-              "comments": 66,
-              "reposts": 1,
-              "engagement": 129
-            },
-            {
-              "id": "2056086646345601374",
-              "url": "https://x.com/HongMai2205/status/2056086646345601374",
-              "date": "2026-05-17",
-              "views": 1135,
-              "likes": 59,
-              "comments": 60,
-              "reposts": 0,
-              "engagement": 119
-            },
-            {
-              "id": "2065281517480468524",
-              "url": "https://x.com/HongMai2205/status/2065281517480468524",
-              "date": "2026-06-12",
-              "views": 405,
-              "likes": 15,
-              "comments": 16,
-              "reposts": 0,
-              "engagement": 31
-            }
-          ]
-        }
-      ],
-      "severity": 3
-    },
-    {
-      "username": "sky.chain",
-      "nickname": "Sky | Dlicom Student",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/555276236947980288/a2e012595079bfe50134959889845440.png?size=512",
-      "handle": "0xrichboy",
-      "roles": [
-        "Dcoded"
-      ],
-      "posts": 35,
-      "totals": {
-        "views": 17748,
-        "likes": 2807,
-        "comments": 1191,
-        "reposts": 32
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 3,
-          "evidence": [
-            {
-              "id": "2075250321883074625",
-              "url": "https://x.com/0xrichboy/status/2075250321883074625",
-              "date": "2026-07-09",
-              "views": 986,
-              "likes": 141,
-              "comments": 149,
-              "reposts": 2,
-              "engagement": 292
-            },
-            {
-              "id": "2075976143661125756",
-              "url": "https://x.com/0xrichboy/status/2075976143661125756",
-              "date": "2026-07-11",
-              "views": 788,
-              "likes": 108,
-              "comments": 114,
-              "reposts": 1,
-              "engagement": 223
-            },
-            {
-              "id": "2074530637000880179",
-              "url": "https://x.com/0xrichboy/status/2074530637000880179",
-              "date": "2026-07-07",
-              "views": 836,
-              "likes": 107,
-              "comments": 112,
-              "reposts": 0,
-              "engagement": 219
-            }
-          ]
-        }
-      ],
-      "severity": 3
-    },
-    {
-      "username": "mdzihantawhid",
-      "nickname": "Md ZihanTawhid",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1289088234004938804/dba4f5f2b92e31bd84048edb975c74f6.png?size=512",
-      "handle": "ZihanTawhid",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 46,
-      "totals": {
-        "views": 16992,
-        "likes": 1887,
-        "comments": 1588,
-        "reposts": 119
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 3,
-          "evidence": [
-            {
-              "id": "2071887655562863102",
-              "url": "https://x.com/ZihanTawhid/status/2071887655562863102",
-              "date": "2026-06-30",
-              "views": 736,
-              "likes": 120,
-              "comments": 146,
-              "reposts": 0,
-              "engagement": 266
-            },
-            {
-              "id": "2055470297214783493",
-              "url": "https://x.com/ZihanTawhid/status/2055470297214783493",
-              "date": "2026-05-16",
-              "views": 310,
-              "likes": 56,
-              "comments": 60,
-              "reposts": 5,
-              "engagement": 121
-            },
-            {
-              "id": "2071977736835584160",
-              "url": "https://x.com/ZihanTawhid/status/2071977736835584160",
-              "date": "2026-06-30",
-              "views": 272,
-              "likes": 27,
-              "comments": 30,
-              "reposts": 0,
-              "engagement": 57
-            }
-          ]
-        }
-      ],
-      "severity": 3
     },
     {
       "username": "indra_13121",
@@ -2130,13 +2415,13 @@
       "avatarUrl": "https://cdn.discordapp.com/avatars/1279854858656157747/6c829694453032a61d5ef7f2bbdd0701.png?size=512",
       "handle": "Ritu323",
       "roles": [
-        "Dcoded"
+        "DCO"
       ],
-      "posts": 49,
+      "posts": 59,
       "totals": {
-        "views": 33737,
-        "likes": 864,
-        "comments": 198,
+        "views": 36136,
+        "likes": 1017,
+        "comments": 227,
         "reposts": 14
       },
       "flags": [
@@ -2168,296 +2453,6 @@
         }
       ],
       "severity": 2
-    },
-    {
-      "username": "mittrosen",
-      "nickname": "JIBON MITTRO SEN",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1028639947785244682/df1ca6b4a0a7e7efb29bd8099d83211d.png?size=512",
-      "handle": "mittrosen",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 29,
-      "totals": {
-        "views": 2845,
-        "likes": 300,
-        "comments": 236,
-        "reposts": 2
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 2,
-          "evidence": [
-            {
-              "id": "2071407972568494376",
-              "url": "https://x.com/mittrosen/status/2071407972568494376",
-              "date": "2026-06-29",
-              "views": 179,
-              "likes": 18,
-              "comments": 20,
-              "reposts": 0,
-              "engagement": 38
-            },
-            {
-              "id": "2069305093892305227",
-              "url": "https://x.com/mittrosen/status/2069305093892305227",
-              "date": "2026-06-23",
-              "views": 180,
-              "likes": 16,
-              "comments": 17,
-              "reposts": 0,
-              "engagement": 33
-            }
-          ]
-        }
-      ],
-      "severity": 2
-    },
-    {
-      "username": "mizan9933",
-      "nickname": "Miizan |Dlicom",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1013439284189089843/fe9364c629779c7d2dd7b000054b7fda.png?size=512",
-      "handle": "REAL_H_ERO",
-      "roles": [
-        "Dcoded"
-      ],
-      "posts": 55,
-      "totals": {
-        "views": 12316,
-        "likes": 918,
-        "comments": 643,
-        "reposts": 35
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2071069568983068856",
-              "url": "https://x.com/REAL_H_ERO/status/2071069568983068856",
-              "date": "2026-06-28",
-              "views": 494,
-              "likes": 57,
-              "comments": 62,
-              "reposts": 1,
-              "engagement": 120
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "duong_56175",
-      "nickname": "Richman",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1250131054455689356/b4f59a923d4d19a4d1375f72b420fb54.png?size=512",
-      "handle": "Phu_Prosperity8",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 17,
-      "totals": {
-        "views": 11557,
-        "likes": 266,
-        "comments": 211,
-        "reposts": 6
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2072266405962199543",
-              "url": "https://x.com/Phu_Prosperity8/status/2072266405962199543",
-              "date": "2026-07-01",
-              "views": 771,
-              "likes": 47,
-              "comments": 52,
-              "reposts": 0,
-              "engagement": 99
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "ahsanulhaque112",
-      "nickname": "AHSAN 24/7",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1444631726662877366/2fb4af13e92705a2794d12d549aa7fd1.png?size=512",
-      "handle": "AHSAN2z",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 85,
-      "totals": {
-        "views": 8926,
-        "likes": 715,
-        "comments": 313,
-        "reposts": 19
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2071429998662271243",
-              "url": "https://x.com/AHSAN2z/status/2071429998662271243",
-              "date": "2026-06-29",
-              "views": 251,
-              "likes": 36,
-              "comments": 38,
-              "reposts": 1,
-              "engagement": 75
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "levsageai",
-      "nickname": "Lev Sage | Dlicom",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1516473586133762079/5c00b69371726bbb1253746b9424ef6b.png?size=512",
-      "handle": "LevSageAI",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 27,
-      "totals": {
-        "views": 8058,
-        "likes": 255,
-        "comments": 161,
-        "reposts": 13
-      },
-      "flags": [
-        {
-          "type": "low-likes",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2070674535440150851",
-              "url": "https://x.com/LevSageAI/status/2070674535440150851",
-              "date": "2026-06-27",
-              "views": 1992,
-              "likes": 5,
-              "comments": 6,
-              "reposts": 1,
-              "engagement": 12
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "vtn1508",
-      "nickname": "VTN1508 🐸⛓",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/528130427471527956/88a6c05da136a17fd6d0bea5dc6afef2.png?size=512",
-      "handle": "vtn1508",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 24,
-      "totals": {
-        "views": 4383,
-        "likes": 226,
-        "comments": 148,
-        "reposts": 0
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2071805582701666633",
-              "url": "https://x.com/vtn1508/status/2071805582701666633",
-              "date": "2026-06-30",
-              "views": 364,
-              "likes": 26,
-              "comments": 33,
-              "reposts": 0,
-              "engagement": 59
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "md.shiumsurkar",
-      "nickname": "Paradox - Dlicom",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/782470054654115852/205d7a1c6ef86f6243399aeb455d200c.png?size=512",
-      "handle": "Paradoxeth_",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 63,
-      "totals": {
-        "views": 4064,
-        "likes": 77,
-        "comments": 42,
-        "reposts": 10
-      },
-      "flags": [
-        {
-          "type": "low-likes",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2067249551497732424",
-              "url": "https://x.com/Paradoxeth_/status/2067249551497732424",
-              "date": "2026-06-17",
-              "views": 1353,
-              "likes": 2,
-              "comments": 0,
-              "reposts": 0,
-              "engagement": 2
-            }
-          ]
-        }
-      ],
-      "severity": 1
-    },
-    {
-      "username": "sohan629",
-      "nickname": "Shohan🌪️|| Dlicom",
-      "avatarUrl": "https://cdn.discordapp.com/avatars/1323150213203886090/2e1299cc8cabf5d06cddf48284d9947b.png?size=512",
-      "handle": "shohanbro1m",
-      "roles": [
-        "Dliever"
-      ],
-      "posts": 31,
-      "totals": {
-        "views": 2609,
-        "likes": 144,
-        "comments": 97,
-        "reposts": 3
-      },
-      "flags": [
-        {
-          "type": "comments",
-          "count": 1,
-          "evidence": [
-            {
-              "id": "2069009013224906924",
-              "url": "https://x.com/shohanbro1m/status/2069009013224906924",
-              "date": "2026-06-22",
-              "views": 161,
-              "likes": 25,
-              "comments": 34,
-              "reposts": 0,
-              "engagement": 59
-            }
-          ]
-        }
-      ],
-      "severity": 1
     }
   ]
 }

@@ -19,15 +19,25 @@ for (const [k, v] of Object.entries(_rawAliases)) {
 function resolveAlias(name) { return ALIASES[name] || name; }
 
 // Каналы, где публикуют X-посты
-const SOURCE_NAMES = new Set(['creators.json', 'dlicom-creators.json']);
+function isXSourceFile(filePath) {
+  const fd = fs.openSync(filePath, 'r');
+  const buffer = Buffer.alloc(16384);
+  const size = fs.readSync(fd, buffer, 0, buffer.length, 0);
+  fs.closeSync(fd);
+  const head = buffer.toString('utf8', 0, size);
+  const match = head.match(/"channel"\s*:\s*\{[\s\S]{0,3000}?"name"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (!match) return false;
+  const channelName = JSON.parse(`"${match[1]}"`);
+  return /(?:^|╏)(?:dlicom-)?creators$/i.test(channelName);
+}
 
-// Рекурсивно находит все файлы из SOURCE_NAMES в папке dir
+// Рекурсивно находит экспорты creators/dlicom-creators по имени канала внутри JSON.
 function findSourceFiles(dir) {
   const results = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) results.push(...findSourceFiles(full));
-    else if (SOURCE_NAMES.has(entry.name)) results.push(full);
+    else if (entry.name.endsWith('.json') && isXSourceFile(full)) results.push(full);
   }
   return results;
 }

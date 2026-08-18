@@ -1,5 +1,6 @@
 {
   "_comment": "X-посты, которые НЕ учитываются в расчёте scores. Tweet ID -> reason.",
   "2057619116379263316": "manual exclude (https://x.com/LanyKatt/status/2057619116379263316)",
-  "2048636486548123776": "manual exclude (https://x.com/FoxiGrow/status/2048636486548123776)"
+  "2048636486548123776": "manual exclude (https://x.com/FoxiGrow/status/2048636486548123776)",
+  "2086724236367032772": "manual exclude (https://x.com/quang250802/status/2086724236367032772)"
 }

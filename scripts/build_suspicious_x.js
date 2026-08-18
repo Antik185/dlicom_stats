@@ -43,6 +43,8 @@ function main() {
   const users = [];
 
   for (const [username, linkData] of Object.entries(links)) {
+    if (excludedHandles.has(username.toLowerCase())) continue;
+
     const posts = (linkData.posts || [])
       .map(post => ({ post, metric: stats[post.id] }))
       .filter(({ metric }) => metric && !metric.error && !metric.notFound)
@@ -71,6 +73,8 @@ function main() {
     }
 
     if (!flags.length) continue;
+    const flaggedPostIds = new Set([...commentFlags, ...lowLikeFlags].map(post => post.id));
+    if (flaggedPostIds.size < 2) continue;
 
     const score = scoreByUser.get(username) || {};
     const userBadges = badges[username]?.badges || [];
@@ -106,6 +110,7 @@ function main() {
   const output = {
     generatedAt: new Date().toISOString(),
     rules: {
+      minimumPosts: 'At least 2 unique suspicious posts',
       comments: 'At least 15 likes and more comments than likes',
       lowLikes: 'At least 1,000 views, no more than 10 likes, like rate up to 0.3%',
     },

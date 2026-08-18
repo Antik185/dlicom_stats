@@ -73,7 +73,7 @@ function row(user) {
   const flags = user.flags.map(flag => `<span class="flag-pill flag-${flag.type}"><i class="ti ${labels[flag.type].icon}"></i>${labels[flag.type].text}${flag.count > 1 ? ` · ${flag.count}` : ''}</span>`).join('');
   return `<article class="bot-row">
     <button class="bot-main" type="button" aria-expanded="false">
-      <div class="bot-user">${avatar(user)}<div style="min-width:0"><div class="bot-name">${esc(user.nickname || user.username)}</div><div class="bot-handles">${esc(user.username)}${user.handle ? ` · @${esc(user.handle)}` : ''}</div><div class="role-list">${roles}</div></div></div>
+      <div class="bot-user">${avatar(user)}<div style="min-width:0"><div class="bot-name copyable-name">${esc(user.nickname || user.username)}</div><div class="bot-handles copyable-name">${esc(user.username)}${user.handle ? ` · @${esc(user.handle)}` : ''}</div><div class="role-list">${roles}</div></div></div>
       <div class="bot-metrics"><div class="metric"><strong>${fmt(flagged.posts)}</strong><span><i class="ti ti-file-text"></i> posts</span></div><div class="metric"><strong>${fmt(flagged.likes)}</strong><span><i class="ti ti-heart"></i> likes</span></div><div class="metric"><strong>${fmt(flagged.comments)}</strong><span><i class="ti ti-message-circle"></i> comments</span></div></div>
       <div class="flag-list">${flags}</div><i class="ti ti-chevron-down expand-icon"></i>
     </button>
@@ -84,7 +84,7 @@ function row(user) {
 function bindRows() {
   document.querySelectorAll('.bot-avatar img').forEach(img => img.addEventListener('error', () => img.remove(), { once: true }));
   document.querySelectorAll('.bot-main').forEach(button => button.addEventListener('click', event => {
-    if (event.target.closest('a')) return;
+    if (event.target.closest('a, .copyable-name')) return;
     const item = button.closest('.bot-row');
     item.classList.toggle('open');
     button.setAttribute('aria-expanded', item.classList.contains('open'));

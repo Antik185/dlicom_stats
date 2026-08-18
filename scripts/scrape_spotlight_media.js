@@ -23,6 +23,10 @@ const FETCH_TIMEOUT = 30000;
 const DELAY_MS      = 250;
 const RETRY_DELAY   = 5000;
 const MAX_RETRIES   = 3;
+const CONCURRENCY   = Math.max(1, parseInt(
+  process.argv.find(a => a.startsWith('--concurrency='))?.split('=')[1] || '6',
+  10,
+) || 6);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function fetchTweet(id, attempt = 1) {
@@ -108,25 +112,35 @@ async function main() {
 
   const out = { ...existing };
   let ok = 0, noMedia = 0, errors = 0;
+  let cursor = 0;
+  let completed = 0;
 
-  for (let i = 0; i < todo.length; i++) {
-    const { id } = todo[i];
-    try {
-      const tweet = await fetchTweet(id);
-      const media = extractMedia(tweet);
-      const stats = extractStats(tweet);
-      if (media && media.length) { out[id] = { media, stats }; ok++; }
-      else { out[id] = { media: [], stats }; noMedia++; }
-    } catch (e) {
-      out[id] = { error: e.message };
-      errors++;
+  async function worker() {
+    while (cursor < todo.length) {
+      const { id } = todo[cursor++];
+      try {
+        const tweet = await fetchTweet(id);
+        const media = extractMedia(tweet);
+        const stats = extractStats(tweet);
+        if (media && media.length) { out[id] = { media, stats }; ok++; }
+        else { out[id] = { media: [], stats }; noMedia++; }
+      } catch (e) {
+        out[id] = { error: e.message };
+        errors++;
+      }
+      completed++;
+      if (completed % 20 === 0) {
+        process.stdout.write(`\r  ${completed}/${todo.length} ok=${ok} noMedia=${noMedia} err=${errors}`);
+        fs.writeFileSync(OUT_FILE, JSON.stringify(out));
+      }
+      await sleep(DELAY_MS);
     }
-    if ((i + 1) % 20 === 0) {
-      process.stdout.write(`\r  ${i + 1}/${todo.length} ok=${ok} noMedia=${noMedia} err=${errors}`);
-      fs.writeFileSync(OUT_FILE, JSON.stringify(out));   // прогресс
-    }
-    await sleep(DELAY_MS);
   }
+
+  await Promise.all(Array.from(
+    { length: Math.min(CONCURRENCY, todo.length) },
+    () => worker(),
+  ));
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2));
   console.log(`\n✅ Готово! С медиа: ${ok}, без медиа: ${noMedia}, ошибок: ${errors}`);

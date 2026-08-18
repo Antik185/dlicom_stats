@@ -123,7 +123,7 @@ function findJsonFiles(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) results.push(...findJsonFiles(full));
-    else if (entry.name.endsWith('.json')) results.push(full);
+    else if (entry.name.endsWith('.json') && !/(?:content-spotlight|spotlite)\.json$/i.test(entry.name)) results.push(full);
   }
   return results;
 }

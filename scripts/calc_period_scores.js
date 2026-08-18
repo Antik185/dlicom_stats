@@ -262,16 +262,54 @@ function findJsonFiles(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) results.push(...findJsonFiles(full));
-    else if (entry.name.endsWith('.json')) results.push(full);
+    else if (entry.name.endsWith('.json') && !/(?:content-spotlight|spotlite)\.json$/i.test(entry.name)) results.push(full);
   }
   return results;
+}
+
+function fileOverlapsPeriod(filePath) {
+  const fd = fs.openSync(filePath, 'r');
+  const stat = fs.fstatSync(fd);
+  const headBuffer = Buffer.alloc(Math.min(16384, stat.size));
+  fs.readSync(fd, headBuffer, 0, headBuffer.length, 0);
+  const head = headBuffer.toString('utf8');
+  const afterMatch = head.match(/"after":\s*"([^"]+)"/);
+  const beforeMatch = head.match(/"before":\s*"([^"]+)"/);
+
+  if (beforeMatch && new Date(beforeMatch[1]).getTime() <= cutoff) {
+    fs.closeSync(fd);
+    return false;
+  }
+  if (afterMatch && new Date(afterMatch[1]).getTime() > refMs) {
+    fs.closeSync(fd);
+    return false;
+  }
+
+  // All-time exports have null dateRange. Their final message is near the file tail.
+  if (!afterMatch && !beforeMatch && stat.size > 0) {
+    const tailSize = Math.min(262144, stat.size);
+    const tailBuffer = Buffer.alloc(tailSize);
+    fs.readSync(fd, tailBuffer, 0, tailSize, stat.size - tailSize);
+    const tail = tailBuffer.toString('utf8');
+    const timestamps = [...tail.matchAll(/"timestamp":\s*"([^"]+)"/g)]
+      .map(match => new Date(match[1]).getTime())
+      .filter(Number.isFinite);
+    if (timestamps.length && Math.max(...timestamps) < cutoff) {
+      fs.closeSync(fd);
+      return false;
+    }
+  }
+
+  fs.closeSync(fd);
+  return true;
 }
 
 // ── Main ─────────────────────────────────────────────────────
 async function main() {
   // 1. Discord
-  const files = findJsonFiles(JSON_DIR);
-  console.log(`Читаем ${files.length} Discord-файлов...`);
+  const allFiles = findJsonFiles(JSON_DIR);
+  const files = allFiles.filter(fileOverlapsPeriod);
+  console.log(`Читаем ${files.length}/${allFiles.length} Discord-файлов, пересекающих период...`);
 
   const start = Date.now();
   const dcResults = await Promise.all(

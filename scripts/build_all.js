@@ -27,6 +27,9 @@ const SCRIPTS = path.join(__dirname);
 const skipX     = process.argv.includes('--skip-x');
 const skipTexts = process.argv.includes('--skip-texts');   // пропустить только scrape_x_posts (тексты)
 const batchArg  = process.argv.find(a => a.startsWith('--batch=')) || '--batch=10';
+const fromDateArg = process.argv.find(a => a.startsWith('--from-date=')) || '';
+const toDateArg   = process.argv.find(a => a.startsWith('--to-date=')) || '';
+const dateRangeArgs = [fromDateArg, toDateArg].filter(Boolean).join(' ');
 
 // Определяем ref-date: явный аргумент или вчера
 const refArg  = process.argv.find(a => a.startsWith('--ref-date='));
@@ -52,7 +55,7 @@ const start = Date.now();
 run('count_dc.js');
 run('extract_x.js');
 if (!skipX) {
-  run('scrape_x.js', `${batchArg} --resume`);
+  run('scrape_x.js', `${batchArg} --resume ${dateRangeArgs}`.trim());
   if (!skipTexts) run('scrape_x_posts.js', `${batchArg} --resume`);   // тексты постов (только новые)
   else console.log('\n⚠ Пропускаем scrape_x_posts.js (--skip-texts)');
 } else {
@@ -66,6 +69,9 @@ run('extract_current_roles.js');
 run('calc_badges.js');
 run('build_suspicious_x.js');
 run('calc_analytics.js', `--ref-date=${refDate}`, '--max-old-space-size=8192');
+run('extract_spotlight.js');
+run('scrape_spotlight_media.js', '--add-stats');
+run('build_spotlight_data.js');
 
 const elapsed = ((Date.now() - start) / 1000).toFixed(0);
 console.log(`\n${'═'.repeat(60)}`);

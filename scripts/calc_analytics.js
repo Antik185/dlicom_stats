@@ -125,7 +125,7 @@ function findJsonFiles(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) findJsonFiles(full, out);
-    else if (e.name.endsWith('.json')) out.push(full);
+    else if (e.name.endsWith('.json') && !/(?:content-spotlight|spotlite)\.json$/i.test(e.name)) out.push(full);
   }
   return out;
 }
@@ -170,11 +170,17 @@ function getChannel(name, cat, type) {
   return channels[name];
 }
 
+function isExcludedAnalyticsChannel(name, category) {
+  const text = `${name || ''} ${category || ''}`.toLowerCase();
+  return text.includes('score-board') || text.includes('dili keeper');
+}
+
 // Единая обработка одного сообщения (для обоих путей)
 function emit(rec) {
   const { type, timestamp, content, name, reactions, mentions, attach, sticker, chName, chCat, chType } = rec;
   if (type !== 'Default' && type !== 'Reply') return;
   if (!name) return;
+  if (isExcludedAnalyticsChannel(chName, chCat)) return;
 
   const canon = resolveAlias(name);
   const tsMs  = new Date(timestamp).getTime();
@@ -460,6 +466,8 @@ async function main() {
       if (/dlicom-creators/.test(n)) return false; // 🧷╏dlicom-creators
       if (/app-feedback/.test(n)) return false;    // 🧪╏app-feedback
       if (/content-spotlight/.test(n)) return false;
+      if (/score-board/.test(n)) return false;
+      if (/dili keeper/.test(n)) return false;
       if (/中文|chinese/i.test(cat) || /中文|游戏频道/.test(ch.name)) return false; // 🇨🇳 китайский канал
       return true;
     })

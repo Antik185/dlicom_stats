@@ -449,6 +449,7 @@ html,body{min-height:100vh;background:#000;color:#fff;font-family:'Geist',system
   <a href="/lb/"                  class="nav-tab">Leaderboard</a>
   <a href="/cards/"               class="nav-tab nav-active">Score Cards</a>
   <a href="/analytics/"           class="nav-tab">Analytics</a>
+  <a href="/spotlight/"           class="nav-tab">Spotlight</a>
   <a href="/bots/"                class="nav-tab">Possible Bots</a>
 </nav>
 
@@ -591,7 +592,9 @@ function renderCard(u) {
   const media = getRandomMedia(tier);
   const prog  = progressData(u);
   const pct   = Math.max(0, Math.min(100, prog.pct));
-  const top   = topPct(u.rank, total);
+  const rankText = Number.isFinite(Number(u.rank))
+    ? `Top ${topPct(Number(u.rank), total)}`
+    : 'Team';
   const score = fmtScore(u.totalScore);
   const pfpStyle = u.avatarUrl ? `background-image:url('${u.avatarUrl}')` : '';
   const xHandle  = u.xHandle ? `@${u.xHandle}` : (u.username ? `@${u.username}` : '');
@@ -651,7 +654,7 @@ function renderCard(u) {
         </div>
         <div class="rank-side">
           <div class="rank-label">RANK</div>
-          <div class="rank-value">Top ${top}</div>
+          <div class="rank-value">${rankText}</div>
           <div class="rank-sub">of Dlicom</div>
         </div>
       </div>
