@@ -5491,7 +5491,7 @@
     }
   },
   "2059812155332157628": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2060261396378763334": {
     "media": [
@@ -7272,7 +7272,7 @@
     }
   },
   "2059174414705639602": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2059175010951160268": {
     "media": [
@@ -10546,8 +10546,7 @@
     }
   },
   "2055229292674777291": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2055281704559157628": {
     "media": [
@@ -11032,8 +11031,7 @@
     }
   },
   "2054624533584490608": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2054978789722268101": {
     "media": [
@@ -11406,8 +11404,7 @@
     }
   },
   "2054512852250275880": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2054527862154395774": {
     "media": [
@@ -11461,8 +11458,7 @@
     }
   },
   "2054341552877744244": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2054232060727025966": {
     "media": [
@@ -11584,8 +11580,7 @@
     }
   },
   "2054110416905855226": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2054103766417498324": {
     "media": [
@@ -12362,8 +12357,7 @@
     }
   },
   "2052305570838024312": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2052308013407772722": {
     "media": [
@@ -13199,8 +13193,7 @@
     }
   },
   "2049077011398934972": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2049081443960442962": {
     "media": [
@@ -14754,8 +14747,7 @@
     }
   },
   "2038293842504352067": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2038527184927883692": {
     "media": [
@@ -14880,8 +14872,7 @@
     }
   },
   "2036726170335817795": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2036323164997689746": {
     "media": [
@@ -14945,7 +14936,7 @@
     }
   },
   "2036084983249461413": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2035963804627124493": {
     "media": [
@@ -15050,8 +15041,7 @@
     }
   },
   "2035657969724006487": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2035502748465242480": {
     "media": [
@@ -15229,8 +15219,7 @@
     }
   },
   "2035020726726803692": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2035025726622113819": {
     "media": [
@@ -15552,11 +15541,10 @@
     }
   },
   "2033154613075980442": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2033158643990896729": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2033198900895515030": {
     "media": [
@@ -15802,8 +15790,7 @@
     }
   },
   "2032219996051439980": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2032308380732105147": {
     "media": [
@@ -15964,8 +15951,7 @@
     }
   },
   "2031425347745460686": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2029577213260018122": {
     "media": [
@@ -15985,8 +15971,7 @@
     }
   },
   "2029601965047697884": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2029867660624711752": {
     "media": [
@@ -16023,19 +16008,16 @@
     }
   },
   "2030204918053953884": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2030213238961455350": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2030267524600696934": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2030270764163752097": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2029575041982058751": {
     "media": [
@@ -21594,7 +21576,7 @@
     }
   },
   "2075216071142101142": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2075205472957993033": {
     "media": [
@@ -24374,8 +24356,7 @@
     }
   },
   "2071639730639516141": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2071477205490622839": {
     "media": [
@@ -24490,8 +24471,7 @@
     }
   },
   "2071246097029407013": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2071124620670103600": {
     "media": [
@@ -24793,7 +24773,7 @@
     }
   },
   "2070231768083628079": {
-    "error": "http 403"
+    "error": "fetch failed"
   },
   "2071107404180463844": {
     "media": [
@@ -24813,8 +24793,7 @@
     }
   },
   "2070489766936957373": {
-    "media": [],
-    "stats": null
+    "error": "fetch failed"
   },
   "2070081828955033709": {
     "media": [
@@ -25947,6 +25926,830 @@
       "comments": 19,
       "text": "DLi is joining the biggest football festival in the world \n\nWorld Cup – a stage to shine, @DlicomApp  – a place to connect!\n\ncc : @dimakuncik @retreeq_ @timcrypto https://t.co/8IOk4ksTcO",
       "handle": "thngl527632"
+    }
+  },
+  "2093710924326764848": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQ5a9tsa4AAwKlA.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 515,
+      "likes": 21,
+      "reposts": 1,
+      "comments": 17,
+      "text": "Strength is not just about power. It’s about having the vision to move forward, the courage to face challenges, and the discipline to keep building.\n\n@DlicomApp is where creativity, connection, and community come together to create something bigger.\n\n@DlicomApp https://t.co/31Hqx2sbPY",
+      "handle": "LevSageAI"
+    }
+  },
+  "2093002114603929868": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQvWTmja8AAA0Qg.jpg",
+        "previewUrl": null
+      },
+      {
+        "type": "video",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2093002092478865408/img/CkREAtfayjaCGw2f.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 766,
+      "likes": 27,
+      "reposts": 1,
+      "comments": 15,
+      "text": "Sometimes you just need to slow down stay focused and keep building.\n\nThat’s the vibe I get from this Dlicom artwork.\n\nDlicom is creating a space where social interaction and Web3 come together in a way that feels simple and natural.\n\nNo need to rush. Just keep showing up, keep exploring and keep moving forward with @DlicomApp @Dlicom_Bangla",
+      "handle": "MdAsifAliv0"
+    }
+  },
+  "2093617551452573855": {
+    "media": [
+      {
+        "type": "video",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2093617515461275648/img/PTkdnchatSy-5BZ2.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 83,
+      "likes": 11,
+      "reposts": 0,
+      "comments": 9,
+      "text": "gdlic\n\nin the midst of the rain and cracks Dli\nstill embraces its own small light\n\na tiny character but exudes a feeling of warmth, tenderness and knows how to heal 🫶\n\n@DlicomApp @dlicom_vn @retreeq_ @timcrypto https://t.co/uQtGTElnvX",
+      "handle": "CzBoii22"
+    }
+  },
+  "2092910699894989067": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQuDK6NakAAPhGJ.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 8,
+      "likes": 1,
+      "reposts": 0,
+      "comments": 2,
+      "text": "⚔️ DLICOM NINJA WARRIOR ⚔️\n\nSilent like a shadow.\nFearless like a warrior. 🔥\n\nTrained in the darkness, powered by determination, and standing strong for the Dlicom community. 🥷\n\nOne mission. One community. One warrior spirit.\n@timcrypto\n@retreeq_ \n@dimakuncik @DlicomApp https://t.co/DdVA9IDzCC",
+      "handle": "ItzXaimBro"
+    }
+  },
+  "2092969398214480202": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQu4jirb0AAIXXg.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 494,
+      "likes": 22,
+      "reposts": 1,
+      "comments": 15,
+      "text": "Power isn’t given. It’s built through every choice, every creation, and every connection.\n\n@DlicomApp gives creators and communities the space to build, connect, and shape what comes next.\n\n@DlicomApp https://t.co/htKZxQVyrl",
+      "handle": "LevSageAI"
+    }
+  },
+  "2093510463632134582": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQ2kp8NaQAAdHB7.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 196,
+      "likes": 22,
+      "reposts": 0,
+      "comments": 10,
+      "text": "Do u know? \nDlicom is building around a simple principle: Web3 should be easier to use without giving up ownership. By combining social interaction, communication, self-custody, and Web3 tools in one ecosystem, Dlicom puts convenience and user control at the center of the experience\n@DlicomApp",
+      "handle": "vangle205"
+    }
+  },
+  "2093176775060955642": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQxd47laMAAv3w9.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 345,
+      "likes": 14,
+      "reposts": 0,
+      "comments": 4,
+      "text": "\"Until now, I never felt like I was alive. Until I painted that blue Dili.\"\n\nTGIF✨",
+      "handle": "flxthesixth"
+    }
+  },
+  "2093850177937584159": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQ7ZoFMaQAAqVlQ.jpg",
+        "previewUrl": null
+      },
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQ7ZoumbkAAu1FD.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 95,
+      "likes": 19,
+      "reposts": 1,
+      "comments": 10,
+      "text": "@DlicomApp is demonstrating how a modern decentralized platform should function\n\nThe seamless flow, robust token economics, and direct utility of $DLI make it a standout solution.\n\n​An extraordinary project built for long-term impact\n@dimakuncik @timcrypto @retreeq_ \n@0x6Leo https://t.co/wJ4qMs194p",
+      "handle": "ZisanBabu___"
+    }
+  },
+  "2093249473627713668": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQy3StgbQAAUMLy.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 489,
+      "likes": 57,
+      "reposts": 2,
+      "comments": 41,
+      "text": "A little creativity, a lot of patience, and the DLICOM spirit 💙\n\nTurning a simple sketch into something of my own, while keeping the DLICOM identity at the heart of the artwork. Creating, learning, and building one artwork at a time.\n\n@DlicomApp @Dlicom_Bangla https://t.co/dxVavOs5Q0",
+      "handle": "BithiX7"
+    }
+  },
+  "2092192166034735307": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQj1rP7aAAAW_YZ.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 89,
+      "likes": 11,
+      "reposts": 0,
+      "comments": 4,
+      "text": "DLICOM is building more than just a platform  it’s building a connected digital ecosystem where community, innovation, and Web3 come together.\n\nStep by step, the vision is becoming reality.\n\nStay connected. Stay curious.\nDLICOM is just getting started.\n\n#DLICOM #Web3 #SocialFi #Blockchain\n@DlicomApp \n@Dlicom_Bangla",
+      "handle": "Rolexsir___"
+    }
+  },
+  "2093190421916848411": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQyBaMIaAAAPGib.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 202,
+      "likes": 10,
+      "reposts": 0,
+      "comments": 6,
+      "text": "Another peaceful corner of the Dlicom world 💙\n\nThis artwork makes me think of @DlicomApp as more than just a Web3 project  it feels like a place where community, creativity, and connection can grow naturally.\n\nThere’s something warm about this piece.\nPeople are gathering, exploring, sharing moments, and simply being part of the same world. That’s the kind of energy I think SocialFi should have.\nWhat I like about Dlicom is that it doesn’t just feel like a product. It feels like an ecosystem being shaped by its community  a space where creators, users, and builders can all belong.\n\nIn a space that often feels too technical, Dlicom brings a softer and more human side to Web3.\n\nA world you don’t just use.\nA world you want to be part of. \n\n1/2",
+      "handle": "ErinaBASE_"
+    }
+  },
+  "2091898834565964041": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQfq4zRaoAAPuCy.jpg",
+        "previewUrl": null
+      },
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQfq5lTbYAAECEt.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 210,
+      "likes": 34,
+      "reposts": 1,
+      "comments": 21,
+      "text": "The dedication from the @DlicomApp team is on another level They aren’t just building a platform; they are shaping the future of Web3 social media\n\n​With their vision and execution $DLI is destined to reach incredible new heights\n\n Huge respect to the devs\n@dimakuncik @timcrypto https://t.co/J5rmte3vPR",
+      "handle": "ZisanBabu___"
+    }
+  },
+  "2092529861038649422": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQoo0E_bMAAr96F.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 449,
+      "likes": 18,
+      "reposts": 1,
+      "comments": 10,
+      "text": "On Halloween night, Dili found a magical candy hiding a fragment of code from Dlicom🎃\nAs it connected him to a digital collective mind, Dli realized a new world of data, consciousness, and intelligence was awakening✨\n@DlicomApp @timcrypto https://t.co/2ou3s3gV19",
+      "handle": "wo_004"
+    }
+  },
+  "2092831098695000094": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQs6x9laUAARVIP.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 377,
+      "likes": 59,
+      "reposts": 6,
+      "comments": 14,
+      "text": "Digital assets, whenever you need them.\n\nIn Web3, managing digital assets shouldn’t feel complicated.\n\nThat’s where @DlicomApp comes in  bringing social interaction and digital ownership closer together.\nConnect with people, discover communities, share content, and stay connected with your digital assets in one place.\n\nNo unnecessary complexity.\nJust a smoother way to experience Web3, whenever you need it.\n\n@DlicomApp Digital Assets On Demand. \n\n@Dlicom_Bangla",
+      "handle": "rxhridoy0017"
+    }
+  },
+  "2092124373780177342": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQi4BmiaoAAp6IR.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 146,
+      "likes": 14,
+      "reposts": 0,
+      "comments": 4,
+      "text": "One piece at a time.\n\nDlicom is putting everything together.\nSocial, creators, communities, and real connections.\n\nThe puzzle is slowly taking shape. \n\nGdlic @DlicomApp https://t.co/N0K1oPLywW",
+      "handle": "dikdik1809"
+    }
+  },
+  "2091934077310079170": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQgK80XaMAA4T0q.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 276,
+      "likes": 19,
+      "reposts": 1,
+      "comments": 11,
+      "text": "Dili in a fierce form in full action mode\nFire in the eyes, courage in the heart, and only the goal of victory ahead.\n\nNo matter how big the challenge, this time there is no turning back \n\nit's time to break through all obstacles and move forward.\n@DlicomApp https://t.co/982J99luZS",
+      "handle": "mia_maruf68587"
+    }
+  },
+  "2091903707461890266": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQfvVRJXsAAdOCL.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 205,
+      "likes": 40,
+      "reposts": 0,
+      "comments": 1,
+      "text": "There’s no need to rush the journey\n\nSometimes the best progress comes from taking a breath, enjoying the moment, and then coming back with fresh energy\n\nThat’s the kind of space @DlicomApp is building, community where we can connect, create, share ideas, and grow together in Web3\n\nStay consistent, creating and keep moving forward",
+      "handle": "Sofia94799Sycuk"
+    }
+  },
+  "2091937422011740283": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQgN-vsaMAAFGzp.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 34,
+      "likes": 0,
+      "reposts": 0,
+      "comments": 0,
+      "text": "Whether you’re making music, sharing moments, or just enjoying the journey, there’s always room for a little more @DlicomApp's energy.\n&gt; Plug in\n&gt; Connect\n&gt; Keep the vibe going https://t.co/aAR50xDysC",
+      "handle": "Moby_sweet16111"
+    }
+  },
+  "2091460847277408762": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQZcjG_awAEB8Nu.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 50,
+      "likes": 6,
+      "reposts": 0,
+      "comments": 6,
+      "text": "Hallo guys good afternoon. Our @DlicomApp dili is put our Obitos Dress.and guys you all are know about the story of Obito ❤️‍🩹\nA real broken hero now the dili is the broken hero.\nKeep support to the dlicom for the future $DLI \n@dimakuncik @retreeq_ @timcrypto https://t.co/pxarNIhyr8",
+      "handle": "ItzXaimBro"
+    }
+  },
+  "2093022368356597950": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQvovhYXAAEb2Ht.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 198,
+      "likes": 9,
+      "reposts": 1,
+      "comments": 6,
+      "text": "Every big vision starts with facing the challenge.\n\n@DlicomApp is stepping forward. 🐉 https://t.co/vtUvduYAZJ",
+      "handle": "ElsaMadre"
+    }
+  },
+  "2091354450778828920": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQX7qwZacAAWxHd.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 361,
+      "likes": 17,
+      "reposts": 1,
+      "comments": 13,
+      "text": "A true Dlicom warrior keeps moving forward. Every challenge builds strength, every setback brings experience, and every step brings the vision closer. Keep creating, keep building, and keep moving with Dlicom. @DlicomApp @Dlicom_Bangla https://t.co/KKbxvIeIkV",
+      "handle": "LevSageAI"
+    }
+  },
+  "2091532867062944069": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQaeDOgbgAAjfyG.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 263,
+      "likes": 20,
+      "reposts": 0,
+      "comments": 7,
+      "text": "Dlicom—Beyond the Obvious\n\nMost platforms chase attention.\n@DlicomApp is building something that earns it.\n\nNot just another idea.Not just another ecosystem.\n\nA place where\ncreativity,technology,and community can turn small pieces into something much bigger.\n@retreeq_ \n@timcrypto https://t.co/BfiJb6y0YE",
+      "handle": "mrarun2303"
+    }
+  },
+  "2090016455001788798": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQE64vZbAAAHV0L.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 471,
+      "likes": 32,
+      "reposts": 4,
+      "comments": 15,
+      "text": "Web3 is growing, but using it can still feel confusing.\n\nDlicom is building a different kind of experience.\n\nA social platform where people can connect, share, create, and explore Web3 in one place.\n\nThe focus is not only on technology.\n\nIt is about making the whole experience simple enough for normal users.\n\nCreators can share their work.\n\nCommunities can connect.\n\nUsers can discover new content and take part in the ecosystem.\n\nDlicom brings these parts together with Web3 features, creating a space where social activity and blockchain can work side by side.\n\nSimple idea.\n\nReal community.\n\nWeb3 made more social.\n\nThat is Dlicom.\n\n@DlicomApp\n@Dlicom_Bangla\n@retreeq_",
+      "handle": "BadhonAI"
+    }
+  },
+  "2091453630713098256": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQZV_SsaQAAaRur.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 153,
+      "likes": 13,
+      "reposts": 0,
+      "comments": 11,
+      "text": "The journey isn’t always easy, but every challenge makes us stronger.🧗🏻\n\nKeep climbing, keep building, and keep moving forward with @DlicomApp .\n\nOne step at a time. 💙\n\n#DLICOM #KeepBuilding #KeepMoving https://t.co/uARRryhEBE",
+      "handle": "Zeyaa17_"
+    }
+  },
+  "2091168562136387951": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQVSta_b0AAJ89J.jpg",
+        "previewUrl": null
+      },
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQVSuL_aUAA6hN_.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 117,
+      "likes": 20,
+      "reposts": 0,
+      "comments": 14,
+      "text": "Magical Time with @DlicomApp\n\nSometimes we deeply feel connected to something. A feeling of liking or disliking naturally comes from within us.\n\nI feel the same about Dlicom, there’s a special feeling within me. it’s mostly a feeling of love and positivity. \n@Dlicom_Bangla https://t.co/WU13gGY7BO",
+      "handle": "NazibHa93298933"
+    }
+  },
+  "2075098581992976615": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HMw7Dtkb0AAkWMt.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 132,
+      "likes": 13,
+      "reposts": 0,
+      "comments": 10,
+      "text": "What if every social media interaction delivered value?\n\nWith Dlicom, you don't just browse content; you experience an ecosystem where:\n\n✨ You connect with the global Web3 community.\n\n💜 You support creators through Creator Tipping.\n\n⭐ You experience exclusive features with Dlicom Premium.\n\n🔐 You control your assets and privacy all in one platform.\n\nThis is how SocialFi transforms every interaction into part of the digital economy, where users are not just viewers but also creators of value.\n\n🚀 @DlicomApp  is taking steps to realize that experience.\n@dlicom_vn \n@timcrypto",
+      "handle": "Quang190503"
+    }
+  },
+  "2091186562583371938": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQVjF3zbEAA9lt1.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 158,
+      "likes": 11,
+      "reposts": 0,
+      "comments": 4,
+      "text": "Relaxing in your own cup of coffee, no one else holding it but you.\nThat's the logic behind @DlicomApp non custodial wallet. \nYour private key stays with you, not the platform. @DlicomApp can't freeze your assets, can't reverse your transactions, has no access to your wallet at all.\nCompare that to custodial wallets, where you're essentially trusting someone else to hold your funds if they run into trouble, you do too.\n\nThe tradeoff: your seed phrase is entirely your responsibility. No \"forgot password\" reset like Web2. But that's the price of real ownership.",
+      "handle": "SRedofermansyah"
+    }
+  },
+  "2091072993657307147": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQT7zK4bEAA7b7v.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 825,
+      "likes": 20,
+      "reposts": 2,
+      "comments": 12,
+      "text": "gDlic Fam 💙\n\nYour creativity knows no bounds. It's time to take off with @DlicomApp 💙\n\n@timcrypto \n@retreeq_ https://t.co/Y8himZQqVm",
+      "handle": "jenay_for"
+    }
+  },
+  "2091090453487931874": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQS4Id7bcAA05o4.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 131,
+      "likes": 10,
+      "reposts": 0,
+      "comments": 7,
+      "text": "I've been offline lately to get this fridge house and it's officially finished 🤓 who want this little corner 🫠\n\n@DlicomApp @dlicom_vn https://t.co/AAL5T000Z3",
+      "handle": "realrenyarei"
+    }
+  },
+  "2091452457671077982": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQZU65ybQAA31KR.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 167,
+      "likes": 16,
+      "reposts": 1,
+      "comments": 11,
+      "text": "Sometimes you have to stay patient while working toward something you really want.\n\nStill learning, contributing, and staying consistent with Dlicom. The journey continues, and hopefully the next step is closer than it feels.\n\n@DlicomApp https://t.co/QohqUVjxy5",
+      "handle": "Devid1640625"
+    }
+  },
+  "2089564043057205694": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HP-fau4a8AAJBNB.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 355,
+      "likes": 16,
+      "reposts": 2,
+      "comments": 7,
+      "text": "DILI SUFFER IS HERE 🔥🔥\n\nNow you can play dili suffer , play and enjoy \n\nThis website is made by me 😎\n\nPlay https://t.co/ImUWA5m4Ci\n\n@retreeq_ @DlicomApp @dlicom_IN @cooldudeabhii https://t.co/nEYWuFNI81",
+      "handle": "attract_ga29482"
+    }
+  },
+  "2091612302625894676": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQbmTNLbYAAqSDE.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 118,
+      "likes": 12,
+      "reposts": 0,
+      "comments": 3,
+      "text": "Spent some time thinking about @DlicomApp today 🧠\n\nMade this one with the idea of a Dlicom researcher trying to understand how everything fits together\n\nThe clipboard, test tubes, books and the question marks are my little way of showing the research side of Web3\n\nBefore using a project, I like to look beyond the surface\n\nWhat is being built\nHow does it work\nWhat are people actually using\nAnd what is happening inside the community\n\nThat’s also how I approach my Dlicom content\n\nSometimes it’s an article, sometimes an infographic, sometimes an artwork like this\n\nThe goal is simple\n\nLearn something first, then create something around it\n\nStill learning, still creating, still part of the Dlicom community",
+      "handle": "IDREES_ETH"
+    }
+  },
+  "2090828662136611224": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQQdlTEbAAAg3WX.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 64,
+      "likes": 8,
+      "reposts": 0,
+      "comments": 4,
+      "text": "Hi FM.@DlicomApp\n\nDlicom and I have come here together today. I am always cheerful.\n\nWe live together.\n\nLook, he is acting a bit strange for some reason.\n\nBut Dlicom is always happy. Good night, FM. @Dlicom_Bangla \n\n@timcrypto https://t.co/WaF3R5swXF",
+      "handle": "MSajjad28970"
+    }
+  },
+  "2090810050264945043": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQQMp9OaoAAsOWE.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 991,
+      "likes": 28,
+      "reposts": 1,
+      "comments": 19,
+      "text": "One drop can start a ripple \n\nThat is how I see @DlicomApp .\n\nA Web3 platform built around social connection where users can communicate share content build communities and interact with onchain features in one place.\n\nThe more people join and contribute the stronger the community becomes.\n\nStill early in the journey but DliCOM is already creating something worth watching.\n\nI am glad to be part of it. \n\n@Dlicom_Bangla @retreeq_",
+      "handle": "MdAsifAliv0"
+    }
+  },
+  "2090365390295900511": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQJ3ry5bEAAG_5E.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 44,
+      "likes": 5,
+      "reposts": 0,
+      "comments": 3,
+      "text": "From digital art to handmade pieces\nI’ve been creating a lot of Dlicom art along the way.\n\nLooking back at all of them in one frame hits different.\n\nEach piece came from a different idea, mood, or random moment  but they all have one thing in common:\n\nI enjoyed creating them\n\nStill more to come\n@DlicomApp @timcrypto",
+      "handle": "captain_fogo"
+    }
+  },
+  "2090569167791407597": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQMxkx9XgAAYElo.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 227,
+      "likes": 19,
+      "reposts": 0,
+      "comments": 7,
+      "text": "Gdlic\n\nAnother art for @DlicomApp\nWe have sweat Dili here \n\nLost in a world of sugar and cosmic vibes 🌌🍒\n\nHope you all like it\n\n@timcrypto @retreeq_ @MichaelWin3129 @JustSamm020 @dlicom_ng https://t.co/W9YtRRUUB3",
+      "handle": "amircry94432508"
+    }
+  },
+  "2092129404315107423": {
+    "media": [
+      {
+        "type": "animated_gif",
+        "url": "https://pbs.twimg.com/tweet_video_thumb/HQi8lHIakAAr5ec.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 136,
+      "likes": 2,
+      "reposts": 0,
+      "comments": 1,
+      "text": "Just another day building, sharing, and vibing with the Dlicom community \n\nNo hype, no forced narratives \n\nJust real people showing up and making the ecosystem more alive every day \n\nStill early \nStill bullish on what’s coming @DlicomApp https://t.co/7Pgwo5A7ah",
+      "handle": "0xhirono"
+    }
+  },
+  "2090140962718654558": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQGsGA1WIAALVR3.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 250,
+      "likes": 24,
+      "reposts": 1,
+      "comments": 15,
+      "text": ". @DlicomApp is building for the millions of users who shouldn’t need to learn Web3 just to enjoy its benefits.\n\nLess complexity. More ownership. A social experience built for everyone. \n\nAdopt Dlicom, Adopt simplicity.\n\ngDlic. | @retreeq_ https://t.co/QotphpAIGN",
+      "handle": "1kaylanii"
+    }
+  },
+  "2089619400093847759": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HP_RuPjaMAAth0e.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 224,
+      "likes": 9,
+      "reposts": 1,
+      "comments": 9,
+      "text": "When the numbers get complicated, the vision stays simple.\n\nDlicom is building a space where people can connect, create, and grow together without losing sight of what matters.\n\n@DlicomApp @Dlicom_Bangla @dimakuncik @timcrypto @joyhasanx10 https://t.co/rvdiqSYnBD",
+      "handle": "LevSageAI"
+    }
+  },
+  "2090052091180208275": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQFbPZqb0AAEtrW.jpg",
+        "previewUrl": null
+      },
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQFbR_SbwAABUOk.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 107,
+      "likes": 13,
+      "reposts": 0,
+      "comments": 7,
+      "text": "DLICOM is building a future where digital assets can move smarter and more freely. \n\nJust like these coins flowing through the ecosystem, @DlicomApp  is focused on creating real utility and a stronger Web3 experience. \n\nThe journey is just getting started. 🔥\n@Dlicom_Bangla @dimakuncik @timcrypto @retreeq_",
+      "handle": "Ahashanhabib10"
+    }
+  },
+  "2089599239206941052": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HP-_bQ2acAAjay5.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 177,
+      "likes": 22,
+      "reposts": 5,
+      "comments": 11,
+      "text": "Hey @DlicomApp fam!\n\nDid you recognize the person in the picture?\n\nHaha, it’s our very own DILI. \n\nNo caption today—so, how are you doing?👀\n\n@Dlicom_Bangla \n@timcrypto \n@retreeq_ \n@dimakuncik https://t.co/dPk5qPnJ9s",
+      "handle": "rxhridoy0017"
+    }
+  },
+  "2089450217716240737": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HP83u3KXIAAZVdq.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 39,
+      "likes": 5,
+      "reposts": 0,
+      "comments": 2,
+      "text": "Your social life, your wallet, your identity - all in one place. 💜\nDlicom is bringing social, self-custody and Web3 together into one seamless experience built around ownership. @DlicomApp https://t.co/OydnMNDcTO",
+      "handle": "Totosha_0"
+    }
+  },
+  "2090062282340643260": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQFkNyqaQAA7jLf.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 97,
+      "likes": 10,
+      "reposts": 0,
+      "comments": 6,
+      "text": "When did you start drawing, and what motivated you to do so?\nFor me, it’s quite simple—it all started with Dili\n\nIt had been a long time since I last picked up a pencil, coloring tools, and paper.\nHowever, I wanted to challenge myself and test my artistic abilities, while also pursuing the goal of becoming a contributor for Dlicom 😅\n\nDriven by that passion, I went from someone who—truth be told—\"drew poorly\" to creating the pieces I make today; after many days of \"shaky lines,\" my technique has improved significantly\n\nLooking back on this journey, I am truly grateful to Dili.\nThank you @DlicomApp  for providing a space where I could learn and practice, allowing me to hone and improve my skills\n#my_paper_art_piece\n@DlicomApp \n@dlicom_vn",
+      "handle": "MBT0625"
+    }
+  },
+  "2090995774289330539": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQS1kcyaYAAQ5Lo.png",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 908,
+      "likes": 28,
+      "reposts": 1,
+      "comments": 16,
+      "text": "Dlicom connects social interaction with crypto payments, allowing users to move value directly within their digital experience.\n\nBy combining communication, wallets, and payment utilities, Dlicom aims to make sending and receiving crypto feel more natural.\n@DlicomApp https://t.co/dp9FVD2kNc",
+      "handle": "vangle205"
+    }
+  },
+  "2089622131500036325": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HP_ThiBbYAARcGT.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 360,
+      "likes": 16,
+      "reposts": 1,
+      "comments": 4,
+      "text": "\"Smiles and laughter are always good, but never forget your Dlicom Face.\"",
+      "handle": "flxthesixth"
+    }
+  },
+  "2089870487631614242": {
+    "media": [
+      {
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HQC2IGca4AA5Mcx.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 1113,
+      "likes": 44,
+      "reposts": 0,
+      "comments": 21,
+      "text": "Please bring magic to me...\nPuPu is working hard by creating 2 artworks a day. Give me some ideas!!!\n\n@DlicomApp \n@dlicom_vn https://t.co/HCNWwGalM9",
+      "handle": "X_Pu_Pu"
+    }
+  },
+  "2089802551247982839": {
+    "media": [
+      {
+        "type": "video",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2089802056307441664/img/-TBp-0sqK3Kb6Tre.jpg",
+        "previewUrl": null
+      }
+    ],
+    "stats": {
+      "views": 212,
+      "likes": 19,
+      "reposts": 2,
+      "comments": 7,
+      "text": "At this point, pretty much everything you need to track your activity in Dlicom is in one place.\n\n🏆Leaderboard - see where you stand and compare yourself with other members\n\n📊 Activity Cards - generate your own card with detailed stats broken down by tiers and see what you've already achieved and what's still missing\n\n📈 Analytics - track overall server activity or dive into individual channels and see how the community is changing over time\n\n✨ Spotlight - browse all posts highlighted by the team, filter them by likes or date, and search by author\n\n🤖 Possible Bots - review suspicious activity from members with roles, with flagged posts and links to the originals for manual verification\n\nIf you're active in @DlicomApp , this is basically built for you.\n\nCheck your stats, see where you stand, find what you're still missing, and track your progress over time.\n\nAnd don't forget to generate your activity card and share it - would be cool to see everyone's stats 👀\n\nhttps://t.co/RKeC0wZqDD\n\nGood luck everyone 🚀\n\n#dlicom #LEADERBOARD\n@retreeq_ \n@JustSamm020",
+      "handle": "Virdzhi292"
     }
   }
 }

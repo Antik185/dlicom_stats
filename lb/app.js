@@ -1,10 +1,13 @@
 let usersData   = [];
 let statFilter  = 'all';
 let timeFilter  = 'all';
+let regionFilter = 'all';
 let searchQuery = '';
 let withoutBots = true;
 let firstRender = true;
 let previousRanks = new Map();
+let userRegionByUser = new Map();
+let currentMemberUsernames = null;
 const champState = { 1: null, 2: null, 3: null };
 
 const PAGE_SIZE = 10;
@@ -12,6 +15,19 @@ let currentPage = 0;
 const suspiciousUsernames = new Set(
   (window.SUSPICIOUS_X_DATA?.users || []).map(user => String(user.username || '').toLowerCase()),
 );
+const REGION_DEFS = [
+  { region: 'Bangladesh', label: 'Bangladesh' },
+  { region: 'India', label: 'India' },
+  { region: 'Nigeria', label: 'Nigeria' },
+  { region: 'Vietnam', label: 'Vietnam' },
+  { region: 'Indonesia', label: 'Indonesia' },
+  { region: 'Ukraine', label: 'Ukraine' },
+  { region: 'Russia', label: 'Russia' },
+  { region: 'Arabic', label: 'Arabic' },
+  { region: 'China', label: 'China' },
+  { region: 'Turkey', label: 'Turkey' },
+];
+const REGION_BY_NAME = new Map(REGION_DEFS.map(region => [region.region, region]));
 
 // ── Icon data URLs (embedded, no server dependency) ───────────
 const ICON_DATA = {
@@ -91,6 +107,7 @@ function getUserBadges(username) {
 
 // ── Rank change indicator HTML ────────────────────────────────
 function buildRankChangeHtml(username, realRank) {
+  if (regionFilter !== 'all') return '';
   if (withoutBots) return '';
   if (typeof realRank !== 'number') return '';   // team-член (★) — без тренда
   const hist = window.RANK_HISTORY_DATA;
@@ -150,7 +167,7 @@ function buildStatsHtml(u) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
   const stats = [
-    { label: 'Rank',      value: u.team ? '★' : (u.rank ? '#' + u.rank : '?'),  sub: u.tierLabel },
+    { label: regionFilter === 'all' ? 'Rank' : 'Region Rank', value: u.team ? '★' : (u.displayRank ? '#' + u.displayRank : '?'), sub: u.tierLabel },
     { label: 'Total Pts', value: fmtNum(u.totalScore),  sub: u.percentile != null ? 'top ' + (100 - u.percentile) + '%' : '' },
     { label: 'DC Score',  value: fmtNum(u.dcScore),     sub: fmtNum(u.dcMessages) + ' msgs' },
     { label: 'X Score',   value: fmtNum(u.xScore),      sub: fmtNum(u.posts) + ' posts' },
@@ -206,6 +223,9 @@ function buildReviewHtml(username) {
 
 // ── Rank history chart HTML ───────────────────────────────────
 function buildRankChartHtml(username) {
+  if (regionFilter !== 'all') {
+    return '<div class="chart-empty">Regional rank history starts with the next snapshot</div>';
+  }
   // All-time — вместо истории рангов показываем ревью (там как раз свободное место)
   if (timeFilter === 'all') return buildReviewHtml(username);
 
@@ -382,10 +402,14 @@ function updateConnectionLines() {
 
 // ── Champions ─────────────────────────────────────────────────
 function renderChampions(allScored) {
+  const constellationBg = document.querySelector('.constellation-bg');
+  if (constellationBg) constellationBg.style.visibility = allScored.length >= 3 ? 'visible' : 'hidden';
   for (let i = 0; i < 3; i++) {
     const slot = i + 1;
     const u    = allScored[i];
-    if (!u) continue;
+    const champPos = document.querySelector('.champ-' + slot + '-pos');
+    if (champPos) champPos.style.visibility = u ? 'visible' : 'hidden';
+    if (!u) { champState[slot] = null; continue; }
 
     const champEl  = document.querySelector('.champ-' + slot + '-pos .champion');
     const prevName = champState[slot];
@@ -479,7 +503,7 @@ function buildRow(u, rank, pct) {
       '<div class="score-num secondary' + xHl + '">' + fmt(u.xScore) + '</div>' +
     '</div>';
 
-  row.addEventListener('click', () => toggleProfile(u, row));
+  row.addEventListener('click', () => toggleProfile({ ...u, displayRank: rank }, row));
   return row;
 }
 
@@ -522,10 +546,70 @@ function updatePagination(total) {
 }
 
 // ── Compute sorted lists ──────────────────────────────────────
+function userMatchesRegion(user, region) {
+  if (region === 'all') return true;
+  return userRegionByUser.get(String(user.username || '').toLowerCase()) === region;
+}
+
+function computeRegionPool() {
+  return usersData.filter(user => userMatchesRegion(user, regionFilter));
+}
+
+function updateRegionOptions() {
+  const select = document.getElementById('region-filter');
+  if (!select) return;
+  const counts = new Map(REGION_DEFS.map(region => [region.region, 0]));
+  for (const user of usersData) {
+    const region = userRegionByUser.get(String(user.username || '').toLowerCase());
+    if (counts.has(region)) counts.set(region, counts.get(region) + 1);
+  }
+  select.innerHTML = '<option value="all">All regions</option>' + REGION_DEFS.map(region =>
+    '<option value="' + region.region + '">' + region.label + ' (' + counts.get(region.region) + ')</option>'
+  ).join('');
+  select.value = regionFilter;
+}
+
+async function loadUserRegions() {
+  if (userRegionByUser.size) return;
+  try {
+    const res = await fetch('../data/user_regions.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    userRegionByUser = new Map(
+      Object.entries(data.users || {}).map(([username, regional]) => [username.toLowerCase(), regional.region]),
+    );
+  } catch (err) {
+    console.warn('Regional activity data is unavailable:', err);
+  }
+}
+
+async function loadCurrentMembers() {
+  if (currentMemberUsernames) return;
+  try {
+    const res = await fetch('../data/current_roles.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const rolesByUser = await res.json();
+    currentMemberUsernames = new Set(
+      Object.entries(rolesByUser)
+        .filter(([, roles]) => Array.isArray(roles) && roles.length > 0)
+        .map(([username]) => username.toLowerCase()),
+    );
+  } catch (err) {
+    console.warn('Current member data is unavailable:', err);
+    currentMemberUsernames = new Set();
+  }
+}
+
+function isCurrentMember(user) {
+  return user.team || !currentMemberUsernames?.size ||
+    currentMemberUsernames.has(String(user.username || '').toLowerCase());
+}
+
 function computeAll() {
+  const regionUsers = computeRegionPool();
   const visibleUsers = withoutBots
-    ? usersData.filter(u => !suspiciousUsernames.has(String(u.username || '').toLowerCase()))
-    : usersData;
+    ? regionUsers.filter(u => !suspiciousUsernames.has(String(u.username || '').toLowerCase()))
+    : regionUsers;
   return visibleUsers.map(u => {
     const score =
       statFilter === 'discord' ? (u.dcScore   || 0) :
@@ -570,9 +654,12 @@ function render() {
   const scored     = computeScored();
   const totalPool  = scored.reduce((a, b) => a + b.score, 0);
   const totalCount = scored.length;
-  const hiddenCount = usersData.length - allScored.length;
+  const regionPool = computeRegionPool();
+  const hiddenCount = regionPool.length - allScored.length;
+  const regionName = REGION_BY_NAME.get(regionFilter)?.label;
   document.getElementById('footer-stats').innerHTML =
-    '<div>' + allScored.length + ' users shown' + (hiddenCount ? ' · ' + hiddenCount + ' bots hidden' : '') + '</div>';
+    '<div>' + allScored.length + (regionName ? ' users ranked in ' + regionName : ' users shown') +
+    (hiddenCount ? ' · ' + hiddenCount + (hiddenCount === 1 ? ' bot hidden' : ' bots hidden') : '') + '</div>';
   const pageStart  = currentPage * PAGE_SIZE;
   const paged      = scored.slice(pageStart, pageStart + PAGE_SIZE);
 
@@ -679,6 +766,7 @@ async function loadData(timeframe) {
   const file = fileMap[timeframe] || fileMap.all;
   try {
     document.getElementById('live-status').innerHTML = '<span class="pulse-dot"></span> Loading...';
+    await Promise.all([loadUserRegions(), loadCurrentMembers()]);
     const res = await fetch(file);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     let data = await res.json();
@@ -688,8 +776,9 @@ async function loadData(timeframe) {
       data = await fb.json();
     }
 
-    const totalU = data.totalUsers || data.users.length || 1;
-    usersData = (data.users || []).map(u => {
+    const currentUsers = (data.users || []).filter(isCurrentMember);
+    const totalU = currentUsers.filter(user => !user.team).length || 1;
+    usersData = currentUsers.map(u => {
       if (u.team) {
         return { ...u, verified: !!u.xHandle, tierClass: 'L', tierLabel: 'TEAM' };
       }
@@ -700,6 +789,7 @@ async function loadData(timeframe) {
       else if (pctCalc <= 10 || u.tier === 't3') tierClass = 'A';
       return { ...u, verified: !!u.xHandle, tierClass, tierLabel: 'TOP ' + dispPct };
     });
+    updateRegionOptions();
 
     // Показываем дату последних данных (refDate), а не дату запуска (generatedAt)
     const statusDateSrc = data.refDate || data.generatedAt || new Date().toISOString().slice(0,10);
@@ -734,6 +824,13 @@ document.querySelectorAll('#time-filter .filter-btn').forEach(b => {
     b.classList.add('active');
     timeFilter = b.dataset.time; currentPage = 0; loadData(timeFilter);
   });
+});
+document.getElementById('region-filter').addEventListener('change', e => {
+  regionFilter = e.target.value;
+  firstRender = true;
+  currentPage = 0;
+  previousRanks = new Map();
+  render();
 });
 document.getElementById('without-bots').addEventListener('change', e => {
   withoutBots = e.target.checked;

@@ -18,7 +18,7 @@ function findSpotlightFiles(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) findSpotlightFiles(full, out);
-    else if (/(?:content-spotlight|spotlite)\.json$/i.test(e.name)) out.push(full);
+    else if (/(?:content-spotlight|spotlite).*\.json$/i.test(e.name)) out.push(full);
   }
   return out;
 }

@@ -1,4 +1,4 @@
-/** Extracts current Discord roles from the export folder with the latest end date. */
+/** Extracts the latest known Discord role snapshot for every user. */
 
 const fs = require('fs');
 const path = require('path');
@@ -6,26 +6,23 @@ const readline = require('readline');
 
 const JSON_DIR = path.join(__dirname, '..', 'json');
 const OUT_FILE = path.join(__dirname, '..', 'data', 'current_roles.json');
+const ALIASES_FILE = path.join(__dirname, 'aliases.json');
+const EXCLUDED_MEMBERS_FILE = path.join(__dirname, 'excluded_members.json');
 
-function exportEndDate(dir) {
-  const sample = fs.readdirSync(dir).find(name => name.endsWith('.json'));
-  if (!sample) return 0;
-  const fd = fs.openSync(path.join(dir, sample), 'r');
-  const buffer = Buffer.alloc(16384);
-  const size = fs.readSync(fd, buffer, 0, buffer.length, 0);
-  fs.closeSync(fd);
-  const match = buffer.toString('utf8', 0, size).match(/"before":\s*"([^"]+)"/);
-  return match ? new Date(match[1]).getTime() : 0;
-}
+const rawAliases = JSON.parse(fs.readFileSync(ALIASES_FILE, 'utf8'));
+const aliases = Object.fromEntries(Object.entries(rawAliases).filter(([key]) => !key.startsWith('_')));
+const resolveAlias = username => aliases[username] || username;
+const excludedMembers = fs.existsSync(EXCLUDED_MEMBERS_FILE)
+  ? new Set(JSON.parse(fs.readFileSync(EXCLUDED_MEMBERS_FILE, 'utf8')).users.map(resolveAlias))
+  : new Set();
 
-function latestExportDir() {
-  const candidates = fs.readdirSync(JSON_DIR, { withFileTypes: true })
-    .filter(entry => entry.isDirectory() && entry.name !== 'spotlight')
-    .map(entry => ({ dir: path.join(JSON_DIR, entry.name), end: exportEndDate(path.join(JSON_DIR, entry.name)) }))
-    .filter(item => item.end > 0)
-    .sort((a, b) => b.end - a.end);
-  if (!candidates.length) throw new Error('No dated Discord export folders found');
-  return candidates[0];
+function findJsonFiles(dir, out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) findJsonFiles(full, out);
+    else if (entry.name.endsWith('.json')) out.push(full);
+  }
+  return out;
 }
 
 function scanFile(filePath) {
@@ -80,16 +77,17 @@ function scanFile(filePath) {
 }
 
 async function main() {
-  const latest = latestExportDir();
-  const files = fs.readdirSync(latest.dir).filter(name => name.endsWith('.json')).map(name => path.join(latest.dir, name));
-  console.log(`Current roles source: ${path.basename(latest.dir)} (${files.length} files)`);
+  const files = findJsonFiles(JSON_DIR);
+  console.log(`Latest known roles source: all exports (${files.length} files)`);
   const scans = await Promise.all(files.map(scanFile));
   const latestByUser = {};
   for (const scan of scans) {
     for (const [user, snapshot] of Object.entries(scan)) {
-      if (!latestByUser[user] || snapshot.ts >= latestByUser[user].ts) latestByUser[user] = snapshot;
+      const canonical = resolveAlias(user);
+      if (!latestByUser[canonical] || snapshot.ts >= latestByUser[canonical].ts) latestByUser[canonical] = snapshot;
     }
   }
+  for (const username of excludedMembers) latestByUser[username] = { ts: Number.MAX_SAFE_INTEGER, roles: [] };
   const output = Object.fromEntries(Object.entries(latestByUser).map(([user, snapshot]) => [user, snapshot.roles]));
   fs.writeFileSync(OUT_FILE, JSON.stringify(output, null, 2));
   console.log(`Current roles: ${Object.keys(output).length} users`);

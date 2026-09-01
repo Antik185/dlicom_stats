@@ -68,6 +68,7 @@ run('save_rank_snapshot.js', `--ref-date=${refDate}`);
 run('extract_current_roles.js');
 run('calc_badges.js');
 run('build_suspicious_x.js');
+run('build_user_regions.js');
 run('calc_analytics.js', `--ref-date=${refDate}`, '--max-old-space-size=8192');
 run('extract_spotlight.js');
 run('scrape_spotlight_media.js', '--add-stats');

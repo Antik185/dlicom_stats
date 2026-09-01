@@ -265,6 +265,34 @@ body {
 }
 .filter-btn .ti { font-size: 18px; }
 
+.region-filter-row { margin: 15px 0 0; }
+.region-select-wrap {
+  position: relative; display: inline-flex; align-items: center;
+  min-width: 230px;
+}
+.region-select-wrap > .ti-world {
+  position: absolute; left: 14px; color: #4ad6ff; font-size: 18px;
+  pointer-events: none; z-index: 1;
+}
+.region-select {
+  width: 100%; appearance: none;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #1f2240; color: #c0c5e0;
+  padding: 10.5px 42px 10.5px 42px; border-radius: 13.5px;
+  font-size: 16px; font-family: inherit; cursor: pointer; outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.region-select:hover { border-color: #3a4070; }
+.region-select:focus {
+  border-color: #4ad6ff; background: rgba(74,214,255,0.08);
+  box-shadow: 0 0 0 3px rgba(74,214,255,0.08);
+}
+.region-select option { background: #0d1024; color: #e0e7ff; }
+.region-chevron {
+  position: absolute; right: 14px; color: #5a608a; font-size: 16px;
+  pointer-events: none;
+}
+
 .bot-filter-row { margin: 15px 0 0; }
 .bot-toggle {
   display: inline-flex; align-items: center; gap: 10px;
@@ -674,6 +702,8 @@ body {
   .lb-search { width: 100%; }
   .filter-label { display: none; }
   .filter-btn { padding: 8px 14px; font-size: 14px; }
+  .region-select-wrap { min-width: 220px; }
+  .region-select { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
   .score-num { font-size: 18px; }
   .user-name { font-size: 15px; }
   .title { font-size: 26px; }
@@ -736,6 +766,10 @@ body {
   .filter-row { gap: 5px; margin-bottom: 8px; }
   .filter-btn { padding: 6px 9px; font-size: 11px; border-radius: 9px; }
   .filter-btn .ti { font-size: 12px; }
+  .region-select-wrap { min-width: 190px; }
+  .region-select-wrap > .ti-world { left: 11px; font-size: 14px; }
+  .region-select { font-size: 12px; padding: 7px 34px; border-radius: 9px; }
+  .region-chevron { right: 11px; font-size: 13px; }
   .lb-search { font-size: 13px; padding: 8px 12px 8px 34px; border-radius: 9px; }
   .lb-search-icon { font-size: 13px; left: 11px; }
 

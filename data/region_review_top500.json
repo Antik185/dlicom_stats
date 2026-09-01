@@ -1,0 +1,303 @@
+{
+  "generatedAt": "2026-08-31T21:00:39.197Z",
+  "topLimit": 500,
+  "reviewedUsers": 500,
+  "rules": {
+    "closeSplit": "Runner-up region has at least 80% of primary region messages",
+    "lowEvidence": "Fewer than 10 total messages in regional channels"
+  },
+  "closeSplit": [
+    {
+      "rank": 86,
+      "username": "alpha_0x01",
+      "nickname": "𝗔𝗹𝗽𝗵𝗮 | 𝗗𝗹𝗶𝗰𝗼𝗺 |",
+      "region": "Ukraine",
+      "source": "messages",
+      "messages": 3700,
+      "totalRegionalMessages": 7017,
+      "sharePct": 52.7,
+      "runnerUp": {
+        "region": "Russia",
+        "messages": 3182
+      },
+      "counts": {
+        "Ukraine": 3700,
+        "Russia": 3182,
+        "Nigeria": 123,
+        "Arabic": 12
+      },
+      "runnerUpRatioPct": 86
+    },
+    {
+      "rank": 154,
+      "username": "krypto_leo",
+      "nickname": "krypto_in",
+      "region": "India",
+      "source": "messages",
+      "messages": 778,
+      "totalRegionalMessages": 1504,
+      "sharePct": 51.7,
+      "runnerUp": {
+        "region": "Bangladesh",
+        "messages": 714
+      },
+      "counts": {
+        "India": 778,
+        "Bangladesh": 714,
+        "Indonesia": 7,
+        "Arabic": 5
+      },
+      "runnerUpRatioPct": 91.8
+    },
+    {
+      "rank": 158,
+      "username": "meherabhossain",
+      "nickname": "MEHERAB",
+      "region": "India",
+      "source": "messages",
+      "messages": 267,
+      "totalRegionalMessages": 494,
+      "sharePct": 54,
+      "runnerUp": {
+        "region": "Bangladesh",
+        "messages": 227
+      },
+      "counts": {
+        "India": 267,
+        "Bangladesh": 227
+      },
+      "runnerUpRatioPct": 85
+    },
+    {
+      "rank": 467,
+      "username": "shormi_312",
+      "nickname": "🌸𝚂𝚑𝚘𝚛𝚖𝚒🌸",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 432,
+      "totalRegionalMessages": 839,
+      "sharePct": 51.5,
+      "runnerUp": {
+        "region": "India",
+        "messages": 407
+      },
+      "counts": {
+        "Bangladesh": 432,
+        "India": 407
+      },
+      "runnerUpRatioPct": 94.2
+    }
+  ],
+  "lowEvidence": [
+    {
+      "rank": 24,
+      "username": "exaweb3",
+      "nickname": "εאα",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 8,
+      "totalRegionalMessages": 8,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 8
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 123,
+      "username": "riyad_699",
+      "nickname": "Riyad",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 3,
+      "totalRegionalMessages": 3,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 3
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 194,
+      "username": "jahidverse",
+      "nickname": "Jahid Hasan",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 1,
+      "totalRegionalMessages": 1,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 1
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 251,
+      "username": "joyful_cheetah_69707",
+      "nickname": "atik",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 8,
+      "totalRegionalMessages": 8,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 8
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 257,
+      "username": "babu380592",
+      "nickname": "CryptoBabuETH",
+      "region": "India",
+      "source": "messages",
+      "messages": 2,
+      "totalRegionalMessages": 2,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "India": 2
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 284,
+      "username": "azahir0441",
+      "nickname": "Azahir",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 8,
+      "totalRegionalMessages": 9,
+      "sharePct": 88.9,
+      "runnerUp": {
+        "region": "Arabic",
+        "messages": 1
+      },
+      "counts": {
+        "Bangladesh": 8,
+        "Arabic": 1
+      },
+      "runnerUpRatioPct": 12.5
+    },
+    {
+      "rank": 291,
+      "username": "nibir6537",
+      "nickname": "nibir",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 2,
+      "totalRegionalMessages": 2,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 2
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 375,
+      "username": "jiaduljoy",
+      "nickname": "Ziadul 24/7",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 1,
+      "totalRegionalMessages": 1,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 1
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 434,
+      "username": "0xmim9",
+      "nickname": "Princess MiM",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 5,
+      "totalRegionalMessages": 8,
+      "sharePct": 62.5,
+      "runnerUp": {
+        "region": "India",
+        "messages": 3
+      },
+      "counts": {
+        "Bangladesh": 5,
+        "India": 3
+      },
+      "runnerUpRatioPct": 60
+    },
+    {
+      "rank": 460,
+      "username": "kurt055683",
+      "nickname": "Kurt | DLICOM",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 1,
+      "totalRegionalMessages": 1,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 1
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 465,
+      "username": "zihantawhid",
+      "nickname": "Md ZihanTawhid",
+      "region": "Bangladesh",
+      "source": "messages",
+      "messages": 1,
+      "totalRegionalMessages": 1,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Bangladesh": 1
+      },
+      "runnerUpRatioPct": 0
+    },
+    {
+      "rank": 508,
+      "username": "abdulhakeemson0",
+      "nickname": "Abdulhakeemson",
+      "region": "Nigeria",
+      "source": "messages",
+      "messages": 1,
+      "totalRegionalMessages": 1,
+      "sharePct": 100,
+      "runnerUp": null,
+      "counts": {
+        "Nigeria": 1
+      },
+      "runnerUpRatioPct": 0
+    }
+  ],
+  "noData": [
+    {
+      "rank": 410,
+      "username": "taruntanti026",
+      "nickname": "Tarun ./"
+    },
+    {
+      "rank": 474,
+      "username": "marmutz.",
+      "nickname": "Marmutz"
+    },
+    {
+      "rank": 497,
+      "username": "airdroptap",
+      "nickname": "𝐏𝐚𝐰𝐬𝐞𝐝 | 𝐎𝐯𝐞𝐫𝐥𝐚𝐲𝐞r"
+    },
+    {
+      "rank": 510,
+      "username": "ayeramalik",
+      "nickname": "Crypto Salar"
+    }
+  ]
+}

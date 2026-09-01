@@ -125,7 +125,7 @@ function findJsonFiles(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) findJsonFiles(full, out);
-    else if (e.name.endsWith('.json') && !/(?:content-spotlight|spotlite)\.json$/i.test(e.name)) out.push(full);
+    else if (e.name.endsWith('.json') && !/(?:content-spotlight|spotlite).*\.json$/i.test(e.name)) out.push(full);
   }
   return out;
 }
@@ -172,7 +172,7 @@ function getChannel(name, cat, type) {
 
 function isExcludedAnalyticsChannel(name, category) {
   const text = `${name || ''} ${category || ''}`.toLowerCase();
-  return text.includes('score-board') || text.includes('dili keeper');
+  return text.includes('score-board') || text.includes('dili keeper') || text.includes('content-spotlight');
 }
 
 // Единая обработка одного сообщения (для обоих путей)
@@ -553,6 +553,7 @@ async function main() {
     if (EXCLUDED_USERS.has(name)) continue;   // забаненный
     // топ-3 канала по числу сообщений
     const topChannels = Object.entries(m.chanCount)
+      .filter(([ch]) => !/中文|游戏频道/.test(ch))
       .sort((a, b) => b[1] - a[1]).slice(0, 3)
       .map(([ch, c]) => ({ name: ch, count: c }));
     contributors[name] = {

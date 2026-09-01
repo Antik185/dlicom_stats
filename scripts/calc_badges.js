@@ -21,6 +21,11 @@ const JSON_DIR       = path.join(__dirname, '..', 'json');
 const SCORES_FILE    = path.join(DATA_DIR, 'scores.json');
 const BADGES_FILE    = path.join(DATA_DIR, 'badges.json');
 const RANK_HIST_FILE = path.join(DATA_DIR, 'rank_history.json');
+const ALIASES_FILE   = path.join(__dirname, 'aliases.json');
+
+const rawAliases = JSON.parse(fs.readFileSync(ALIASES_FILE, 'utf8'));
+const aliases = Object.fromEntries(Object.entries(rawAliases).filter(([key]) => !key.startsWith('_')));
+const resolveAlias = username => aliases[username] || username;
 
 // Discord роли → ID бейджа
 const ROLE_BADGE_MAP = {
@@ -146,7 +151,13 @@ async function main() {
   // Existing badges (never lose them)
   let existing = {};
   if (fs.existsSync(BADGES_FILE)) {
-    existing = JSON.parse(fs.readFileSync(BADGES_FILE, 'utf-8'));
+    const rawExisting = JSON.parse(fs.readFileSync(BADGES_FILE, 'utf-8'));
+    for (const [username, record] of Object.entries(rawExisting)) {
+      const canonical = resolveAlias(username);
+      const badges = new Set(existing[canonical]?.badges || []);
+      for (const badge of record.badges || []) badges.add(badge);
+      existing[canonical] = { ...record, badges: Array.from(badges) };
+    }
   }
 
   // Rank history for Podium / #1 / Top10 badges
@@ -162,9 +173,10 @@ async function main() {
     // Check all-time, weekly, and monthly ranks
     for (const key of ['all', 'weekly', 'monthly']) {
       for (const [uname, rank] of Object.entries(snap[key] || {})) {
-        if (rank === 1)  everTop1.add(uname);
-        if (rank <= 3)   everTop3.add(uname);
-        if (rank <= 10)  everTop10.add(uname);
+        const canonical = resolveAlias(uname);
+        if (rank === 1)  everTop1.add(canonical);
+        if (rank <= 3)   everTop3.add(canonical);
+        if (rank <= 10)  everTop10.add(canonical);
       }
     }
   }
@@ -203,11 +215,13 @@ async function main() {
 
   for (const { userRoles, firstMessage, roleColors } of scanResults) {
     for (const [u, roles] of Object.entries(userRoles)) {
-      if (!allRoles[u]) allRoles[u] = new Set();
-      for (const r of roles) allRoles[u].add(r);
+      const canonical = resolveAlias(u);
+      if (!allRoles[canonical]) allRoles[canonical] = new Set();
+      for (const r of roles) allRoles[canonical].add(r);
     }
     for (const [u, ts] of Object.entries(firstMessage)) {
-      if (!firstMsg[u] || ts < firstMsg[u]) firstMsg[u] = ts;
+      const canonical = resolveAlias(u);
+      if (!firstMsg[canonical] || ts < firstMsg[canonical]) firstMsg[canonical] = ts;
     }
     for (const [role, color] of Object.entries(roleColors)) {
       if (!globalColors[role]) globalColors[role] = color;

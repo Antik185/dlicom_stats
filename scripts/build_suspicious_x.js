@@ -16,6 +16,7 @@ const currentRoles = fs.existsSync(currentRolesFile) ? JSON.parse(fs.readFileSyn
 const excludedHandles = new Set(
   JSON.parse(fs.readFileSync(path.join(__dirname, 'excluded_suspicious_x.json'), 'utf8')).map(handle => handle.toLowerCase()),
 );
+const roleOptionalUsers = new Set(['senjueth']);
 
 const scoreByUser = new Map((scores.users || []).map(user => [user.username, user]));
 const ROLE_MAP = { dcoded: 'Dcoded', dliever: 'Dliever', dco: 'DCO' };
@@ -81,7 +82,7 @@ function main() {
     const roles = currentRoles
       ? ['Dliever', 'Dcoded', 'DCO'].filter(role => (currentRoles[username] || []).includes(role))
       : Object.entries(ROLE_MAP).filter(([badge]) => userBadges.includes(badge)).map(([, role]) => role);
-    if (!roles.length) continue;
+    if (!roles.length && !roleOptionalUsers.has(username.toLowerCase())) continue;
     const handleCounts = {};
     for (const post of posts) {
       const match = post.url.match(/x\.com\/([^/]+)/i);
